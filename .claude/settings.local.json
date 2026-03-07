@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill:*)",
+      "Bash(npx next:*)",
+      "Bash(curl:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(taskkill:*)",
+      "Bash(powershell:*)",
+      "Bash(node:*)",
+      "Bash(npx kill-port:*)"
+    ]
+  }
+}

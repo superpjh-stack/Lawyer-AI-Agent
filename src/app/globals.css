@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --primary: 30 32 96;
+    --primary-foreground: 255 255 255;
+    --secondary: 241 245 249;
+    --secondary-foreground: 71 85 105;
+    --accent: 227 159 15;
+    --accent-foreground: 255 255 255;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 30 32 96;
+    --radius: 0.5rem;
+    --sidebar-width: 256px;
+    --header-height: 64px;
+  }
+
+  .dark {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+    --primary: 80 147 248;
+    --primary-foreground: 15 23 42;
+    --secondary: 30 41 59;
+    --secondary-foreground: 203 213 225;
+    --accent: 247 207 77;
+    --accent-foreground: 15 23 42;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 80 147 248;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-slate-200;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
+           text-slate-600 hover:text-navy-900 hover:bg-slate-100
+           transition-all duration-150 cursor-pointer;
+  }
+
+  .sidebar-link.active {
+    @apply bg-navy-50 text-navy-800 font-semibold;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-card;
+  }
+
+  .stat-card {
+    @apply card p-5 flex flex-col gap-2 hover:shadow-card-hover transition-shadow duration-200;
+  }
+
+  .badge-status {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-navy-900 text-white text-sm font-medium
+           hover:bg-navy-800 active:bg-navy-950
+           transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-slate-100 text-slate-700 text-sm font-medium
+           hover:bg-slate-200 active:bg-slate-300
+           transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           text-slate-600 text-sm font-medium
+           hover:bg-slate-100 active:bg-slate-200
+           transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm
+           placeholder:text-slate-400
+           focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent
+           transition-all duration-150;
+  }
+
+  .table-row {
+    @apply border-b border-slate-100 hover:bg-slate-50 transition-colors duration-100;
+  }
+
+  .chat-bubble-user {
+    @apply bg-navy-900 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm max-w-[80%] ml-auto;
+  }
+
+  .chat-bubble-ai {
+    @apply bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 text-sm max-w-[85%];
+  }
+
+  .risk-badge-high {
+    @apply badge-status bg-red-50 text-red-700;
+  }
+
+  .risk-badge-medium {
+    @apply badge-status bg-amber-50 text-amber-700;
+  }
+
+  .risk-badge-low {
+    @apply badge-status bg-green-50 text-green-700;
+  }
+
+  .page-header {
+    @apply flex items-center justify-between mb-6;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-slate-900;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Typing indicator dots */
+.typing-dot {
+  @apply w-2 h-2 rounded-full bg-slate-400 inline-block mx-0.5;
+  animation: typing 1.5s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

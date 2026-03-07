@@ -1,0 +1,173 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Firm {
+  id        String   @id @default(cuid())
+  name      String
+  plan      String   @default("personal")
+  maxUsers  Int      @default(1)
+  createdAt DateTime @default(now())
+  users     User[]
+  clients   Client[]
+}
+
+model User {
+  id             String    @id @default(cuid())
+  firmId         String
+  name           String
+  email          String    @unique
+  passwordHash   String
+  role           String    @default("member")
+  createdAt      DateTime  @default(now())
+  firm           Firm      @relation(fields: [firmId], references: [id])
+  assignedCases  Case[]    @relation("AssignedUser")
+  conversations  Conversation[]
+  documents      Document[]     @relation("UploadedBy")
+  billingEntries BillingEntry[]
+  researchResults ResearchSavedResult[]
+  @@index([firmId])
+  @@index([email])
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  firmId    String
+  name      String
+  email     String?
+  phone     String?
+  type      String   @default("individual")
+  createdAt DateTime @default(now())
+  firm      Firm     @relation(fields: [firmId], references: [id])
+  cases     Case[]
+  invoices  Invoice[]
+  @@index([firmId])
+}
+
+model Case {
+  id             String   @id @default(cuid())
+  caseNumber     String   @unique
+  title          String
+  description    String?
+  clientId       String
+  assignedUserId String
+  status         String   @default("active")
+  category       String
+  courtName      String?
+  caseYear       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  client         Client   @relation(fields: [clientId], references: [id])
+  assignedUser   User     @relation("AssignedUser", fields: [assignedUserId], references: [id])
+  documents      Document[]
+  deadlines      Deadline[]
+  billingEntries BillingEntry[]
+  researchResults ResearchSavedResult[]
+  @@index([clientId])
+  @@index([assignedUserId])
+  @@index([status])
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  caseId     String?
+  uploadedBy String
+  fileName   String
+  fileUrl    String
+  fileSize   Int
+  mimeType   String
+  docType    String
+  aiSummary  String?
+  riskLevel  String?
+  createdAt  DateTime @default(now())
+  case       Case?    @relation(fields: [caseId], references: [id])
+  uploader   User     @relation("UploadedBy", fields: [uploadedBy], references: [id])
+  @@index([caseId])
+  @@index([uploadedBy])
+}
+
+model Deadline {
+  id           String   @id @default(cuid())
+  caseId       String
+  title        String
+  dueDate      DateTime
+  deadlineType String
+  status       String   @default("pending")
+  reminderSent Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  case         Case     @relation(fields: [caseId], references: [id])
+  @@index([caseId])
+  @@index([dueDate])
+  @@index([status])
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  messages  Message[]
+  @@index([userId])
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String
+  content        String
+  toolUseData    String?
+  createdAt      DateTime @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  @@index([conversationId])
+}
+
+model ResearchSavedResult {
+  id         String   @id @default(cuid())
+  userId     String
+  caseId     String?
+  query      String
+  resultData String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  case       Case?    @relation(fields: [caseId], references: [id])
+  @@index([userId])
+  @@index([caseId])
+}
+
+model BillingEntry {
+  id          String   @id @default(cuid())
+  caseId      String
+  userId      String
+  description String
+  hours       Float
+  hourlyRate  Float
+  amount      Float
+  date        DateTime
+  invoiceId   String?
+  createdAt   DateTime @default(now())
+  case        Case     @relation(fields: [caseId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+  invoice     Invoice? @relation(fields: [invoiceId], references: [id])
+  @@index([caseId])
+  @@index([invoiceId])
+}
+
+model Invoice {
+  id          String    @id @default(cuid())
+  clientId    String
+  totalAmount Float
+  status      String    @default("draft")
+  issuedAt    DateTime?
+  dueDate     DateTime?
+  createdAt   DateTime  @default(now())
+  client      Client    @relation(fields: [clientId], references: [id])
+  entries     BillingEntry[]
+  @@index([clientId])
+}
