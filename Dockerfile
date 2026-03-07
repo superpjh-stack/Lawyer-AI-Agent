@@ -18,8 +18,14 @@ COPY . .
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build Next.js (standalone)
+# Dummy env vars for build time (real values injected at runtime via Secret Manager)
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy
+ENV AUTH_SECRET=build-time-placeholder-secret-32chars!!
+ENV NEXTAUTH_URL=http://localhost:3000
+ENV OPENAI_API_KEY=sk-dummy-build-time-key
+
+# Build Next.js (standalone)
 RUN npm run build
 
 # ── runner ────────────────────────────────────────────
