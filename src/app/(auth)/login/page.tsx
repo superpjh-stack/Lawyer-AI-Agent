@@ -112,7 +112,7 @@ export default function LoginPage() {
                   비밀번호
                 </label>
                 <Link
-                  href="/auth/forgot-password"
+                  href="/forgot-password"
                   className="text-xs text-navy-600 hover:underline"
                 >
                   비밀번호 찾기
@@ -150,7 +150,7 @@ export default function LoginPage() {
             <p className="text-sm text-slate-500">
               계정이 없으신가요?{" "}
               <Link
-                href="/auth/register"
+                href="/register"
                 className="text-navy-600 font-medium hover:underline"
               >
                 회원가입
