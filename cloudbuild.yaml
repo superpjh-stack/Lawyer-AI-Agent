@@ -16,7 +16,44 @@ steps:
       - '--all-tags'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/app'
 
-  # 3. Cloud Run 배포 (Cloud SQL 소켓 연결 포함)
+  # 3. Migration 이미지 빌드 & 푸시
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-f'
+      - 'Dockerfile.migrate'
+      - '-t'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+      - '.'
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+
+  # 4. Prisma migrate deploy (Cloud Run Job)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'update'
+      - 'prisma-migrate'
+      - '--image'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+      - '--region'
+      - 'asia-northeast3'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'execute'
+      - 'prisma-migrate'
+      - '--region'
+      - 'asia-northeast3'
+      - '--wait'
+
+  # 5. Cloud Run 배포 (Cloud SQL 소켓 연결 포함)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
