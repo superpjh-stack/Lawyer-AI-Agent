@@ -42,6 +42,10 @@ steps:
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
       - '--region'
       - 'asia-northeast3'
+      - '--set-cloudsql-instances'
+      - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
+      - '--set-secrets'
+      - 'DATABASE_URL=DATABASE_URL:latest'
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
