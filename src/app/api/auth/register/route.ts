@@ -1,20 +1,41 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/db/prisma"
+import { authRateLimit } from "@/lib/security/rate-limit"
+import { safeValidate, RegisterSchema } from "@/lib/security/validation"
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { name, email, password, firmName, role } = await req.json()
-
-    if (!name || !email || !password) {
+    // Rate limiting (brute-force protection)
+    const ip = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? 'unknown';
+    const { success: rateLimitOk, resetAt } = authRateLimit(ip);
+    if (!rateLimitOk) {
       return NextResponse.json(
-        { error: "이름, 이메일, 비밀번호는 필수입니다." },
+        { error: "요청이 너무 많습니다. 잠시 후 다시 시도해주세요." },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(Math.ceil((resetAt - Date.now()) / 1000)),
+          },
+        }
+      )
+    }
+
+    const body = await req.json()
+
+    // Zod validation
+    const validation = safeValidate(RegisterSchema, body)
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: validation.errors[0]?.message ?? '입력값이 올바르지 않습니다.' },
         { status: 400 }
       )
     }
 
+    const { name, email, password, firmName } = validation.data
+    const { role } = body as { role?: string }
     const validRoles = ["admin", "lawyer", "member"]
-    const userRole = validRoles.includes(role) ? role : "lawyer"
+    const userRole = validRoles.includes(role ?? '') ? role : "lawyer"
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -41,7 +62,7 @@ export async function POST(req: Request) {
         email,
         passwordHash,
         firmId: firm.id,
-        role: userRole,
+        role: userRole as string,
       },
     })
 

@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth/config';
 import { searchLaws } from '@/lib/agents/tools/search-laws';
 import { searchCases } from '@/lib/agents/tools/search-cases';
+import { apiRateLimit } from '@/lib/security/rate-limit';
+import { safeValidate, ResearchQuerySchema } from '@/lib/security/validation';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -16,15 +18,27 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: { message: '인증이 필요합니다.' } }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { query, type = 'both', court_level, date_from, law_category } = body;
-
-    if (!query || typeof query !== 'string' || query.trim().length === 0) {
+    // Rate limiting
+    const { success: rateLimitOk, resetAt } = apiRateLimit(session.user.id);
+    if (!rateLimitOk) {
       return NextResponse.json(
-        { error: { message: '검색어를 입력해주세요.' } },
+        { error: { message: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.' } },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((resetAt - Date.now()) / 1000)) } }
+      );
+    }
+
+    const body = await request.json();
+
+    // Zod validation
+    const validation = safeValidate(ResearchQuerySchema, body);
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: { message: validation.errors[0]?.message ?? '입력값이 올바르지 않습니다.' } },
         { status: 400 }
       );
     }
+
+    const { query, type = 'both', court_level, date_from, law_category } = validation.data;
 
     const results: { laws?: unknown; cases?: unknown } = {};
 

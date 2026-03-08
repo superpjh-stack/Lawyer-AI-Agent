@@ -6,6 +6,7 @@ import { auth } from '@/lib/auth/config';
 import { prisma } from '@/lib/db/prisma';
 import { mockConversations, mockMessages, MOCK_USER_ID } from '@/lib/db/mock-data';
 import type { ChatRequest, ChatStreamChunk } from '@/types';
+import { chatRateLimit } from '@/lib/security/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -15,6 +16,24 @@ export async function POST(request: NextRequest): Promise<Response> {
   try {
     const session = await auth();
     const userId = session?.user?.id ?? MOCK_USER_ID;
+
+    // Rate limiting
+    const ip = request.headers.get('x-forwarded-for') ?? request.headers.get('x-real-ip') ?? 'unknown';
+    const rateLimitKey = session?.user?.id ?? ip;
+    const { success: rateLimitOk, remaining, resetAt } = chatRateLimit(rateLimitKey);
+    if (!rateLimitOk) {
+      return NextResponse.json(
+        { error: { message: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.' } },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': String(Math.ceil(resetAt / 1000)),
+            'Retry-After': String(Math.ceil((resetAt - Date.now()) / 1000)),
+          },
+        }
+      );
+    }
 
     const body: ChatRequest = await request.json();
     const { message, conversationId } = body;
@@ -32,6 +51,7 @@ export async function POST(request: NextRequest): Promise<Response> {
         { status: 400 }
       );
     }
+
 
     const encoder = new TextEncoder();
     let activeConversationId = conversationId;

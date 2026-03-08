@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth/config';
 import { prisma } from '@/lib/db/prisma';
+import { chatRateLimit } from '@/lib/security/rate-limit';
 import {
   generateAdvisoryDraft1,
   generateAdvisoryDraft2,
@@ -18,6 +19,15 @@ export async function POST(request: NextRequest): Promise<Response> {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: { message: '인증이 필요합니다.' } }, { status: 401 });
+    }
+
+    // Rate limiting (AI generation = same limit as chat)
+    const { success: rateLimitOk, resetAt } = chatRateLimit(session.user.id);
+    if (!rateLimitOk) {
+      return NextResponse.json(
+        { error: { message: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.' } },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((resetAt - Date.now()) / 1000)) } }
+      );
     }
 
     const body = await request.json();
