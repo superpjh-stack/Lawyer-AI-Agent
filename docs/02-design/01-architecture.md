@@ -1,8 +1,10 @@
 # LexAgent 시스템 아키텍처 및 화면 설계
 
 **작성일**: 2026-03-06
-**버전**: v1.0
+**버전**: v1.2 (2026-03-08 업데이트: 실 구현 반영)
 **기반 문서**: 01-service-concept.md, 02-feature-list.md
+
+> **v1.2 변경 이력**: AI 모델을 OpenAI GPT-4o로 확정, 배포 타겟을 GCP Cloud Run으로 변경, Advisory 기능·Lawee AI 캐릭터 추가 반영
 
 ---
 
@@ -16,15 +18,17 @@
 | Styling | Tailwind CSS | 유틸리티 우선 CSS, 반응형 디자인 빠른 구현, 커스터마이징 용이 |
 | 상태 관리 | Zustand | 경량, 단순한 API, Next.js App Router와 호환성 우수 |
 | Backend | Next.js API Routes (Route Handlers) | 프론트엔드와 동일 레포, 배포 단순화, Vercel Edge Runtime 지원 |
-| AI | Anthropic Claude API (claude-sonnet-4-6) | 멀티 에이전트 오케스트레이션, 긴 컨텍스트 지원 (200K 토큰), 한국어 성능 우수 |
-| DB (관계형) | PostgreSQL (via Supabase) | 복잡한 관계형 데이터(사건-문서-클라이언트), ACID 보장, RLS(Row Level Security)로 멀티테넌트 보안 |
-| DB (벡터) | pgvector (PostgreSQL 확장) | 문서 시맨틱 검색용 임베딩 저장, 별도 벡터 DB 없이 단일 DB로 관리 가능 |
-| ORM | Prisma | 타입 안전 쿼리, 스키마 마이그레이션 자동화, Next.js 통합 우수 |
-| 파일 저장 | Supabase Storage | PDF/DOCX 문서 저장, CDN 연동, RLS 기반 접근 제어 |
-| 인증 | NextAuth.js v5 | Next.js App Router 완벽 지원, 이메일/소셜 로그인, JWT + 세션 관리 |
-| 이메일 | Resend | 개발자 친화적 API, 한국어 이메일 템플릿 지원 |
-| 배포 | Vercel | Next.js 최적 배포 환경, Edge Functions, 자동 CI/CD |
-| 캐시 | Redis (Upstash) | AI 응답 캐시, 세션 데이터, rate limiting |
+| AI | OpenAI GPT-4o (openai SDK) | Tool Use 기반 agentic loop, 한국 법률 API fallback 지원, 스트리밍 SSE 지원 (※초기 설계: Anthropic Claude → GPT-4o로 확정) |
+| DB (관계형) | PostgreSQL (GCP Cloud SQL) | 복잡한 관계형 데이터(사건-문서-클라이언트), ACID 보장, Cloud SQL Auth Proxy 소켓 연결 |
+| DB (벡터) | pgvector (PostgreSQL 확장) | 문서 시맨틱 검색용 임베딩 저장 (백로그 - 미구현) |
+| ORM | Prisma | 타입 안전 쿼리, binaryTargets: linux-musl-openssl-3.0.x (Alpine Linux) |
+| 파일 저장 | Supabase Storage (백로그) | PDF/DOCX 문서 저장 (미구현 - 향후 적용) |
+| 인증 | NextAuth.js v5 | Edge-safe 미들웨어 분리 패턴, JWT 세션, CredentialsProvider |
+| 이메일 | Resend (백로그) | 기일 알림 이메일 (미구현 - 향후 적용) |
+| 배포 | GCP Cloud Build + Cloud Run | Docker 멀티스테이지 빌드, Cloud SQL 소켓 연결, Secret Manager (※초기 설계: Vercel → GCP로 확정) |
+| 캐시 | Redis/Upstash (백로그) | 미구현 - 향후 적용 |
+| AI 캐릭터 | Lawee (신규) | 플로팅 버튼 + 다이얼로그 패턴의 AI 캐릭터 인터페이스 |
+| 음성 | Web Speech API (신규) | STT/TTS 기반 음성 입력·출력 (useVoice hook) |
 
 ### 1.2 DB 선택 근거 (PostgreSQL + pgvector)
 

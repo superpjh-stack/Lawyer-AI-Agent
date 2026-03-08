@@ -5,6 +5,7 @@ import openaiClient, { AI_MODEL, MAX_TOKENS } from '@/lib/anthropic';
 import type { ChatStreamChunk, ToolUseData } from '@/types';
 import { searchLaws } from './tools/search-laws';
 import { searchCases } from './tools/search-cases';
+import { prisma } from '@/lib/db/prisma';
 
 const ORCHESTRATOR_SYSTEM_PROMPT = `당신은 LexAgent의 핵심 오케스트레이터 AI입니다.
 한국 변호사의 법률 업무를 전방위로 지원합니다.
@@ -334,9 +335,10 @@ export class OrchestratorAgent {
         );
 
       case 'manage_deadline':
-        return this.mockManageDeadline(
+        return this.manageDeadline(
           input.action as string,
           input.case_id as string | undefined,
+          input.deadline_data as Record<string, unknown> | undefined,
           userId
         );
 
@@ -385,21 +387,61 @@ export class OrchestratorAgent {
     };
   }
 
-  private mockManageDeadline(action: string, caseId?: string, userId?: string) {
-    if (action === 'list') {
-      return {
-        deadlines: [
-          {
-            id: 'deadline-001',
-            caseId: caseId ?? 'case-001',
-            title: '준비서면 제출',
-            dueDate: '2026-03-07',
+  private async manageDeadline(
+    action: string,
+    caseId?: string,
+    deadlineData?: Record<string, unknown>,
+    userId?: string
+  ) {
+    try {
+      if (action === 'list') {
+        const where: Record<string, unknown> = {};
+        if (caseId) where.caseId = caseId;
+        const deadlines = await prisma.deadline.findMany({
+          where,
+          orderBy: { dueDate: 'asc' },
+          include: { case: { select: { id: true, title: true } } },
+        });
+        return { deadlines };
+      }
+
+      if (action === 'create' && deadlineData) {
+        const created = await prisma.deadline.create({
+          data: {
+            caseId: (deadlineData.caseId as string) ?? caseId ?? '',
+            title: deadlineData.title as string,
+            dueDate: new Date(deadlineData.dueDate as string),
+            deadlineType: (deadlineData.deadlineType as string) ?? 'general',
             status: 'pending',
           },
-        ],
-      };
+        });
+        return { success: true, deadline: created };
+      }
+
+      if (action === 'update' && deadlineData?.id) {
+        const updated = await prisma.deadline.update({
+          where: { id: deadlineData.id as string },
+          data: {
+            ...(deadlineData.status !== undefined && { status: deadlineData.status as string }),
+            ...(deadlineData.title !== undefined && { title: deadlineData.title as string }),
+            ...(deadlineData.dueDate !== undefined && {
+              dueDate: new Date(deadlineData.dueDate as string),
+            }),
+          },
+        });
+        return { success: true, deadline: updated };
+      }
+
+      if (action === 'delete' && deadlineData?.id) {
+        await prisma.deadline.delete({ where: { id: deadlineData.id as string } });
+        return { success: true, id: deadlineData.id };
+      }
+
+      return { success: false, message: `Unknown action: ${action}` };
+    } catch (err) {
+      console.error('[orchestrator] manageDeadline error:', err);
+      return { success: false, message: 'Failed to manage deadline' };
     }
-    return { success: true, action, caseId, userId };
   }
 
   private mockSearchDocuments(query: string, caseId?: string, docType?: string) {
