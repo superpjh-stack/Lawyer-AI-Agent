@@ -61,7 +61,38 @@ steps:
       - 'asia-northeast3'
       - '--wait'
 
-  # 5. Cloud Run 배포 (Cloud SQL 소켓 연결 포함)
+  # 5. Prisma seed (Cloud Run Job)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'update'
+      - 'prisma-seed'
+      - '--image'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+      - '--command'
+      - 'npx'
+      - '--args'
+      - 'prisma,db,seed'
+      - '--region'
+      - 'asia-northeast3'
+      - '--set-cloudsql-instances'
+      - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
+      - '--set-secrets'
+      - 'DATABASE_URL=DATABASE_URL:latest'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'execute'
+      - 'prisma-seed'
+      - '--region'
+      - 'asia-northeast3'
+      - '--wait'
+
+  # 6. Cloud Run 배포 (Cloud SQL 소켓 연결 포함)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
