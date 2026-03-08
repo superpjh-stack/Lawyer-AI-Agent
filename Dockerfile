@@ -36,8 +36,11 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=8080
 ENV HOSTNAME="0.0.0.0"
+# Force Prisma to use OpenSSL 3.x compatible binary (Alpine Linux)
+ENV PRISMA_QUERY_ENGINE_LIBRARY=/app/node_modules/.prisma/client/libquery_engine-linux-musl-openssl-3.0.x.so.node
 
-RUN addgroup --system --gid 1001 nodejs && \
+RUN apk add --no-cache openssl && \
+    addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 # Standalone output
