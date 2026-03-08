@@ -1,13 +1,10 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const SEND_TRIGGERS = [
-  "답변해줘", "답변해", "답변 해줘",
-  "전송", "전송해", "전송해줘",
-  "보내줘", "보내 줘",
-  "질문해", "질문해줘",
-  "실행해", "실행",
+  "답변해줘", "답변해", "전송", "전송해", "전송해줘",
+  "보내줘", "질문해", "질문해줘", "실행해",
 ];
 
 export function parseTrigger(text: string): { clean: string; triggered: boolean } {
@@ -19,89 +16,106 @@ export function parseTrigger(text: string): { clean: string; triggered: boolean 
   return { clean: text, triggered: false };
 }
 
-// ── STT: 연속 음성 인식 ───────────────────────────────────
+// ── STT ─────────────────────────────────────────────────
 export function useSpeechToText(
   onResult: (text: string, triggered: boolean) => void,
-  enabled: boolean          // 외부에서 on/off 제어
+  enabled: boolean
 ) {
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+  // 모든 값을 ref에 보관 → 의존성 루프 없음
   const recognitionRef = useRef<any>(null);
   const enabledRef = useRef(enabled);
-  const pausedRef = useRef(false); // AI 응답 대기 중 일시정지
+  const pausedRef = useRef(false);
+  const onResultRef = useRef(onResult);
+  const listeningRef = useRef(false);
 
+  // ref 동기화
   useEffect(() => { enabledRef.current = enabled; }, [enabled]);
+  useEffect(() => { onResultRef.current = onResult; }, [onResult]);
 
   useEffect(() => {
-    const SR =
-      typeof window !== "undefined" &&
-      (window.SpeechRecognition || (window as any).webkitSpeechRecognition);
+    const SR = typeof window !== "undefined" &&
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
     setSupported(!!SR);
   }, []);
 
-  const startRecognition = useCallback(() => {
-    if (!enabledRef.current || pausedRef.current) return;
-    const SR = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
+  // start/pause/resume 을 ref 함수로 정의 (의존성 없음)
+  const startRef = useRef(() => {});
+  const pauseRef = useRef(() => {});
+  const resumeRef = useRef(() => {});
+
+  startRef.current = () => {
+    if (!enabledRef.current || pausedRef.current || listeningRef.current) return;
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
 
-    const recognition: SpeechRecognition = new SR();
-    recognition.lang = "ko-KR";
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    const rec = new SR();
+    rec.lang = "ko-KR";
+    rec.continuous = false;
+    rec.interimResults = false;
 
-    recognition.onresult = (e: SpeechRecognitionEvent) => {
-      const raw = e.results[0][0].transcript;
+    rec.onresult = (e: any) => {
+      const raw = e.results[0][0].transcript as string;
       const { clean, triggered } = parseTrigger(raw);
-      onResult(clean, triggered);
+      onResultRef.current(clean, triggered);
     };
 
-    recognition.onend = () => {
+    rec.onend = () => {
+      listeningRef.current = false;
       setListening(false);
-      // 활성화 상태면 자동 재시작
       if (enabledRef.current && !pausedRef.current) {
-        setTimeout(() => startRecognition(), 300);
+        setTimeout(() => startRef.current(), 400);
       }
     };
 
-    recognition.onerror = (e) => {
+    rec.onerror = (e: any) => {
+      listeningRef.current = false;
       setListening(false);
-      // 사용자가 끈 게 아니면 재시작
       if (e.error !== "aborted" && enabledRef.current && !pausedRef.current) {
-        setTimeout(() => startRecognition(), 800);
+        setTimeout(() => startRef.current(), 900);
       }
     };
 
-    recognitionRef.current = recognition;
-    recognition.start();
+    recognitionRef.current = rec;
+    rec.start();
+    listeningRef.current = true;
     setListening(true);
-  }, [onResult]);
+  };
 
-  // enabled 변경 시 시작/중지
+  pauseRef.current = () => {
+    pausedRef.current = true;
+    try { recognitionRef.current?.abort(); } catch {}
+    listeningRef.current = false;
+    setListening(false);
+  };
+
+  resumeRef.current = () => {
+    if (!enabledRef.current) return;
+    pausedRef.current = false;
+    setTimeout(() => startRef.current(), 600);
+  };
+
+  // enabled ON → 시작, OFF → 중지
   useEffect(() => {
     if (enabled) {
       pausedRef.current = false;
-      startRecognition();
+      setTimeout(() => startRef.current(), 200);
     } else {
-      recognitionRef.current?.abort();
+      pausedRef.current = true;
+      try { recognitionRef.current?.abort(); } catch {}
+      listeningRef.current = false;
       setListening(false);
     }
-  }, [enabled, startRecognition]);
+  }, [enabled]); // eslint-disable-line
 
-  // AI 응답 대기 중 일시정지/재개
-  const pause = useCallback(() => {
-    pausedRef.current = true;
-    recognitionRef.current?.abort();
-    setListening(false);
-  }, []);
-
-  const resume = useCallback(() => {
-    if (!enabledRef.current) return;
-    pausedRef.current = false;
-    setTimeout(() => startRecognition(), 500);
-  }, [startRecognition]);
-
-  return { listening, supported, pause, resume };
+  return {
+    listening,
+    supported,
+    pause: () => pauseRef.current(),
+    resume: () => resumeRef.current(),
+  };
 }
 
 // ── TTS ─────────────────────────────────────────────────
@@ -113,7 +127,7 @@ export function useTextToSpeech() {
     setSupported(typeof window !== "undefined" && "speechSynthesis" in window);
   }, []);
 
-  const speak = useCallback((text: string, onEnd?: () => void) => {
+  const speak = (text: string, onEnd?: () => void) => {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
 
@@ -129,30 +143,29 @@ export function useTextToSpeech() {
 
     const utterance = new SpeechSynthesisUtterance(clean);
     utterance.lang = "ko-KR";
-    utterance.rate = 1.05;
+    utterance.rate = 1.0;
     utterance.pitch = 1.0;
 
-    const trySetVoice = () => {
+    // 한국어 음성 선택
+    const setVoice = () => {
       const voices = window.speechSynthesis.getVoices();
-      const koVoice = voices.find(
-        (v) => v.lang.startsWith("ko") || v.name.includes("Korean")
-      );
-      if (koVoice) utterance.voice = koVoice;
+      const ko = voices.find(v => v.lang.startsWith("ko") || v.name.includes("Korean"));
+      if (ko) utterance.voice = ko;
     };
-    trySetVoice();
-    window.speechSynthesis.onvoiceschanged = trySetVoice;
+    setVoice();
+    window.speechSynthesis.onvoiceschanged = setVoice;
 
     utterance.onstart = () => setSpeaking(true);
     utterance.onend = () => { setSpeaking(false); onEnd?.(); };
     utterance.onerror = () => { setSpeaking(false); onEnd?.(); };
 
     window.speechSynthesis.speak(utterance);
-  }, []);
+  };
 
-  const stop = useCallback(() => {
+  const stop = () => {
     window.speechSynthesis?.cancel();
     setSpeaking(false);
-  }, []);
+  };
 
   return { speaking, supported, speak, stop };
 }
