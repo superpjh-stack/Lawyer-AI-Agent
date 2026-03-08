@@ -134,11 +134,11 @@
   }
 
   .page-header {
-    @apply flex items-center justify-between mb-6;
+    @apply flex items-center justify-between mb-4 md:mb-6;
   }
 
   .page-title {
-    @apply text-2xl font-bold text-slate-900;
+    @apply text-xl font-bold text-slate-900 md:text-2xl;
   }
 }
 
@@ -170,6 +170,12 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 

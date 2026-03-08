@@ -143,6 +143,8 @@ export default function DraftingPage() {
     setSelectedHistory(entry.id);
   };
 
+  const [activeTab, setActiveTab] = useState<'input' | 'result'>('input');
+
   const wordCount = draft.trim() ? draft.trim().length : 0;
 
   return (
@@ -152,9 +154,25 @@ export default function DraftingPage() {
         <p className="text-sm text-slate-500">AI가 법률 문서 초안을 자동으로 작성합니다</p>
       </div>
 
-      <div className="flex gap-6 h-[calc(100vh-12rem)]">
-        {/* 좌측: 입력 패널 */}
-        <div className="w-80 flex-shrink-0 flex flex-col gap-4 overflow-y-auto scrollbar-thin pr-1">
+      {/* 탭 네비게이션 - 모바일만 */}
+      <div className="flex md:hidden border-b mb-4">
+        <button
+          onClick={() => setActiveTab('input')}
+          className={`flex-1 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'input' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}
+        >
+          입력
+        </button>
+        <button
+          onClick={() => setActiveTab('result')}
+          className={`flex-1 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'result' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}
+        >
+          초안 결과
+        </button>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6 md:h-[calc(100vh-12rem)]">
+        {/* 입력 패널 */}
+        <div className={`w-full md:w-80 md:flex-shrink-0 flex flex-col gap-4 overflow-y-auto scrollbar-thin md:pr-1 ${activeTab !== 'input' ? 'hidden md:flex' : ''}`}>
 
           {/* 문서 유형 선택 */}
           <div>
@@ -303,8 +321,8 @@ export default function DraftingPage() {
           )}
         </div>
 
-        {/* 우측: 결과 패널 */}
-        <div className="flex-1 flex flex-col min-w-0">
+        {/* 결과 패널 */}
+        <div className={`flex-1 flex flex-col min-w-0 ${activeTab !== 'result' ? 'hidden md:flex' : ''}`}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <PenLine className="w-4 h-4 text-slate-400" />

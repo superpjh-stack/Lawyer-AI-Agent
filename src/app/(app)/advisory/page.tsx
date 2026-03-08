@@ -46,6 +46,9 @@ export default function AdvisoryPage() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [selectedHistoryId, setSelectedHistoryId] = useState<string | null>(null);
 
+  // 모바일 탭 상태
+  const [activeTab, setActiveTab] = useState<"form" | "history" | "viewer">("form");
+
   // 히스토리 로드
   const loadHistory = useCallback(async () => {
     setHistoryLoading(true);
@@ -387,103 +390,128 @@ export default function AdvisoryPage() {
       )}
 
       {/* 메인 콘텐츠 */}
-      <div className="flex gap-6 h-[calc(100vh-18rem)]">
+      <div className="flex flex-col md:flex-row gap-6 md:h-[calc(100vh-18rem)]">
+        {/* 탭 네비게이션 - 모바일만 */}
+        <div className="flex md:hidden border-b border-slate-200 mb-2">
+          <button
+            onClick={() => setActiveTab("form")}
+            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "form" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
+          >
+            의견서 작성
+          </button>
+          <button
+            onClick={() => setActiveTab("history")}
+            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "history" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
+          >
+            히스토리
+          </button>
+          <button
+            onClick={() => setActiveTab("viewer")}
+            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "viewer" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
+          >
+            결과 보기
+          </button>
+        </div>
+
         {/* 좌측 패널 */}
-        <div className="w-80 flex-shrink-0 flex flex-col gap-4 overflow-y-auto scrollbar-thin pr-1">
-          {currentStep === "input" ? (
-            <AdvisoryForm
-              onSubmit={handleFormSubmit}
-              loading={creating || streaming}
-              initialData={advisory ? {
-                title: advisory.title,
-                type: advisory.type,
-                background: advisory.background,
-                purpose: advisory.purpose,
-              } : undefined}
-            />
-          ) : (
-            <>
-              {/* 자문 정보 요약 */}
-              {advisory && (
-                <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
-                  <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">자문 주제</p>
-                    <p className="text-sm font-medium text-slate-800">{advisory.title}</p>
+        <div className={`w-full md:w-80 md:flex-shrink-0 flex-col gap-4 overflow-y-auto scrollbar-thin pr-1 ${activeTab === "viewer" ? "hidden md:flex" : "flex"}`}>
+          {/* 폼/자문 정보 영역 - 모바일에서 form 탭일 때만, 데스크탑은 항상 */}
+          <div className={`flex flex-col gap-4 ${activeTab === "history" ? "hidden md:flex" : ""}`}>
+            {currentStep === "input" ? (
+              <AdvisoryForm
+                onSubmit={handleFormSubmit}
+                loading={creating || streaming}
+                initialData={advisory ? {
+                  title: advisory.title,
+                  type: advisory.type,
+                  background: advisory.background,
+                  purpose: advisory.purpose,
+                } : undefined}
+              />
+            ) : (
+              <>
+                {/* 자문 정보 요약 */}
+                {advisory && (
+                  <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
+                    <div>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">자문 주제</p>
+                      <p className="text-sm font-medium text-slate-800">{advisory.title}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">자문 유형</p>
+                      <p className="text-sm text-slate-600">
+                        {{ case_advisory: "실제 사건 자문", supreme_court: "대법원 법률 자문", institution: "기관 자문", other: "기타" }[advisory.type] || advisory.type}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">배경 요약</p>
+                      <p className="text-xs text-slate-500 line-clamp-3">{advisory.background}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">자문 유형</p>
-                    <p className="text-sm text-slate-600">
-                      {{ case_advisory: "실제 사건 자문", supreme_court: "대법원 법률 자문", institution: "기관 자문", other: "기타" }[advisory.type] || advisory.type}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">배경 요약</p>
-                    <p className="text-xs text-slate-500 line-clamp-3">{advisory.background}</p>
-                  </div>
+                )}
+
+                {/* 다음 단계 버튼 */}
+                <div className="space-y-2">
+                  {currentStep === "v1" && completedSteps.includes("v1") && !streaming && (
+                    <Button
+                      fullWidth
+                      onClick={() => handleGenerateStep(2)}
+                      disabled={streaming}
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      2차 상세 자문서 생성
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  )}
+                  {currentStep === "v2" && completedSteps.includes("v2") && !streaming && (
+                    <Button
+                      fullWidth
+                      onClick={() => handleGenerateStep(3)}
+                      disabled={streaming}
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      3차 최종 자문서 생성
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  )}
+                  {/* 이전 단계 재생성 */}
+                  {!streaming && completedSteps.includes("v1") && currentStep !== "v1" && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      fullWidth
+                      onClick={() => setCurrentStep("v1")}
+                    >
+                      1차 초안 보기
+                    </Button>
+                  )}
+                  {!streaming && completedSteps.includes("v2") && currentStep !== "v2" && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      fullWidth
+                      onClick={() => setCurrentStep("v2")}
+                    >
+                      2차 상세 보기
+                    </Button>
+                  )}
+                  {!streaming && completedSteps.includes("v3") && currentStep !== "v3" && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      fullWidth
+                      onClick={() => setCurrentStep("v3")}
+                    >
+                      3차 최종 보기
+                    </Button>
+                  )}
                 </div>
-              )}
+              </>
+            )}
+          </div>
 
-              {/* 다음 단계 버튼 */}
-              <div className="space-y-2">
-                {currentStep === "v1" && completedSteps.includes("v1") && !streaming && (
-                  <Button
-                    fullWidth
-                    onClick={() => handleGenerateStep(2)}
-                    disabled={streaming}
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    2차 상세 자문서 생성
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                )}
-                {currentStep === "v2" && completedSteps.includes("v2") && !streaming && (
-                  <Button
-                    fullWidth
-                    onClick={() => handleGenerateStep(3)}
-                    disabled={streaming}
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    3차 최종 자문서 생성
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                )}
-                {/* 이전 단계 재생성 */}
-                {!streaming && completedSteps.includes("v1") && currentStep !== "v1" && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    fullWidth
-                    onClick={() => setCurrentStep("v1")}
-                  >
-                    1차 초안 보기
-                  </Button>
-                )}
-                {!streaming && completedSteps.includes("v2") && currentStep !== "v2" && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    fullWidth
-                    onClick={() => setCurrentStep("v2")}
-                  >
-                    2차 상세 보기
-                  </Button>
-                )}
-                {!streaming && completedSteps.includes("v3") && currentStep !== "v3" && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    fullWidth
-                    onClick={() => setCurrentStep("v3")}
-                  >
-                    3차 최종 보기
-                  </Button>
-                )}
-              </div>
-            </>
-          )}
-
-          {/* 히스토리 */}
-          <div className="pt-2 border-t border-slate-100">
+          {/* 히스토리 - 모바일에서 history 탭일 때만, 데스크탑은 항상 */}
+          <div className={`pt-2 border-t border-slate-100 ${activeTab === "form" ? "hidden md:block" : activeTab === "viewer" ? "hidden md:block" : ""}`}>
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
               자문서 히스토리 ({historyItems.length})
             </p>
@@ -497,21 +525,23 @@ export default function AdvisoryPage() {
           </div>
         </div>
 
-        {/* 우측: 자문서 뷰어 */}
-        <AdvisoryViewer
-          content={getCurrentContent()}
-          title={advisory?.title}
-          stepLabel={getCurrentStepLabel()}
-          streaming={streaming}
-          onContentChange={handleContentChange}
-          onDeepDive={handleDeepDive}
-          onReset={() => {
-            if (currentStep === "input") return;
-            // 현재 단계 초기화
-            const setter = currentStep === "v3" ? setDraft3 : currentStep === "v2" ? setDraft2 : setDraft1;
-            setter("");
-          }}
-        />
+        {/* 우측: 자문서 뷰어 - 모바일에서 viewer 탭일 때만, 데스크탑은 항상 */}
+        <div className={`flex-1 min-w-0 ${activeTab !== "viewer" ? "hidden md:flex" : "flex"} flex-col`}>
+          <AdvisoryViewer
+            content={getCurrentContent()}
+            title={advisory?.title}
+            stepLabel={getCurrentStepLabel()}
+            streaming={streaming}
+            onContentChange={handleContentChange}
+            onDeepDive={handleDeepDive}
+            onReset={() => {
+              if (currentStep === "input") return;
+              // 현재 단계 초기화
+              const setter = currentStep === "v3" ? setDraft3 : currentStep === "v2" ? setDraft2 : setDraft1;
+              setter("");
+            }}
+          />
+        </div>
       </div>
     </div>
   );

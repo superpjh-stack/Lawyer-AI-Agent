@@ -26,7 +26,7 @@ export function AdvisorySteps({
   const stepIndex = STEPS.findIndex((s) => s.key === currentStep);
 
   return (
-    <div className="flex items-center gap-0 w-full">
+    <div className="flex items-center gap-0 w-full overflow-x-auto">
       {STEPS.map((step, idx) => {
         const isCompleted = completedSteps.includes(step.key);
         const isCurrent = step.key === currentStep;

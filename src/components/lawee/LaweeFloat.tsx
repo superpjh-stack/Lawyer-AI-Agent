@@ -39,6 +39,19 @@ export function LaweeFloat({ state, onClick, onDialogClose }: LaweeFloatProps) {
     setPosition({ x: newX, y: newY });
   }, []);
 
+  // Bottom offset: mobile adds 64px for bottom tab bar, desktop keeps 20px base
+  const [bottomBase, setBottomBase] = useState<number>(
+    typeof window !== 'undefined' && window.innerWidth < 768 ? 84 : 20
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBottomBase(window.innerWidth < 768 ? 84 : 20);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       moveToRandomPosition();
@@ -65,7 +78,7 @@ export function LaweeFloat({ state, onClick, onDialogClose }: LaweeFloatProps) {
       `}
       style={{
         right: `${20 + position.x}px`,
-        bottom: `${20 + position.y}px`,
+        bottom: `${bottomBase + position.y}px`,
       }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}

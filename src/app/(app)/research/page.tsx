@@ -62,10 +62,10 @@ export default function ResearchPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">법률 리서치</h1>
-        <p className="text-slate-500">판례 및 법령을 AI로 검색하고 분석합니다</p>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-bold text-slate-900 mb-1.5 md:mb-2">법률 리서치</h1>
+        <p className="text-sm md:text-base text-slate-500">판례 및 법령을 AI로 검색하고 분석합니다</p>
       </div>
 
       {/* 검색 타입 선택 */}
@@ -93,19 +93,19 @@ export default function ResearchPage() {
       </div>
 
       {/* 검색 입력 */}
-      <div className="flex gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-6">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           placeholder={searchType === "cases" ? "예: 부동산 매매계약 해제 귀책사유" : "예: 민법 계약해제 요건"}
-          className="flex-1 px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-navy-500"
+          className="w-full flex-1 px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-navy-500"
         />
         <button
           onClick={handleSearch}
           disabled={isLoading || !query.trim()}
-          className="px-6 py-3 bg-navy-900 text-white rounded-xl text-sm font-medium hover:bg-navy-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+          className="w-full sm:w-auto px-6 py-3 bg-navy-900 text-white rounded-xl text-sm font-medium hover:bg-navy-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
         >
           <Search className="w-4 h-4" />
           {isLoading ? "검색 중..." : "검색"}
@@ -127,15 +127,15 @@ export default function ResearchPage() {
             <div key={i} className="p-5 border border-slate-100 rounded-xl bg-white hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <Scale className="w-4 h-4 text-navy-700" />
-                  <h3 className="font-semibold text-slate-900">{result.title}</h3>
+                  <Scale className="w-4 h-4 text-navy-700 flex-shrink-0" />
+                  <h3 className="font-semibold text-sm md:text-base text-slate-900">{result.title}</h3>
                 </div>
-                <button className="p-1.5 text-slate-400 hover:text-gold-500 transition-colors">
+                <button className="p-1.5 text-slate-400 hover:text-gold-500 transition-colors flex-shrink-0">
                   <Bookmark className="w-4 h-4" />
                 </button>
               </div>
               {result.content && (
-                <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">{result.content}</p>
+                <p className="text-xs md:text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">{result.content}</p>
               )}
               <div className="mt-3 pt-3 border-t border-slate-100">
                 <span className="text-xs text-slate-400">{result.source}</span>

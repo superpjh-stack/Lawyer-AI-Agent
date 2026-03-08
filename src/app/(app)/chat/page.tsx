@@ -5,6 +5,7 @@ import { Plus, MessageSquare, ChevronRight, ChevronDown, Loader2, Lightbulb } fr
 import { ChatInterface } from "@/components/chat/ChatInterface";
 import { Button } from "@/components/ui/Button";
 import { clsx } from "clsx";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface Conversation {
   id: string;
@@ -131,9 +132,10 @@ const QUICK_QUESTIONS = [
 ];
 
 export default function ChatPage() {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConvId, setActiveConvId] = useState<string | null>(null);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [showQPanel, setShowQPanel] = useState(true);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
@@ -156,6 +158,10 @@ export default function ChatPage() {
   }, [activeConvId]);
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
+
+  useEffect(() => {
+    setShowSidebar(isDesktop);
+  }, [isDesktop]);
 
   const handleNewConversation = async () => {
     setCreating(true);
@@ -197,7 +203,15 @@ export default function ChatPage() {
   ];
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] -m-4 sm:-m-6">
+    <div className="flex h-[calc(100svh-4rem-5rem)] md:h-[calc(100vh-4rem)] -m-4 sm:-m-6 overflow-hidden">
+
+      {/* ── 모바일 백드롭 ── */}
+      {showSidebar && !isDesktop && (
+        <div
+          className="fixed inset-0 bg-black/40 z-20 md:hidden"
+          onClick={() => setShowSidebar(false)}
+        />
+      )}
 
       {/* ── 좌측: 대화 사이드바 ── */}
       <div className={clsx(
