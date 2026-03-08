@@ -31,7 +31,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             firmName: user.firm.name,
             role: user.role,
           }
-        } catch {
+        } catch (e) {
+          console.error("[auth] authorize error:", e)
           return null
         }
       },
