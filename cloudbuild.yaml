@@ -30,7 +30,7 @@ steps:
       - 'push'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
 
-  # 4. Prisma migrate deploy (Cloud Run Job)
+  # 4. Prisma db push (Cloud Run Job)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -40,6 +40,10 @@ steps:
       - 'prisma-migrate'
       - '--image'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+      - '--command'
+      - 'npx'
+      - '--args'
+      - 'prisma,db,push,--accept-data-loss'
       - '--region'
       - 'asia-northeast3'
       - '--set-cloudsql-instances'
