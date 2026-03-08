@@ -16,7 +16,7 @@ steps:
       - '--all-tags'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/app'
 
-  # 3. Cloud Run 배포
+  # 3. Cloud Run 배포 (Cloud SQL 소켓 연결 포함)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -40,13 +40,10 @@ steps:
       - '0'
       - '--max-instances'
       - '5'
+      - '--add-cloudsql-instances'
+      - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
       - '--set-env-vars'
-      - >-
-        NODE_ENV=production,
-        NEXTAUTH_URL=$$NEXTAUTH_URL,
-        AUTH_SECRET=$$AUTH_SECRET,
-        DATABASE_URL=$$DATABASE_URL,
-        OPENAI_API_KEY=$$OPENAI_API_KEY
+      - 'NODE_ENV=production'
       - '--set-secrets'
       - >-
         NEXTAUTH_URL=NEXTAUTH_URL:latest,
