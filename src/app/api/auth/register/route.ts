@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db/prisma"
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password, firmName } = await req.json()
+    const { name, email, password, firmName, role } = await req.json()
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -12,6 +12,9 @@ export async function POST(req: Request) {
         { status: 400 }
       )
     }
+
+    const validRoles = ["admin", "lawyer", "member"]
+    const userRole = validRoles.includes(role) ? role : "lawyer"
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -38,7 +41,7 @@ export async function POST(req: Request) {
         email,
         passwordHash,
         firmId: firm.id,
-        role: "admin",
+        role: userRole,
       },
     })
 

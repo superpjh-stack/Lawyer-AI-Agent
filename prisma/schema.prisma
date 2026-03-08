@@ -32,6 +32,7 @@ model User {
   documents      Document[]     @relation("UploadedBy")
   billingEntries BillingEntry[]
   researchResults ResearchSavedResult[]
+  advisories      Advisory[]
   @@index([firmId])
   @@index([email])
 }
@@ -140,6 +141,26 @@ model ResearchSavedResult {
   case       Case?    @relation(fields: [caseId], references: [id])
   @@index([userId])
   @@index([caseId])
+}
+
+model Advisory {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  type        String   // case_advisory | supreme_court | institution | other
+  background  String
+  purpose     String
+  status      String   @default("draft") // draft | v1 | v2 | v3
+  draft1      String?  // 1차 초안
+  draft2      String?  // 2차 상세
+  draft3      String?  // 3차 최종
+  toc1        Json?    // 1차 목차
+  toc2        Json?    // 2차 목차
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+  @@index([userId])
+  @@index([status])
 }
 
 model BillingEntry {

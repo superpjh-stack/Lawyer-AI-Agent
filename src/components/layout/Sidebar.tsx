@@ -7,6 +7,7 @@ import { signOut } from "next-auth/react";
 import { clsx } from "clsx";
 import {
   Scale,
+  Gavel,
   LayoutDashboard,
   MessageSquare,
   FolderOpen,
@@ -24,12 +25,13 @@ import {
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
-  { href: "/chat", icon: MessageSquare, label: "AI 채팅" },
-  { href: "/cases", icon: FolderOpen, label: "사건 관리" },
-  { href: "/documents", icon: FileText, label: "문서 관리" },
-  { href: "/deadlines", icon: Calendar, label: "기일 관리" },
+  { href: "/chat", icon: MessageSquare, label: "AI와 법률대화 하기" },
+  { href: "/advisory", icon: Gavel, label: "자문하기" },
   { href: "/research", icon: BookOpen, label: "법률 리서치" },
   { href: "/drafting", icon: PenLine, label: "법률문서 작성" },
+  { href: "/cases", icon: FolderOpen, label: "사건 관리" },
+  { href: "/deadlines", icon: Calendar, label: "기일 관리" },
+  { href: "/documents", icon: FileText, label: "문서 관리" },
   { href: "/clients", icon: Users, label: "클라이언트" },
   { href: "/billing", icon: CreditCard, label: "청구 관리" },
 ];
@@ -137,6 +139,16 @@ export function Sidebar({ className }: SidebarProps) {
             {!collapsed && <span>로그아웃</span>}
           </button>
         </div>
+
+        {/* Attribution */}
+        {!collapsed && (
+          <div className="px-4 py-2 border-t border-slate-100">
+            <p className="text-[10px] text-slate-300 text-center tracking-wide">
+              © made by{" "}
+              <span className="font-semibold text-slate-400">Gerardo92</span>
+            </p>
+          </div>
+        )}
       </aside>
 
       {/* Mobile Bottom Nav */}

@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
+import { Lawee } from "@/components/lawee";
 
 export default function AppLayout({
   children,
@@ -20,6 +21,9 @@ export default function AppLayout({
           </div>
         </main>
       </div>
+
+      {/* Lawee - Floating Mascot */}
+      <Lawee />
     </div>
   );
 }

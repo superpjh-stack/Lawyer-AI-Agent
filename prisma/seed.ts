@@ -27,6 +27,7 @@ async function main() {
     { name: "김민준 변호사", email: "minjun@lexagent.kr", role: "lawyer", hash: adminHash },
     { name: "이서연 변호사", email: "seoyeon@lexagent.kr", role: "lawyer", hash: adminHash },
     { name: "Jay Park", email: "hyunsoo@lexagent.kr", role: "lawyer", hash: lawyerHash },
+    { name: "Mina Jung", email: "mina@lexagent.kr", role: "lawyer", hash: lawyerHash },
   ]
 
   const users: Record<string, string> = {} // email → id
@@ -47,6 +48,7 @@ async function main() {
   const adminId = users["admin@lexagent.kr"]
   const lawyer1Id = users["minjun@lexagent.kr"]
   const lawyer2Id = users["seoyeon@lexagent.kr"]
+  const minaId = users["mina@lexagent.kr"]
 
   // ── Clients (10명) ────────────────────────────────────
   const clientsData = [
@@ -60,6 +62,9 @@ async function main() {
     { name: "글로벌파트너스(주)", email: "info@globalpartners.kr", phone: "02-3456-7890", type: "corporate" },
     { name: "강지우", email: "kang@example.com", phone: "010-6789-0123", type: "individual" },
     { name: "신흥건설 주식회사", email: "legal@shbuilding.kr", phone: "031-234-5678", type: "corporate" },
+    { name: "오세준", email: "oh@example.com", phone: "010-7890-1234", type: "individual" },
+    { name: "스타트업코리아(주)", email: "ceo@startupkorea.kr", phone: "02-4567-8901", type: "corporate" },
+    { name: "김다은", email: "kim.daeeun@example.com", phone: "010-8901-2345", type: "individual" },
   ]
 
   const clientIds: string[] = []
@@ -189,6 +194,62 @@ async function main() {
       courtName: "서울가정법원",
       caseYear: "2023",
     },
+    // ── Mina Jung 사건 5건 ──
+    {
+      caseNumber: "2026가합11001",
+      title: "저작권 침해 손해배상 청구",
+      description: "온라인 플랫폼의 무단 콘텐츠 복제에 따른 저작권 침해 손해배상 소송",
+      clientId: clientIds[10],
+      assignedUserId: minaId,
+      status: "active",
+      category: "지식재산",
+      courtName: "서울중앙지방법원",
+      caseYear: "2026",
+    },
+    {
+      caseNumber: "2026가단11002",
+      title: "직장 내 성희롱 손해배상",
+      description: "직장 내 성희롱으로 인한 정신적 손해배상 및 원직복직 청구",
+      clientId: clientIds[12],
+      assignedUserId: minaId,
+      status: "active",
+      category: "노동",
+      courtName: "서울남부지방법원",
+      caseYear: "2026",
+    },
+    {
+      caseNumber: "2026가합11003",
+      title: "개인정보 유출 손해배상",
+      description: "기업의 개인정보 관리 소홀로 인한 정보 유출 피해 집단소송",
+      clientId: clientIds[11],
+      assignedUserId: minaId,
+      status: "active",
+      category: "민사",
+      courtName: "서울중앙지방법원",
+      caseYear: "2026",
+    },
+    {
+      caseNumber: "2026가합11004",
+      title: "상속재산 분할 심판",
+      description: "피상속인 사망 후 공동상속인 간 상속재산 분할 청구",
+      clientId: clientIds[10],
+      assignedUserId: minaId,
+      status: "active",
+      category: "가사",
+      courtName: "서울가정법원",
+      caseYear: "2026",
+    },
+    {
+      caseNumber: "2026가합11005",
+      title: "프랜차이즈 계약 분쟁",
+      description: "가맹본부의 영업지역 침해 및 계약 위반에 따른 손해배상 청구",
+      clientId: clientIds[11],
+      assignedUserId: minaId,
+      status: "pending",
+      category: "상사",
+      courtName: "서울중앙지방법원",
+      caseYear: "2026",
+    },
   ]
 
   const caseIds: string[] = []
@@ -275,6 +336,42 @@ async function main() {
       deadlineType: "화해기일",
       status: "pending",
     },
+    // ── Mina Jung 기일 ──
+    {
+      caseId: caseIds[10],
+      title: "저작권 침해 1차 변론기일",
+      dueDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 6),
+      deadlineType: "변론기일",
+      status: "pending",
+    },
+    {
+      caseId: caseIds[11],
+      title: "성희롱 사건 증거보전 신청 기한",
+      dueDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 3),
+      deadlineType: "기타",
+      status: "pending",
+    },
+    {
+      caseId: caseIds[12],
+      title: "개인정보 집단소송 준비서면 제출",
+      dueDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 12),
+      deadlineType: "준비서면 제출",
+      status: "pending",
+    },
+    {
+      caseId: caseIds[13],
+      title: "상속재산 심판 조정기일",
+      dueDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 9),
+      deadlineType: "조정기일",
+      status: "pending",
+    },
+    {
+      caseId: caseIds[14],
+      title: "프랜차이즈 사건 답변서 제출",
+      dueDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 4),
+      deadlineType: "기타",
+      status: "pending",
+    },
   ]
 
   let deadlineCount = 0
@@ -301,6 +398,12 @@ async function main() {
     { caseId: caseIds[6], fileName: "임금지급대장.xlsx", docType: "기타", mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileSize: 204800 },
     { caseId: caseIds[7], fileName: "도급계약서_신흥건설.pdf", docType: "계약서", mimeType: "application/pdf", fileSize: 430080 },
     { caseId: caseIds[8], fileName: "주주간협약서.pdf", docType: "계약서", mimeType: "application/pdf", fileSize: 276480 },
+    // ── Mina Jung 문서 ──
+    { caseId: caseIds[10], fileName: "저작권등록증_원고.pdf", docType: "기타", mimeType: "application/pdf", fileSize: 184320 },
+    { caseId: caseIds[11], fileName: "성희롱_피해진술서.pdf", docType: "의견서", mimeType: "application/pdf", fileSize: 92160 },
+    { caseId: caseIds[12], fileName: "개인정보유출_피해사실확인서.pdf", docType: "기타", mimeType: "application/pdf", fileSize: 307200 },
+    { caseId: caseIds[13], fileName: "상속재산_목록_및_감정서.pdf", docType: "기타", mimeType: "application/pdf", fileSize: 409600 },
+    { caseId: caseIds[14], fileName: "프랜차이즈_가맹계약서.pdf", docType: "계약서", mimeType: "application/pdf", fileSize: 358400 },
   ]
 
   let docCount = 0
@@ -335,6 +438,12 @@ async function main() {
     { caseId: caseIds[5], userId: lawyer1Id, description: "상표권 침해 분석 및 가처분 신청", hours: 6.0, hourlyRate: 350000, date: new Date("2025-02-03") },
     { caseId: caseIds[6], userId: lawyer2Id, description: "임금 체불 진정서 작성 및 제출", hours: 2.0, hourlyRate: 280000, date: new Date("2025-02-14") },
     { caseId: caseIds[8], userId: lawyer2Id, description: "주주총회 의사록 검토 및 소 제기", hours: 4.5, hourlyRate: 320000, date: new Date("2025-02-22") },
+    // ── Mina Jung 청구 ──
+    { caseId: caseIds[10], userId: minaId, description: "저작권 침해 사실 조사 및 소장 작성", hours: 4.0, hourlyRate: 320000, date: new Date("2026-02-10") },
+    { caseId: caseIds[11], userId: minaId, description: "성희롱 피해자 상담 및 증거 수집", hours: 3.0, hourlyRate: 300000, date: new Date("2026-02-15") },
+    { caseId: caseIds[12], userId: minaId, description: "개인정보 유출 피해 분석 및 집단소송 준비", hours: 6.0, hourlyRate: 320000, date: new Date("2026-02-20") },
+    { caseId: caseIds[13], userId: minaId, description: "상속재산 목록 작성 및 심판 청구서 제출", hours: 3.5, hourlyRate: 300000, date: new Date("2026-02-25") },
+    { caseId: caseIds[14], userId: minaId, description: "프랜차이즈 계약 검토 및 내용증명 발송", hours: 2.5, hourlyRate: 320000, date: new Date("2026-03-01") },
   ]
 
   let billingCount = 0
@@ -363,6 +472,12 @@ async function main() {
     { title: "건설 하자보수 책임 기간", userId: lawyer2Id },
     { title: "주주간 분쟁 조정 방법", userId: lawyer2Id },
     { title: "이혼 재산분할 기준 문의", userId: adminId },
+    // ── Mina Jung 대화 ──
+    { title: "저작권 침해 입증 요건 검토", userId: minaId },
+    { title: "직장 내 성희롱 관련 판례 분석", userId: minaId },
+    { title: "개인정보보호법 위반 손해배상 기준", userId: minaId },
+    { title: "상속 한정승인 절차 문의", userId: minaId },
+    { title: "프랜차이즈 영업지역 보호 규정", userId: minaId },
   ]
 
   let convCount = 0

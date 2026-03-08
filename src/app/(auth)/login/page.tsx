@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 const QUICK_ACCOUNTS = [
   { label: "admin", email: "admin@lexagent.kr", password: "admin1234", role: "관리자" },
   { label: "Jay Park", email: "hyunsoo@lexagent.kr", password: "lawyer1234", role: "변호사" },
+  { label: "Mina Jung", email: "mina@lexagent.kr", password: "lawyer1234", role: "변호사" },
 ];
 
 export default function LoginPage() {
@@ -183,7 +184,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-white/40 text-xs mt-6">
-          &copy; 2026 LexAgent. All rights reserved.
+          &copy; 2026 Gerardo92. All rights reserved.
         </p>
       </div>
     </div>
