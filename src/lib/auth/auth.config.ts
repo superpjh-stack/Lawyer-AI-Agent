@@ -7,6 +7,7 @@ const protectedPaths = [
 ]
 
 export const authConfig: NextAuthConfig = {
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
