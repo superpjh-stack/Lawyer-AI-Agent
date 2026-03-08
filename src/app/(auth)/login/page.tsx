@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 
 const QUICK_ACCOUNTS = [
   { label: "admin", email: "admin@lexagent.kr", password: "admin1234", role: "관리자" },
-  { label: "박현수", email: "hyunsoo@lexagent.kr", password: "lawyer1234", role: "변호사" },
+  { label: "Jay Park", email: "hyunsoo@lexagent.kr", password: "lawyer1234", role: "변호사" },
 ];
 
 export default function LoginPage() {

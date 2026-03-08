@@ -20,10 +20,13 @@ async function main() {
   // ── Users ─────────────────────────────────────────────
   const adminHash = await bcrypt.hash("admin1234", 12)
 
+  const lawyerHash = await bcrypt.hash("lawyer1234", 12)
+
   const usersData = [
-    { name: "관리자", email: "admin@lexagent.kr", role: "admin" },
-    { name: "김민준 변호사", email: "minjun@lexagent.kr", role: "lawyer" },
-    { name: "이서연 변호사", email: "seoyeon@lexagent.kr", role: "lawyer" },
+    { name: "관리자", email: "admin@lexagent.kr", role: "admin", hash: adminHash },
+    { name: "김민준 변호사", email: "minjun@lexagent.kr", role: "lawyer", hash: adminHash },
+    { name: "이서연 변호사", email: "seoyeon@lexagent.kr", role: "lawyer", hash: adminHash },
+    { name: "Jay Park", email: "hyunsoo@lexagent.kr", role: "lawyer", hash: lawyerHash },
   ]
 
   const users: Record<string, string> = {} // email → id
@@ -31,7 +34,7 @@ async function main() {
     const existing = await prisma.user.findUnique({ where: { email: u.email } })
     if (!existing) {
       const created = await prisma.user.create({
-        data: { firmId: firm.id, name: u.name, email: u.email, passwordHash: adminHash, role: u.role },
+        data: { firmId: firm.id, name: u.name, email: u.email, passwordHash: u.hash, role: u.role },
       })
       users[u.email] = created.id
       console.log("✅ User 생성:", u.email)
