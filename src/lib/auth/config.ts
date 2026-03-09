@@ -4,6 +4,13 @@ import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/db/prisma"
 import { authConfig } from "./auth.config"
 
+// Dev-only mock accounts (used when DB is unavailable in local dev)
+const DEV_ACCOUNTS = [
+  { id: "dev-admin", email: "admin@lexagent.kr", password: "admin1234", name: "Admin", firmId: "dev-firm", firmName: "LexAgent Dev", role: "admin" },
+  { id: "dev-jay", email: "hyunsoo@lexagent.kr", password: "lawyer1234", name: "Jay Park", firmId: "dev-firm", firmName: "LexAgent Dev", role: "lawyer" },
+  { id: "dev-mina", email: "mina@lexagent.kr", password: "lawyer1234", name: "Mina Jung", firmId: "dev-firm", firmName: "LexAgent Dev", role: "lawyer" },
+]
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
@@ -32,6 +39,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             role: user.role,
           }
         } catch (e) {
+          // DB unreachable — fall back to dev mock accounts in development only
+          if (process.env.NODE_ENV === "development") {
+            const mock = DEV_ACCOUNTS.find(
+              (a) => a.email === credentials.email && a.password === credentials.password
+            )
+            if (mock) {
+              console.warn("[auth] DB unavailable — using dev mock account:", mock.email)
+              return { id: mock.id, email: mock.email, name: mock.name, firmId: mock.firmId, firmName: mock.firmName, role: mock.role }
+            }
+          }
           console.error("[auth] authorize error:", e)
           return null
         }

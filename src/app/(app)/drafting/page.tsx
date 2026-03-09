@@ -12,6 +12,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { MobileTabs } from "@/components/ui/MobileTabs";
 import { clsx } from "clsx";
 
 const DOCUMENT_TYPES = [
@@ -155,20 +156,15 @@ export default function DraftingPage() {
       </div>
 
       {/* 탭 네비게이션 - 모바일만 */}
-      <div className="flex md:hidden border-b mb-4">
-        <button
-          onClick={() => setActiveTab('input')}
-          className={`flex-1 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'input' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}
-        >
-          입력
-        </button>
-        <button
-          onClick={() => setActiveTab('result')}
-          className={`flex-1 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'result' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500'}`}
-        >
-          초안 결과
-        </button>
-      </div>
+      <MobileTabs
+        tabs={[
+          { id: "input", label: "입력" },
+          { id: "result", label: "초안 결과" },
+        ]}
+        activeTab={activeTab}
+        onChange={(id) => setActiveTab(id as 'input' | 'result')}
+        className="mb-4"
+      />
 
       <div className="flex flex-col md:flex-row gap-6 md:h-[calc(100vh-12rem)]">
         {/* 입력 패널 */}

@@ -24,6 +24,19 @@ export function ChatInterface({
   const { messages, isStreaming, error, sendMessage } = useChat(conversationId);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
+
+  // Keyboard-aware input positioning via visualViewport API
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.visualViewport) return;
+    const vv = window.visualViewport;
+    const onResize = () => {
+      const offset = window.innerHeight - vv.height - (vv.offsetTop ?? 0);
+      setKeyboardOffset(Math.max(0, offset));
+    };
+    vv.addEventListener("resize", onResize);
+    return () => vv.removeEventListener("resize", onResize);
+  }, []);
 
   // sendMessage를 ref로 보관 → STT 콜백에서 stale closure 방지
   const sendMessageRef = useRef(sendMessage);
@@ -288,7 +301,10 @@ export function ChatInterface({
       </div>
 
       {/* 입력 영역 */}
-      <div className="shrink-0 p-3 md:p-4 border-t border-slate-100 bg-white">
+      <div
+        className="shrink-0 p-3 md:p-4 border-t border-slate-100 bg-white"
+        style={keyboardOffset > 0 ? { paddingBottom: `${keyboardOffset + 12}px` } : undefined}
+      >
         <div className="flex items-end gap-2 p-3 rounded-xl border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-navy-500 focus-within:border-transparent transition-all">
           <button className="text-slate-400 hover:text-slate-600 transition-colors flex-shrink-0 mb-0.5">
             <Paperclip className="w-4.5 h-4.5" />

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Search, BookOpen, Bookmark, Scale, AlertCircle } from "lucide-react"
+import { Search, BookOpen, Bookmark, Scale, AlertCircle, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 interface ResearchResult {
   title: string
@@ -63,10 +64,23 @@ export default function ResearchPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-6 md:mb-8">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 mb-1.5 md:mb-2">법률 리서치</h1>
-        <p className="text-sm md:text-base text-slate-500">판례 및 법령을 AI로 검색하고 분석합니다</p>
+      <div className="page-header">
+        <h1 className="page-title">판례 요약검색</h1>
+        <p className="text-sm text-slate-500">AI를 활용하여 판례 및 법령을 요약 검색합니다</p>
       </div>
+
+      {/* 판례 원문 검색 바로가기 */}
+      <Link
+        href="/research/case-law"
+        className="flex items-center justify-between p-3 mb-4 bg-blue-50 border border-blue-200 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Search className="w-4 h-4" />
+          <span className="text-sm font-medium">판례 원문 검색</span>
+          <span className="text-xs text-blue-500">국가법령정보 API 연동</span>
+        </div>
+        <ArrowRight className="w-4 h-4" />
+      </Link>
 
       {/* 검색 타입 선택 */}
       <div className="flex gap-2 mb-4">
@@ -78,7 +92,7 @@ export default function ResearchPage() {
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
           }`}
         >
-          판례 검색
+          판례 요약검색
         </button>
         <button
           onClick={() => setSearchType("laws")}

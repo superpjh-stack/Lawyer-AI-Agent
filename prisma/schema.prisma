@@ -33,6 +33,7 @@ model User {
   billingEntries BillingEntry[]
   researchResults ResearchSavedResult[]
   advisories      Advisory[]
+  caseLawBookmarks CaseLawBookmark[]
   @@index([firmId])
   @@index([email])
 }
@@ -70,6 +71,7 @@ model Case {
   deadlines      Deadline[]
   billingEntries BillingEntry[]
   researchResults ResearchSavedResult[]
+  caseLawBookmarks CaseLawBookmark[]
   @@index([clientId])
   @@index([assignedUserId])
   @@index([status])
@@ -192,4 +194,24 @@ model Invoice {
   client      Client    @relation(fields: [clientId], references: [id])
   entries     BillingEntry[]
   @@index([clientId])
+}
+
+model CaseLawBookmark {
+  id              String   @id @default(cuid())
+  userId          String
+  caseId          String?
+  serialNumber    String
+  caseNumber      String
+  caseName        String
+  courtName       String
+  judgmentDate     String
+  caseType        String?
+  aiSummary       String?
+  embedding       Unsupported("vector(1536)")?
+  createdAt       DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id])
+  case            Case?    @relation(fields: [caseId], references: [id])
+  @@unique([userId, serialNumber])
+  @@index([userId])
+  @@index([caseId])
 }

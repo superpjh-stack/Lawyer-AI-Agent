@@ -22,14 +22,16 @@ import {
   ChevronRight,
   LogOut,
   MoreHorizontal,
-  X,
+  Search,
 } from "lucide-react";
+import { MobileSheet } from "@/components/ui/MobileSheet";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
   { href: "/chat", icon: MessageSquare, label: "AI와 법률대화 하기" },
   { href: "/advisory", icon: Gavel, label: "자문하기" },
-  { href: "/research", icon: BookOpen, label: "법률 리서치" },
+  { href: "/research", icon: BookOpen, label: "판례 요약검색" },
+  { href: "/research/case-law", icon: Search, label: "판례 원문 검색" },
   { href: "/drafting", icon: PenLine, label: "법률문서 작성" },
   { href: "/cases", icon: FolderOpen, label: "사건 관리" },
   { href: "/deadlines", icon: Calendar, label: "기일 관리" },
@@ -60,7 +62,8 @@ const mobileSheetItems = [
   { href: "/documents", icon: FileText, label: "문서 관리" },
   { href: "/clients", icon: Users, label: "클라이언트" },
   { href: "/billing", icon: CreditCard, label: "청구 관리" },
-  { href: "/research", icon: BookOpen, label: "법률 리서치" },
+  { href: "/research", icon: BookOpen, label: "판례 요약검색" },
+  { href: "/research/case-law", icon: Search, label: "판례 원문 검색" },
   { href: "/drafting", icon: PenLine, label: "법률문서 작성" },
   { href: "/settings/profile", icon: Settings, label: "설정" },
 ];
@@ -70,8 +73,16 @@ export function Sidebar({ className }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [moreSheetOpen, setMoreSheetOpen] = useState(false);
 
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
+  const isActive = (href: string) => {
+    if (pathname === href) return true;
+    // /research와 /research/case-law를 구분하기 위해
+    // 더 긴 경로가 먼저 매칭되도록 exact match 우선
+    if (href === "/research") {
+      // /research/case-law는 별도 메뉴이므로 제외
+      return pathname.startsWith("/research/") && !pathname.startsWith("/research/case-law");
+    }
+    return pathname.startsWith(href + "/");
+  };
 
   return (
     <>
@@ -208,66 +219,41 @@ export function Sidebar({ className }: SidebarProps) {
       </nav>
 
       {/* Mobile 더보기 Sheet */}
-      {moreSheetOpen && (
-        <>
-          {/* 배경 오버레이 */}
-          <div
-            className="md:hidden fixed inset-0 z-50 bg-black/40"
-            onClick={() => setMoreSheetOpen(false)}
-            aria-hidden="true"
-          />
+      <MobileSheet isOpen={moreSheetOpen} onClose={() => setMoreSheetOpen(false)} title="메뉴">
+        {/* 메뉴 목록 */}
+        <div className="px-3 py-2 grid grid-cols-4 gap-1">
+          {mobileSheetItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMoreSheetOpen(false)}
+              className={clsx(
+                "flex flex-col items-center gap-1 px-1 py-3 rounded-xl text-center",
+                isActive(item.href)
+                  ? "bg-navy-50 text-navy-900"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+              )}
+            >
+              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <span className="text-[10px] leading-tight">{item.label}</span>
+            </Link>
+          ))}
+        </div>
 
-          {/* Slide-up 패널 */}
-          <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-xl pb-safe">
-            {/* 핸들 + 헤더 */}
-            <div className="flex items-center justify-between px-4 pt-3 pb-2 border-b border-slate-100">
-              <div className="w-10 h-1 bg-slate-200 rounded-full mx-auto absolute left-1/2 -translate-x-1/2 top-2" />
-              <span className="font-semibold text-slate-700 text-sm">메뉴</span>
-              <button
-                onClick={() => setMoreSheetOpen(false)}
-                className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100"
-                aria-label="메뉴 닫기"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* 메뉴 목록 */}
-            <div className="px-3 py-2 grid grid-cols-4 gap-1">
-              {mobileSheetItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMoreSheetOpen(false)}
-                  className={clsx(
-                    "flex flex-col items-center gap-1 px-1 py-3 rounded-xl text-center",
-                    isActive(item.href)
-                      ? "bg-navy-50 text-navy-900"
-                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
-                  )}
-                >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
-                  <span className="text-[10px] leading-tight">{item.label}</span>
-                </Link>
-              ))}
-            </div>
-
-            {/* 로그아웃 */}
-            <div className="px-3 pb-4 pt-1 border-t border-slate-100 mt-1">
-              <button
-                onClick={() => {
-                  setMoreSheetOpen(false);
-                  signOut({ callbackUrl: "/login" });
-                }}
-                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 hover:text-red-700 transition-colors"
-              >
-                <LogOut className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm font-medium">로그아웃</span>
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+        {/* 로그아웃 */}
+        <div className="px-3 pb-4 pt-1 border-t border-slate-100 mt-1">
+          <button
+            onClick={() => {
+              setMoreSheetOpen(false);
+              signOut({ callbackUrl: "/login" });
+            }}
+            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 hover:text-red-700 transition-colors"
+          >
+            <LogOut className="w-5 h-5 flex-shrink-0" />
+            <span className="text-sm font-medium">로그아웃</span>
+          </button>
+        </div>
+      </MobileSheet>
     </>
   );
 }

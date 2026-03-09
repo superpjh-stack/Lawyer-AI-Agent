@@ -10,6 +10,7 @@ import {
   AdvisoryHistory,
   type AdvisoryHistoryItem,
 } from "@/components/advisory/AdvisoryHistory";
+import { MobileTabs } from "@/components/ui/MobileTabs";
 
 interface AdvisoryData {
   id: string;
@@ -374,7 +375,7 @@ export default function AdvisoryPage() {
       </div>
 
       {/* 스텝 인디케이터 */}
-      <div className="mb-6 bg-white rounded-xl border border-slate-200 p-4">
+      <div className="mb-6 bg-white rounded-xl border border-slate-200 p-4 overflow-x-auto">
         <AdvisorySteps
           currentStep={currentStep}
           completedSteps={completedSteps}
@@ -392,26 +393,15 @@ export default function AdvisoryPage() {
       {/* 메인 콘텐츠 */}
       <div className="flex flex-col md:flex-row gap-6 md:h-[calc(100vh-18rem)]">
         {/* 탭 네비게이션 - 모바일만 */}
-        <div className="flex md:hidden border-b border-slate-200 mb-2">
-          <button
-            onClick={() => setActiveTab("form")}
-            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "form" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
-          >
-            의견서 작성
-          </button>
-          <button
-            onClick={() => setActiveTab("history")}
-            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "history" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
-          >
-            히스토리
-          </button>
-          <button
-            onClick={() => setActiveTab("viewer")}
-            className={`flex-1 py-2 text-sm font-medium transition-colors ${activeTab === "viewer" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-500"}`}
-          >
-            결과 보기
-          </button>
-        </div>
+        <MobileTabs
+          tabs={[
+            { id: "form", label: "의견서 작성" },
+            { id: "history", label: "히스토리" },
+            { id: "viewer", label: "결과 보기" },
+          ]}
+          activeTab={activeTab}
+          onChange={(id) => setActiveTab(id as "form" | "history" | "viewer")}
+        />
 
         {/* 좌측 패널 */}
         <div className={`w-full md:w-80 md:flex-shrink-0 flex-col gap-4 overflow-y-auto scrollbar-thin pr-1 ${activeTab === "viewer" ? "hidden md:flex" : "flex"}`}>
