@@ -89,9 +89,25 @@ const nextConfig = {
   output: 'standalone',
   experimental: {
     typedRoutes: false,
+    // 패키지 최적화: 서버/클라이언트 번들 분리
+    optimizePackageImports: [
+      'lucide-react',
+      'date-fns',
+      '@langchain/core',
+      '@langchain/openai',
+    ],
   },
   images: {
     remotePatterns: [],
+    // WebP/AVIF 자동 변환으로 이미지 크기 최적화
+    formats: ['image/avif', 'image/webp'],
+  },
+  // 컴파일러 최적화
+  compiler: {
+    // 프로덕션 빌드에서 console.log 제거
+    removeConsole: process.env.NODE_ENV === 'production'
+      ? { exclude: ['error', 'warn'] }
+      : false,
   },
   async headers() {
     return [
@@ -99,6 +115,26 @@ const nextConfig = {
         // 모든 경로에 보안 헤더 적용
         source: '/:path*',
         headers: securityHeaders,
+      },
+      {
+        // 정적 자산 장기 캐싱 (Next.js _next/static은 content-hash 포함)
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // API 응답 캐시 비허용 (항상 최신 데이터)
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, no-cache, must-revalidate',
+          },
+        ],
       },
     ];
   },

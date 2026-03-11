@@ -4,6 +4,59 @@ All notable changes to the LexAgent project are documented in this file.
 
 ---
 
+## [2026-03-11] - Phase 8: Review + Testing + Performance Optimization
+
+### Summary
+Phase 8 완료. Vitest 유닛 테스트 54개 (100% 통과), Playwright E2E 테스트 세트 구축, Next.js 번들 성능 최적화.
+
+### Added
+- **Vitest 유닛 테스트** (`src/__tests__/security/`):
+  - `validation.test.ts` — 31개 테스트 (LoginSchema, RegisterSchema, CreateCaseSchema, CreateClientSchema, ChatMessageSchema, ResearchQuerySchema, CreateBillingEntrySchema, safeValidate)
+  - `rate-limit.test.ts` — 9개 테스트 (rateLimit, chatRateLimit, authRateLimit, apiRateLimit)
+  - `encryption.test.ts` — 14개 테스트 (encrypt/decrypt, maskSensitive, maskEmail)
+  - **총 54개 테스트 100% 통과**
+
+- **Playwright E2E 테스트** (`src/__tests__/e2e/`):
+  - `auth.spec.ts` — 인증 플로우 (로그인 페이지, 보호 경로 리다이렉트, 보안 헤더)
+  - `api-security.spec.ts` — API 보안 (미인증 차단, 입력 검증, Rate Limiting, CORS)
+  - 서버 실행 시 전체 E2E 실행 가능 (`npm run test:e2e`)
+
+- **테스트 스크립트** (`package.json`):
+  - `npm test` — 유닛 테스트 실행
+  - `npm run test:coverage` — 커버리지 리포트
+  - `npm run test:e2e` — E2E 전체 실행
+  - `npm run test:e2e:ui` — Playwright UI 모드
+
+### Changed
+- **Next.js 성능 최적화** (`next.config.js`):
+  - `optimizePackageImports`: `lucide-react`, `date-fns`, `@langchain/*` 번들 분리
+  - 이미지 포맷: WebP → **AVIF 우선** (30-50% 추가 압축)
+  - `removeConsole`: 프로덕션 빌드에서 `console.log` 제거 (error/warn 제외)
+  - 정적 자산 `Cache-Control: immutable, max-age=31536000` (1년 캐싱)
+  - API 라우트 `Cache-Control: no-store` (항상 최신 데이터)
+
+- **Vitest 설정** (`vitest.config.ts`):
+  - E2E 파일 제외 (`src/__tests__/e2e/**`)
+  - coverage 설정: `src/lib/**`, `src/app/api/**` 포함
+
+### Test Results
+
+| 테스트 파일 | 테스트 수 | 결과 |
+|---|:---:|:---:|
+| validation.test.ts | 31 | ✅ 전부 통과 |
+| rate-limit.test.ts | 9 | ✅ 전부 통과 |
+| encryption.test.ts | 14 | ✅ 전부 통과 |
+| **합계** | **54** | **✅ 100%** |
+
+### Next Phase
+**Phase 9: Deployment** (예정)
+- GCP Cloud Run 프로덕션 배포
+- 데이터베이스 마이그레이션
+- 모니터링 + 로깅 (Cloud Logging)
+- Error Reporting 알림 설정
+
+---
+
 ## [2026-03-11] - Phase 7: SEO/Security Hardening
 
 ### Summary
