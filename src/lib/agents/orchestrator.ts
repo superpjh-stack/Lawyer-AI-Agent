@@ -6,6 +6,10 @@ import type { ChatStreamChunk, ToolUseData } from '@/types';
 import { searchLaws } from './tools/search-laws';
 import { searchCases } from './tools/search-cases';
 import { prisma } from '@/lib/db/prisma';
+import { similaritySearchWithScore } from '@/lib/rag/retriever';
+import { analyzeContractRisk } from '@/lib/rag/chains/risk-analysis';
+
+const ragEnabled = () => process.env.ENABLE_RAG === 'true';
 
 const ORCHESTRATOR_SYSTEM_PROMPT = `당신은 LexAgent의 핵심 오케스트레이터 AI입니다.
 한국 변호사의 법률 업무를 전방위로 지원합니다.
@@ -19,13 +23,19 @@ const ORCHESTRATOR_SYSTEM_PROMPT = `당신은 LexAgent의 핵심 오케스트레
 - 계약서 및 법률 문서 검토
 - 법원 서면 초안 작성
 - 사건 관리 및 기일 알림
-- 문서 시맨틱 검색
+- 지식베이스 문서 시맨틱 검색 (업로드된 계약서, 판결문, 법률의견서 등)
+
+## 지식베이스 활용
+사용자가 업로드한 문서(계약서, 판결문, 준비서면 등)를 검색할 때는 search_documents 도구를 사용하세요.
+다만, 일반적인 법률 지식 질문(법률 개념, 절차, 양식 작성 방법 등)에는 search_documents를 호출하지 말고 바로 답변하세요.
+search_documents는 "우리 사무소 문서에서 찾아줘", "이전에 작성한 계약서" 등 사내 문서를 명시적으로 요청할 때만 사용하세요.
 
 ## 응답 원칙
 1. 도구가 필요한 작업은 반드시 도구를 사용하여 정확한 정보 제공
-2. 불확실한 법률 정보는 명시적으로 "확인 필요" 표시
-3. 모든 응답은 한국어로 작성
-4. 판례/법령 인용 시 출처 명시
+2. 일반 법률 질문에는 전문 지식으로 직접 답변 — 도구 호출 없이 바로 본론으로
+3. 불확실한 법률 정보는 명시적으로 "확인 필요" 표시
+4. 모든 응답은 한국어로 작성
+5. 판례/법령 인용 시 출처 명시
 `;
 
 const ORCHESTRATOR_TOOLS: OpenAI.Chat.Completions.ChatCompletionTool[] = [
@@ -123,7 +133,7 @@ const ORCHESTRATOR_TOOLS: OpenAI.Chat.Completions.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'search_documents',
-      description: '저장된 문서를 자연어로 시맨틱 검색합니다.',
+      description: '사무소 내부 지식베이스에 업로드된 문서를 시맨틱 검색합니다. 사용자가 "우리 문서", "이전에 작성한 계약서", "사무소 자료" 등 내부 문서를 명시적으로 요청할 때만 사용하세요. 일반적인 법률 지식 질문에는 이 도구를 사용하지 마세요.',
       parameters: {
         type: 'object',
         properties: {
@@ -139,12 +149,45 @@ const ORCHESTRATOR_TOOLS: OpenAI.Chat.Completions.ChatCompletionTool[] = [
 
 type Message = OpenAI.Chat.Completions.ChatCompletionMessageParam;
 
+// Cache KB document count per user to avoid repeated DB queries within a session.
+// Entries expire after 60 seconds.
+const kbCountCache = new Map<string, { count: number; ts: number }>();
+const KB_CACHE_TTL = 60_000;
+
+async function hasKnowledgeBaseDocuments(userId: string): Promise<boolean> {
+  const cached = kbCountCache.get(userId);
+  if (cached && Date.now() - cached.ts < KB_CACHE_TTL) {
+    return cached.count > 0;
+  }
+  try {
+    // Use findFirst — prisma.count() doesn't support take/limit
+    const first = await prisma.lawKnowledge.findFirst({
+      where: { OR: [{ lawyerId: userId }, { lawyerId: null }] },
+      select: { id: true },
+    });
+    const count = first ? 1 : 0;
+    kbCountCache.set(userId, { count, ts: Date.now() });
+    return count > 0;
+  } catch {
+    // On error, assume KB is not available — omit tool
+    return false;
+  }
+}
+
+/** Return the tool list, conditionally including search_documents. */
+function getTools(includeSearchDocuments: boolean): OpenAI.Chat.Completions.ChatCompletionTool[] {
+  if (includeSearchDocuments) return ORCHESTRATOR_TOOLS;
+  return ORCHESTRATOR_TOOLS.filter((t) => t.function.name !== 'search_documents');
+}
+
 export interface OrchestratorRunOptions {
   userMessage: string;
   conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }>;
   userId: string;
   onChunk?: (chunk: ChatStreamChunk) => void;
   stream?: boolean;
+  /** When true, search_documents tool is included regardless of KB state. */
+  forceSearchDocuments?: boolean;
 }
 
 export interface OrchestratorResult {
@@ -154,7 +197,7 @@ export interface OrchestratorResult {
 
 export class OrchestratorAgent {
   async run(options: OrchestratorRunOptions): Promise<OrchestratorResult> {
-    const { userMessage, conversationHistory, userId, onChunk, stream = false } = options;
+    const { userMessage, conversationHistory, userId, onChunk, stream = false, forceSearchDocuments } = options;
 
     const messages: Message[] = [
       ...conversationHistory.map((m) => ({ role: m.role, content: m.content }) as Message),
@@ -163,19 +206,33 @@ export class OrchestratorAgent {
 
     const toolUseData: ToolUseData[] = [];
 
+    // Determine whether to include search_documents tool.
+    // If KB is empty, omit the tool entirely so GPT-4o cannot call it.
+    let includeSearchDocs = false;
+    if (ragEnabled()) {
+      if (forceSearchDocuments) {
+        includeSearchDocs = true;
+      } else {
+        includeSearchDocs = await hasKnowledgeBaseDocuments(userId);
+      }
+    }
+    const tools = getTools(includeSearchDocs);
+
     if (stream && onChunk) {
-      return this.runStreaming(messages, userId, toolUseData, onChunk);
+      return this.runStreaming(messages, userId, toolUseData, onChunk, tools);
     }
 
-    return this.runSync(messages, userId, toolUseData, onChunk);
+    return this.runSync(messages, userId, toolUseData, onChunk, tools);
   }
 
   private async runSync(
     messages: Message[],
     userId: string,
     toolUseData: ToolUseData[],
-    onChunk?: (chunk: ChatStreamChunk) => void
+    onChunk?: (chunk: ChatStreamChunk) => void,
+    tools?: OpenAI.Chat.Completions.ChatCompletionTool[]
   ): Promise<OrchestratorResult> {
+    const activeTools = tools ?? ORCHESTRATOR_TOOLS;
     let fullText = '';
     const currentMessages = [...messages];
 
@@ -184,7 +241,7 @@ export class OrchestratorAgent {
         model: AI_MODEL,
         max_tokens: MAX_TOKENS,
         messages: [{ role: 'system', content: ORCHESTRATOR_SYSTEM_PROMPT }, ...currentMessages],
-        tools: ORCHESTRATOR_TOOLS,
+        tools: activeTools,
       });
 
       const choice = response.choices[0];
@@ -225,8 +282,10 @@ export class OrchestratorAgent {
     messages: Message[],
     userId: string,
     toolUseData: ToolUseData[],
-    onChunk: (chunk: ChatStreamChunk) => void
+    onChunk: (chunk: ChatStreamChunk) => void,
+    tools?: OpenAI.Chat.Completions.ChatCompletionTool[]
   ): Promise<OrchestratorResult> {
+    const activeTools = tools ?? ORCHESTRATOR_TOOLS;
     let fullText = '';
     const currentMessages = [...messages];
 
@@ -235,7 +294,7 @@ export class OrchestratorAgent {
         model: AI_MODEL,
         max_tokens: MAX_TOKENS,
         messages: [{ role: 'system', content: ORCHESTRATOR_SYSTEM_PROMPT }, ...currentMessages],
-        tools: ORCHESTRATOR_TOOLS,
+        tools: activeTools,
         stream: true,
       });
 
@@ -322,6 +381,13 @@ export class OrchestratorAgent {
         });
 
       case 'analyze_document':
+        if (ragEnabled()) {
+          return this.ragAnalyzeDocument(
+            input.document_id as string,
+            input.analysis_type as string,
+            userId
+          );
+        }
         return this.mockAnalyzeDocument(
           input.document_id as string,
           input.analysis_type as string
@@ -343,6 +409,13 @@ export class OrchestratorAgent {
         );
 
       case 'search_documents':
+        if (ragEnabled()) {
+          return this.ragSearchDocuments(
+            input.query as string,
+            userId,
+            input.doc_type as string | undefined
+          );
+        }
         return this.mockSearchDocuments(
           input.query as string,
           input.case_id as string | undefined,
@@ -351,6 +424,91 @@ export class OrchestratorAgent {
 
       default:
         return { error: `Unknown tool: ${name}` };
+    }
+  }
+
+  // ============================================================
+  // RAG-Enhanced Tool Implementations
+  // ============================================================
+
+  private async ragSearchDocuments(query: string, userId: string, docType?: string) {
+    try {
+      const results = await similaritySearchWithScore(query, {
+        lawyerId: userId,
+        docType,
+        k: 5,
+      });
+
+      if (results.length === 0) {
+        // Return neutral result — no "없습니다" message that GPT-4o would parrot.
+        // The system prompt instructs the model to answer with general legal knowledge.
+        return {
+          documents: [],
+          total: 0,
+          query,
+          source: 'vector',
+        };
+      }
+
+      return {
+        documents: results.map((r) => ({
+          id: (r.metadata.id as string) ?? '',
+          fileName: (r.metadata.title as string) ?? '문서',
+          // PGVectorStore similaritySearchWithScore already returns cosine similarity (0–1).
+          similarity: parseFloat(r.score.toFixed(3)),
+          excerpt: r.content.substring(0, 300),
+          docType: r.metadata.docType,
+          practiceArea: r.metadata.practiceArea,
+        })),
+        total: results.length,
+        query,
+        source: 'vector',
+      };
+    } catch (error) {
+      console.error('[orchestrator] ragSearchDocuments error:', error);
+      // Return neutral empty result on error — do not expose error details to LLM
+      return {
+        documents: [],
+        total: 0,
+        query,
+        source: 'vector',
+      };
+    }
+  }
+
+  private async ragAnalyzeDocument(documentId: string, analysisType: string, userId: string) {
+    try {
+      if (analysisType === 'risk_review') {
+        const chunks = await prisma.lawKnowledge.findMany({
+          where: { sourceDocId: documentId },
+          orderBy: { chunkIndex: 'asc' },
+          select: { content: true },
+        });
+
+        if (chunks.length === 0) {
+          return this.mockAnalyzeDocument(documentId, analysisType);
+        }
+
+        const fullContent = chunks.map((c) => c.content).join('\n');
+        const doc = await prisma.document.findUnique({
+          where: { id: documentId },
+          select: { fileName: true },
+        });
+
+        const result = await analyzeContractRisk({
+          documentContent: fullContent,
+          documentTitle: doc?.fileName ?? '문서',
+          lawyerId: userId,
+          compareWithKnowledgeBase: true,
+        });
+
+        return { documentId, analysisType, ...result };
+      }
+
+      return this.mockAnalyzeDocument(documentId, analysisType);
+    } catch (error) {
+      console.error('[orchestrator] ragAnalyzeDocument error:', error);
+      return this.mockAnalyzeDocument(documentId, analysisType);
     }
   }
 

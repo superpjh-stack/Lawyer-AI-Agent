@@ -1,0 +1,2174 @@
+{
+  "timestamp": "2026-03-08T13:34:38.059Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-08T13:34:36.858Z",
+    "activeFeatures": [
+      "Lawyer-Agent",
+      "db",
+      "ui",
+      "layout",
+      "(app)",
+      "agents",
+      "dashboard",
+      "cases",
+      "chat",
+      "[id]",
+      "analyze",
+      "documents",
+      "clients",
+      "login",
+      "register",
+      "auth",
+      "conversations",
+      "research",
+      "new",
+      "tools",
+      "history",
+      "prisma",
+      "upload",
+      "deadlines",
+      "billing",
+      "profile",
+      "providers",
+      "drafting",
+      "(auth)",
+      "advisory",
+      "generate",
+      "lawee",
+      "query",
+      "[conversationId]",
+      "overview",
+      "timeline",
+      "forgot-password",
+      "Lawyer-Agent 모바일 반응형 Gap 분석",
+      "security"
+    ],
+    "primaryFeature": "Lawyer-Agent",
+    "features": {
+      "Lawyer-Agent": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": 89,
+        "iterationCount": 2,
+        "requirements": [],
+        "documents": {
+          "plan": "docs/01-planning/02-feature-list.md",
+          "design": "docs/02-design/01-architecture.md",
+          "analysis": "docs/03-analysis/Lawyer-Agent.analysis.md",
+          "report": "docs/04-report/Lawyer-Agent.report.md"
+        },
+        "timestamps": {
+          "started": "2026-03-06T14:56:29.152Z",
+          "lastUpdated": "2026-03-08T13:33:32.805Z",
+          "completedAt": "2026-03-08T15:30:00.000Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\env.ts"
+      },
+      "db": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:57:05.445Z",
+          "lastUpdated": "2026-03-07T01:14:55.122Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\db\\prisma.ts"
+      },
+      "ui": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:57:54.778Z",
+          "lastUpdated": "2026-03-06T14:58:08.281Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\ui\\Badge.tsx"
+      },
+      "layout": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:58:30.561Z",
+          "lastUpdated": "2026-03-08T12:25:28.468Z"
+        },
+        "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/src/components/layout/Sidebar.tsx"
+      },
+      "(app)": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:58:58.357Z",
+          "lastUpdated": "2026-03-08T10:13:05.625Z"
+        },
+        "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/src/app/(app)/layout.tsx"
+      },
+      "agents": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:58:59.568Z",
+          "lastUpdated": "2026-03-08T12:19:09.161Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\agents\\orchestrator.ts"
+      },
+      "dashboard": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T14:59:32.650Z",
+          "lastUpdated": "2026-03-07T02:31:18.908Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\dashboard\\page.tsx"
+      },
+      "cases": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:00:33.007Z",
+          "lastUpdated": "2026-03-07T04:53:39.333Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\cases\\route.ts"
+      },
+      "chat": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:00:58.592Z",
+          "lastUpdated": "2026-03-08T13:34:36.857Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\chat\\route.ts"
+      },
+      "[id]": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:01:00.557Z",
+          "lastUpdated": "2026-03-08T13:17:34.593Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\drafting\\[id]\\page.tsx"
+      },
+      "analyze": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:01:10.641Z",
+          "lastUpdated": "2026-03-06T23:55:49.186Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\documents\\analyze\\route.ts"
+      },
+      "documents": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:01:31.266Z",
+          "lastUpdated": "2026-03-08T13:16:18.919Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\documents\\page.tsx"
+      },
+      "clients": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:02:03.628Z",
+          "lastUpdated": "2026-03-07T02:33:29.307Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\clients\\page.tsx"
+      },
+      "login": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:03:58.337Z",
+          "lastUpdated": "2026-03-08T09:03:54.157Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(auth)\\login\\page.tsx"
+      },
+      "register": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-06T15:04:13.159Z",
+          "lastUpdated": "2026-03-08T09:57:37.415Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\auth\\register\\route.ts"
+      },
+      "auth": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:14:59.267Z",
+          "lastUpdated": "2026-03-08T11:19:25.469Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\auth\\config.ts"
+      },
+      "conversations": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:19:04.577Z",
+          "lastUpdated": "2026-03-07T02:45:47.900Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\conversations\\route.ts"
+      },
+      "research": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:28:26.137Z",
+          "lastUpdated": "2026-03-08T13:13:25.206Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\research\\page.tsx"
+      },
+      "new": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:28:45.085Z",
+          "lastUpdated": "2026-03-08T12:22:11.077Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\billing\\new\\page.tsx"
+      },
+      "tools": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:29:42.245Z",
+          "lastUpdated": "2026-03-07T01:29:55.909Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\agents\\tools\\search-cases.ts"
+      },
+      "history": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:30:44.434Z",
+          "lastUpdated": "2026-03-07T01:30:44.434Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\research\\history\\route.ts"
+      },
+      "prisma": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T01:59:08.023Z",
+          "lastUpdated": "2026-03-08T09:06:51.755Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\prisma\\seed.ts"
+      },
+      "upload": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T02:16:42.087Z",
+          "lastUpdated": "2026-03-07T02:17:18.414Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\documents\\upload\\route.ts"
+      },
+      "deadlines": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T02:43:06.665Z",
+          "lastUpdated": "2026-03-08T13:16:20.364Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\deadlines\\page.tsx"
+      },
+      "billing": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T02:57:35.868Z",
+          "lastUpdated": "2026-03-08T13:16:22.908Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\billing\\page.tsx"
+      },
+      "profile": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T02:58:59.007Z",
+          "lastUpdated": "2026-03-07T02:58:59.007Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\settings\\profile\\page.tsx"
+      },
+      "providers": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T03:07:40.813Z",
+          "lastUpdated": "2026-03-07T03:07:40.813Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\providers\\SessionProvider.tsx"
+      },
+      "drafting": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T03:10:56.869Z",
+          "lastUpdated": "2026-03-08T12:25:21.782Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\drafting\\page.tsx"
+      },
+      "(auth)": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-07T07:21:34.734Z",
+          "lastUpdated": "2026-03-07T07:21:34.734Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(auth)\\layout.tsx"
+      },
+      "advisory": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T09:19:14.775Z",
+          "lastUpdated": "2026-03-08T13:21:37.175Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\advisory\\AdvisorySteps.tsx"
+      },
+      "generate": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T09:19:50.484Z",
+          "lastUpdated": "2026-03-08T09:19:50.484Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\advisory\\generate\\route.ts"
+      },
+      "lawee": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T10:11:35.688Z",
+          "lastUpdated": "2026-03-08T13:19:16.110Z"
+        },
+        "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/src/components/lawee/LaweeFloat.tsx"
+      },
+      "query": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T12:17:22.381Z",
+          "lastUpdated": "2026-03-08T12:17:22.381Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\research\\query\\route.ts"
+      },
+      "[conversationId]": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T12:18:37.488Z",
+          "lastUpdated": "2026-03-08T12:18:37.488Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\chat\\[conversationId]\\page.tsx"
+      },
+      "overview": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T13:16:17.681Z",
+          "lastUpdated": "2026-03-08T13:16:17.681Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\overview\\page.tsx"
+      },
+      "timeline": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T13:16:21.625Z",
+          "lastUpdated": "2026-03-08T13:16:21.625Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\timeline\\page.tsx"
+      },
+      "forgot-password": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T13:16:45.121Z",
+          "lastUpdated": "2026-03-08T13:16:45.121Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(auth)\\forgot-password\\page.tsx"
+      },
+      "Lawyer-Agent 모바일 반응형 Gap 분석": {
+        "phase": "act",
+        "phaseNumber": 5,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T13:18:30.384Z",
+          "lastUpdated": "2026-03-08T13:18:30.385Z"
+        },
+        "previousPhase": "check",
+        "autoAdvanced": true
+      },
+      "security": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-08T13:33:54.429Z",
+          "lastUpdated": "2026-03-08T13:34:20.370Z"
+        },
+        "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\security\\validation.ts"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-03-06T14:43:44.348Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-08T13:34:36.858Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-06T14:56:29.152Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:56:40.863Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:56:59.991Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:57:05.445Z",
+        "feature": "db",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:57:41.906Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:57:51.360Z",
+        "feature": "db",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:57:54.778Z",
+        "feature": "ui",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:57:59.743Z",
+        "feature": "ui",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:08.281Z",
+        "feature": "ui",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:12.356Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:30.561Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:52.430Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:58.357Z",
+        "feature": "(app)",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:58:59.568Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:59:32.399Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T14:59:32.650Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:00:12.608Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:00:33.007Z",
+        "feature": "cases",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:00:40.505Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:00:58.592Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:01:00.557Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:01:10.641Z",
+        "feature": "analyze",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:01:27.755Z",
+        "feature": "cases",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:01:31.266Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:01:47.949Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:02:03.628Z",
+        "feature": "clients",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:02:05.709Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:03:12.576Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:03:25.993Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:03:58.337Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:04:13.159Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:04:14.471Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T15:04:15.766Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:32:14.174Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:32:48.718Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:33:35.829Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:34:20.986Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:51:13.343Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:52:10.890Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:52:46.239Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:53:16.164Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:53:58.845Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:54:35.754Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:55:09.950Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:55:37.672Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-06T23:55:49.187Z",
+        "feature": "analyze",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T00:05:45.385Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T00:32:41.080Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T00:53:14.409Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:14:55.122Z",
+        "feature": "db",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:14:59.267Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:15:05.031Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:15:07.332Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:18:14.636Z",
+        "feature": "cases",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:18:26.670Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:18:40.969Z",
+        "feature": "clients",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:19:00.281Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:19:04.577Z",
+        "feature": "conversations",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:19:15.006Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:28:04.610Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:28:26.137Z",
+        "feature": "research",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:28:45.085Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:02.519Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:13.180Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:34.504Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:39.865Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:42.245Z",
+        "feature": "tools",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:54.551Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:29:55.909Z",
+        "feature": "tools",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:00.288Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:04.887Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:07.284Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:11.335Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:14.085Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:22.989Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:28.504Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:34.824Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:39.452Z",
+        "feature": "research",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:44.434Z",
+        "feature": "history",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:48.300Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:48.770Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:30:50.063Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T01:59:08.023Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:02:08.322Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:02:24.146Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:15:57.202Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:16:20.289Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:16:40.569Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:16:42.087Z",
+        "feature": "upload",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:17:07.808Z",
+        "feature": "clients",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:17:18.414Z",
+        "feature": "upload",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:18:12.765Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:19:37.638Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:31:18.908Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:32:08.129Z",
+        "feature": "cases",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:33:29.308Z",
+        "feature": "clients",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:33:49.812Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:43:06.665Z",
+        "feature": "deadlines",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:43:12.793Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:44:07.311Z",
+        "feature": "deadlines",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:45:00.133Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:45:32.039Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:45:39.199Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:45:47.900Z",
+        "feature": "conversations",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:57:35.868Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:58:30.464Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:58:59.007Z",
+        "feature": "profile",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:05.609Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:11.637Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:31.240Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:35.925Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:42.982Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T02:59:59.475Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:00:03.634Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:00:08.935Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:05:05.840Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:05:14.451Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:07:40.813Z",
+        "feature": "providers",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:07:47.368Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:07:51.987Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:10:56.869Z",
+        "feature": "drafting",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:11:54.303Z",
+        "feature": "drafting",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T03:16:58.659Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:32:18.072Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:32:25.683Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:36:04.109Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:37:19.807Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:40:01.677Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:44:51.352Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:47:12.993Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:49:14.685Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T04:53:39.333Z",
+        "feature": "cases",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T05:02:12.606Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T05:02:18.396Z",
+        "feature": "drafting",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T05:17:45.897Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T05:31:52.315Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T05:32:35.932Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T06:24:08.123Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T06:25:46.028Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T06:25:51.622Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-07T07:21:34.734Z",
+        "feature": "(auth)",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T08:57:53.545Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T08:59:31.432Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:02:13.458Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:03:33.749Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:03:54.157Z",
+        "feature": "login",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:05:48.735Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:05:55.214Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:06:13.656Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:06:25.138Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:06:33.676Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:06:45.322Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:06:51.755Z",
+        "feature": "prisma",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:18:49.011Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:19:14.775Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:19:32.645Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:19:50.484Z",
+        "feature": "generate",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:20:12.606Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:20:40.784Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:21:20.361Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:21:37.149Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:22:39.605Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:22:46.404Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:22:50.455Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:23:38.115Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:49:49.487Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:50:00.676Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:50:05.356Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:50:11.090Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:50:19.446Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:54:16.653Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:57:24.163Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:57:32.088Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T09:57:37.415Z",
+        "feature": "register",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:11:35.688Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:11:51.350Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:12:11.209Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:12:50.399Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:12:56.455Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:13:05.625Z",
+        "feature": "(app)",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:16:34.888Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:21:03.395Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:21:27.040Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:21:34.045Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:21:39.197Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:35:19.540Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:36:10.781Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:39:20.778Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:39:55.865Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:40:29.067Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:43:45.249Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:44:48.366Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:45:10.980Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:45:17.575Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:49:36.395Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:50:08.382Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T10:50:39.376Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T11:19:25.469Z",
+        "feature": "auth",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:16:49.264Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:00.214Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:10.670Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:22.381Z",
+        "feature": "query",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:29.127Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:33.511Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:17:44.599Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:18:32.873Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:18:37.488Z",
+        "feature": "[conversationId]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:02.441Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:09.161Z",
+        "feature": "agents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:16.967Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:23.315Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:28.436Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:38.830Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:45.937Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:19:53.767Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:20:35.161Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:21:27.384Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:01.352Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:11.077Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:22.624Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:48.197Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:54.556Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:22:58.793Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:24:56.285Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:04.109Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:04.820Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:12.264Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:13.325Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:17.660Z",
+        "feature": "drafting",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:20.137Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:21.782Z",
+        "feature": "drafting",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:28.468Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:45.204Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:25:50.414Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:26:00.494Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T12:26:13.671Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:12:00.451Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:12:04.015Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:12:16.323Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:12:55.847Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:13:02.738Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:13:08.849Z",
+        "feature": "research",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:13:18.060Z",
+        "feature": "research",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:13:25.206Z",
+        "feature": "research",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:17.681Z",
+        "feature": "overview",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:18.919Z",
+        "feature": "documents",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:20.364Z",
+        "feature": "deadlines",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:21.625Z",
+        "feature": "timeline",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:22.908Z",
+        "feature": "billing",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:45.121Z",
+        "feature": "forgot-password",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:16:59.843Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:17:34.593Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:18:30.385Z",
+        "feature": "Lawyer-Agent 모바일 반응형 Gap 분석",
+        "phase": "act",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:18:57.706Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:19:02.522Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:19:07.315Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:19:13.256Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:19:16.110Z",
+        "feature": "lawee",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:21:37.175Z",
+        "feature": "advisory",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:32:59.038Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:33:01.143Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:33:20.113Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:33:32.805Z",
+        "feature": "Lawyer-Agent",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:33:54.429Z",
+        "feature": "security",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:34:20.370Z",
+        "feature": "security",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-08T13:34:36.857Z",
+        "feature": "chat",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}

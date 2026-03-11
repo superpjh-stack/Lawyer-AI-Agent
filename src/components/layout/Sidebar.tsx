@@ -23,6 +23,7 @@ import {
   LogOut,
   MoreHorizontal,
   Search,
+  Brain,
 } from "lucide-react";
 import { MobileSheet } from "@/components/ui/MobileSheet";
 
@@ -30,8 +31,8 @@ const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
   { href: "/chat", icon: MessageSquare, label: "AI와 법률대화 하기" },
   { href: "/advisory", icon: Gavel, label: "자문하기" },
-  { href: "/research", icon: BookOpen, label: "판례 요약검색" },
-  { href: "/research/case-law", icon: Search, label: "판례 원문 검색" },
+  { href: "/research", icon: BookOpen, label: "판례 및 법령검색" },
+  { href: "/research/case-law", icon: Search, label: "판례원문검색" },
   { href: "/drafting", icon: PenLine, label: "법률문서 작성" },
   { href: "/cases", icon: FolderOpen, label: "사건 관리" },
   { href: "/deadlines", icon: Calendar, label: "기일 관리" },
@@ -42,6 +43,7 @@ const navItems = [
 
 const bottomItems = [
   { href: "/settings/profile", icon: Settings, label: "설정" },
+  { href: "/settings/knowledge", icon: Brain, label: "지식베이스" },
 ];
 
 interface SidebarProps {
@@ -62,9 +64,10 @@ const mobileSheetItems = [
   { href: "/documents", icon: FileText, label: "문서 관리" },
   { href: "/clients", icon: Users, label: "클라이언트" },
   { href: "/billing", icon: CreditCard, label: "청구 관리" },
-  { href: "/research", icon: BookOpen, label: "판례 요약검색" },
-  { href: "/research/case-law", icon: Search, label: "판례 원문 검색" },
+  { href: "/research", icon: BookOpen, label: "판례 및 법령검색" },
+  { href: "/research/case-law", icon: Search, label: "판례원문검색" },
   { href: "/drafting", icon: PenLine, label: "법률문서 작성" },
+  { href: "/settings/knowledge", icon: Brain, label: "지식베이스" },
   { href: "/settings/profile", icon: Settings, label: "설정" },
 ];
 

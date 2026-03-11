@@ -9,6 +9,9 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import { EmbeddingStatusBadge } from "@/components/documents/EmbeddingStatusBadge";
+import { IngestButton } from "@/components/documents/IngestButton";
+import { RiskAnalysisPanel } from "@/components/documents/RiskAnalysisPanel";
 import { clsx } from "clsx";
 
 interface DocumentDetail {
@@ -20,6 +23,7 @@ interface DocumentDetail {
   docType: string;
   aiSummary?: string | null;
   riskLevel?: string | null;
+  embeddingStatus?: string | null;
   createdAt: string;
   case?: { id: string; title: string; caseNumber: string } | null;
   uploader?: { id: string; name: string } | null;
@@ -222,6 +226,17 @@ export default function DocumentDetailPage() {
               </dd>
             </div>
           )}
+          <div>
+            <dt className="text-xs text-slate-400 mb-1">임베딩 상태</dt>
+            <dd className="flex items-center gap-2">
+              <EmbeddingStatusBadge status={doc.embeddingStatus as "processing" | "completed" | "failed" | null} />
+              <IngestButton
+                documentId={doc.id}
+                currentStatus={doc.embeddingStatus}
+                onSuccess={() => setDoc((prev) => prev ? { ...prev, embeddingStatus: "processing" } : prev)}
+              />
+            </dd>
+          </div>
         </dl>
       </Card>
 
@@ -261,6 +276,14 @@ export default function DocumentDetailPage() {
           <ExternalLink className="w-4 h-4 text-slate-400 flex-shrink-0" />
         </a>
       </Card>
+
+      {/* 리스크 분석 */}
+      {(doc.docType === "contract" || doc.docType === "CONTRACT") && (
+        <Card>
+          <h2 className="text-sm font-semibold text-slate-800 mb-4">계약서 리스크 분석</h2>
+          <RiskAnalysisPanel documentId={doc.id} />
+        </Card>
+      )}
     </div>
   );
 }

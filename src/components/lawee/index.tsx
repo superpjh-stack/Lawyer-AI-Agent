@@ -5,7 +5,7 @@ import { LaweeFloat } from './LaweeFloat';
 import { useLawee } from '@/hooks/useLawee';
 
 export function Lawee() {
-  const { state, handleClick, handleDialogClose } = useLawee();
+  const { state, handleClick, handleDialogClose, handleDragStart, handleDrop } = useLawee();
 
   if (!state.isVisible) return null;
 
@@ -14,6 +14,8 @@ export function Lawee() {
       state={state}
       onClick={handleClick}
       onDialogClose={handleDialogClose}
+      onDragStart={handleDragStart}
+      onDrop={handleDrop}
     />
   );
 }

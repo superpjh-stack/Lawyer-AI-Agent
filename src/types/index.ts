@@ -192,6 +192,8 @@ export interface ChatRequest {
   message: string;
   conversationId?: string;
   caseId?: string;
+  ragEnabled?: boolean;
+  history?: Array<{ role: 'user' | 'assistant'; content: string }>;
 }
 
 export interface ChatStreamChunk {

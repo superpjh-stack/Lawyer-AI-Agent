@@ -65,7 +65,7 @@ export default function ResearchPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="page-header">
-        <h1 className="page-title">판례 요약검색</h1>
+        <h1 className="page-title">판례 및 법령검색</h1>
         <p className="text-sm text-slate-500">AI를 활용하여 판례 및 법령을 요약 검색합니다</p>
       </div>
 
@@ -76,7 +76,7 @@ export default function ResearchPage() {
       >
         <div className="flex items-center gap-2">
           <Search className="w-4 h-4" />
-          <span className="text-sm font-medium">판례 원문 검색</span>
+          <span className="text-sm font-medium">판례원문검색</span>
           <span className="text-xs text-blue-500">국가법령정보 API 연동</span>
         </div>
         <ArrowRight className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default function ResearchPage() {
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
           }`}
         >
-          판례 요약검색
+          판례 및 법령검색
         </button>
         <button
           onClick={() => setSearchType("laws")}

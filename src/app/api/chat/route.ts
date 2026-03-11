@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { orchestratorAgent } from '@/lib/agents/orchestrator';
+import { getRAGOrchestrator, RAG_FLAGS } from '@/lib/rag';
 import { auth } from '@/lib/auth/config';
 import { prisma } from '@/lib/db/prisma';
 import { mockConversations, mockMessages, MOCK_USER_ID } from '@/lib/db/mock-data';
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     }
 
     const body: ChatRequest = await request.json();
-    const { message, conversationId } = body;
+    const { message, conversationId, ragEnabled } = body;
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return NextResponse.json(
@@ -120,7 +121,13 @@ export async function POST(request: NextRequest): Promise<Response> {
             originalSendChunk(chunk);
           };
 
-          await orchestratorAgent.run({
+          // Use RAGOrchestrator when RAG is enabled (env flag AND per-request toggle)
+          const useRAG = RAG_FLAGS.ENABLE_RAG && (ragEnabled !== false);
+          const agent = useRAG
+            ? getRAGOrchestrator()
+            : orchestratorAgent;
+
+          await agent.run({
             userMessage: message.trim(),
             conversationHistory,
             userId,

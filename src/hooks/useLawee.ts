@@ -25,6 +25,28 @@ const PAGE_MESSAGES: Record<string, string> = {
   '/clients': '의뢰인분들 소중하게! 저도 응원할게요~',
 };
 
+// Drag messages (잡혔을 때)
+const DRAG_MESSAGES: string[] = [
+  '으아아~ 어디 데려가요?!',
+  '저 날 수 있어요! 그냥 놔줘요~',
+  '꽉 잡혀있어요... 도움!!',
+  '흔들리는 건 싫어요!!!',
+  '저 어지러워요~ 조심히요!',
+  '캡쳐 금지!! (잡는 것도요)',
+  '변호사님 너무해요 진짜로요!',
+];
+
+// Drop messages (내려놨을 때)
+const DROP_MESSAGES: string[] = [
+  '휴~ 이제 내려줬네요!',
+  '여기가 새 집이에요?',
+  '더 높은 데 올려주세요~',
+  '아 다리 아파~ (4개나 되는데)',
+  '이 뷰가 마음에 들어요!',
+  '다음엔 조심히 들어줘요 ㅠㅠ',
+  '정착! 이제 안 움직여요 (조금은요)',
+];
+
 // Random click messages
 const CLICK_MESSAGES: string[] = [
   '변호사님~ 커피 한잔 하세요~',
@@ -183,9 +205,29 @@ export function useLawee() {
     }));
   }, []);
 
+  // 드래그 시작: surprised 표정 + 드래그 메시지
+  const handleDragStart = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      currentMessage: getRandomItem(DRAG_MESSAGES),
+      expression: 'surprised',
+    }));
+  }, []);
+
+  // 내려놓기: excited 표정 + 드롭 메시지
+  const handleDrop = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      currentMessage: getRandomItem(DROP_MESSAGES),
+      expression: 'excited',
+    }));
+  }, []);
+
   return {
     state,
     handleClick,
     handleDialogClose,
+    handleDragStart,
+    handleDrop,
   };
 }

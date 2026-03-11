@@ -8,10 +8,19 @@ export interface ChatMessage {
   isStreaming?: boolean
 }
 
-export function useChat(conversationId?: string) {
+export interface RAGSource {
+  id: string
+  title: string
+  chunkIndex?: number
+  totalChunks?: number
+  similarity?: number
+}
+
+export function useChat(conversationId?: string, ragEnabled = true) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [sourcesMap, setSourcesMap] = useState<Record<string, RAGSource[]>>({})
 
   const sendMessage = useCallback(async (content: string) => {
     const userMsg: ChatMessage = {
@@ -41,6 +50,7 @@ export function useChat(conversationId?: string) {
         body: JSON.stringify({
           message: content,
           conversationId,
+          ragEnabled,
           history: messages.slice(-10).map(m => ({ role: m.role, content: m.content })),
         }),
       })
@@ -75,6 +85,13 @@ export function useChat(conversationId?: string) {
                   )
                 )
               }
+              // Parse RAG sources from tool_use hack: toolName = 'RAG_SOURCES:{json}'
+              if (parsed.type === 'tool_use' && typeof parsed.toolName === 'string' && parsed.toolName.startsWith('RAG_SOURCES:')) {
+                try {
+                  const sources: RAGSource[] = JSON.parse(parsed.toolName.slice('RAG_SOURCES:'.length))
+                  setSourcesMap(prev => ({ ...prev, [assistantMsgId]: sources }))
+                } catch { /* ignore */ }
+              }
             } catch {
               // JSON 파싱 실패 무시
             }
@@ -94,7 +111,10 @@ export function useChat(conversationId?: string) {
     }
   }, [messages, conversationId])
 
-  const clearMessages = useCallback(() => setMessages([]), [])
+  const clearMessages = useCallback(() => {
+    setMessages([])
+    setSourcesMap({})
+  }, [])
 
-  return { messages, isStreaming, error, sendMessage, clearMessages }
+  return { messages, isStreaming, error, sendMessage, clearMessages, sourcesMap }
 }

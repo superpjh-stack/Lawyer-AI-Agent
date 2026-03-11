@@ -9,9 +9,10 @@ import {
   Bookmark,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
   ArrowLeft,
 } from "lucide-react";
+import { SearchModeSelector, type SearchMode } from "@/components/research/SearchModeSelector";
+import { SimilarityBadge } from "@/components/research/SimilarityBadge";
 
 interface CaseLawItem {
   serialNumber: string;
@@ -33,7 +34,7 @@ interface SearchResult {
 
 export default function CaseLawSearchPage() {
   const [query, setQuery] = useState("");
-  const [searchType, setSearchType] = useState<"keyword" | "semantic">("keyword");
+  const [searchType, setSearchType] = useState<SearchMode>("keyword");
   const [results, setResults] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -88,49 +89,27 @@ export default function CaseLawSearchPage() {
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="page-title">판례 원문 검색</h1>
+          <h1 className="page-title">판례원문검색</h1>
         </div>
         <p className="text-sm text-slate-500">
           국가법령정보 API를 통해 판례 원문을 검색합니다
         </p>
       </div>
 
-      {/* 검색 타입 토글 */}
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setSearchType("keyword")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-            searchType === "keyword"
-              ? "bg-navy-900 text-white"
-              : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-          }`}
-        >
-          <Search className="w-3.5 h-3.5" />
-          키워드 검색
-        </button>
-        <button
-          onClick={() => setSearchType("semantic")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-            searchType === "semantic"
-              ? "bg-navy-900 text-white"
-              : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          유사 판례 검색
-        </button>
+      {/* 검색 모드 선택 */}
+      <div className="mb-4">
+        <SearchModeSelector value={searchType} onChange={setSearchType} />
+        {searchType === "semantic" && (
+          <p className="mt-2 text-xs text-blue-600">
+            북마크에 저장된 판례 중에서 의미적으로 유사한 판례를 찾습니다.
+          </p>
+        )}
+        {searchType === "hybrid" && (
+          <p className="mt-2 text-xs text-slate-500">
+            키워드 매칭과 시맨틱 유사도를 결합하여 검색합니다 (권장).
+          </p>
+        )}
       </div>
-
-      {/* 시맨틱 검색 안내 */}
-      {searchType === "semantic" && (
-        <div className="flex items-start gap-2 p-3 bg-blue-50 border border-blue-200 rounded-xl mb-4 text-blue-700 text-xs">
-          <Sparkles className="w-4 h-4 flex-shrink-0 mt-0.5" />
-          <span>
-            유사 판례 검색은 북마크에 저장된 판례 중에서 의미적으로 유사한
-            판례를 찾습니다. 먼저 판례를 북마크에 저장해 주세요.
-          </span>
-        </div>
-      )}
 
       {/* 검색 입력 */}
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-6">
@@ -206,9 +185,10 @@ export default function CaseLawSearchPage() {
                     </span>
                   )}
                   {item.similarity !== undefined && (
-                    <span className="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-700">
-                      {Math.round(item.similarity * 100)}% 유사
-                    </span>
+                    <SimilarityBadge
+                      similarity={item.similarity}
+                      source={searchType === "hybrid" ? "both" : searchType === "semantic" ? "semantic" : "keyword"}
+                    />
                   )}
                   <Bookmark className="w-4 h-4 text-slate-300 group-hover:text-gold-500 transition-colors" />
                 </div>

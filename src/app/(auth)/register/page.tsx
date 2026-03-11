@@ -117,18 +117,28 @@ export default function RegisterPage() {
   const set = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
-  // Step 1 검증
+  // Step 1 검증 (백엔드 RegisterSchema와 동일하게 유지)
+  const passwordValid =
+    form.password.length >= 8 &&
+    /[A-Za-z]/.test(form.password) &&
+    /[0-9]/.test(form.password);
+
   const step1Valid =
     form.name.trim().length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
-    form.password.length >= 8 &&
+    passwordValid &&
     form.password === form.confirmPassword;
 
   const handleNext = () => {
     setError("");
     if (!step1Valid) {
-      if (form.password !== form.confirmPassword) setError("비밀번호가 일치하지 않습니다.");
-      else setError("입력 정보를 확인해주세요.");
+      if (form.password !== form.confirmPassword) {
+        setError("비밀번호가 일치하지 않습니다.");
+      } else if (!passwordValid) {
+        setError("비밀번호는 8자 이상이며 영문자와 숫자를 포함해야 합니다.");
+      } else {
+        setError("입력 정보를 확인해주세요.");
+      }
       return;
     }
     setStep(2);
@@ -267,7 +277,7 @@ export default function RegisterPage() {
                     type={showPassword ? "text" : "password"}
                     value={form.password}
                     onChange={set("password")}
-                    placeholder="8자 이상"
+                    placeholder="8자 이상, 영문자+숫자 포함"
                     required
                     className="input-field pr-10"
                   />

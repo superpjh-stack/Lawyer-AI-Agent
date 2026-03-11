@@ -177,7 +177,7 @@ export default function CaseLawDetailPage() {
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <span className="text-xs text-slate-400">판례 원문 검색</span>
+          <span className="text-xs text-slate-400">판례원문검색</span>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">

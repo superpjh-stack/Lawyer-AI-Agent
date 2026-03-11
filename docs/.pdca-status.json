@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-09T06:45:52.822Z",
+  "lastUpdated": "2026-03-11T01:54:04.184Z",
   "activeFeatures": [
     "Lawyer-Agent",
     "db",
@@ -42,7 +42,18 @@
     "Lawyer-Agent 모바일 반응형 Gap 분석",
     "security",
     "case-law",
-    "bookmarks"
+    "bookmarks",
+    "rag",
+    "ingest",
+    "knowledge",
+    "chains",
+    "agent",
+    "search",
+    "stats",
+    "batch",
+    "execute",
+    "scripts",
+    "supabase"
   ],
   "primaryFeature": "Lawyer-Agent",
   "features": {
@@ -60,10 +71,10 @@
       },
       "timestamps": {
         "started": "2026-03-06T14:56:29.152Z",
-        "lastUpdated": "2026-03-09T06:36:42.795Z",
+        "lastUpdated": "2026-03-10T00:34:56.790Z",
         "completedAt": "2026-03-08T15:30:00.000Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\law-api.ts"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\types\\index.ts"
     },
     "db": {
       "phase": "do",
@@ -100,7 +111,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T14:58:30.561Z",
-        "lastUpdated": "2026-03-09T06:45:52.822Z"
+        "lastUpdated": "2026-03-10T04:45:53.463Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\layout\\Sidebar.tsx"
     },
@@ -126,7 +137,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T14:58:59.568Z",
-        "lastUpdated": "2026-03-08T12:19:09.161Z"
+        "lastUpdated": "2026-03-11T01:27:36.082Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\agents\\orchestrator.ts"
     },
@@ -139,7 +150,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T14:59:32.650Z",
-        "lastUpdated": "2026-03-09T00:44:50.665Z"
+        "lastUpdated": "2026-03-10T04:42:15.651Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\dashboard\\page.tsx"
     },
@@ -165,9 +176,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T15:00:58.592Z",
-        "lastUpdated": "2026-03-09T01:46:27.895Z"
+        "lastUpdated": "2026-03-10T04:00:28.085Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\chat\\ChatInterface.tsx"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\chat\\page.tsx"
     },
     "[id]": {
       "phase": "do",
@@ -178,9 +189,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T15:01:00.557Z",
-        "lastUpdated": "2026-03-09T06:43:03.744Z"
+        "lastUpdated": "2026-03-10T00:27:02.253Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\research\\case-law\\[id]\\page.tsx"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\documents\\[id]\\page.tsx"
     },
     "analyze": {
       "phase": "do",
@@ -191,7 +202,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T15:01:10.641Z",
-        "lastUpdated": "2026-03-06T23:55:49.186Z"
+        "lastUpdated": "2026-03-10T00:33:41.914Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\documents\\analyze\\route.ts"
     },
@@ -204,9 +215,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T15:01:31.266Z",
-        "lastUpdated": "2026-03-08T13:16:18.919Z"
+        "lastUpdated": "2026-03-10T00:26:25.550Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\cases\\[id]\\documents\\page.tsx"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\documents\\page.tsx"
     },
     "clients": {
       "phase": "do",
@@ -243,9 +254,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-06T15:04:13.159Z",
-        "lastUpdated": "2026-03-08T13:36:28.001Z"
+        "lastUpdated": "2026-03-09T08:28:47.726Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\auth\\register\\route.ts"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(auth)\\register\\page.tsx"
     },
     "auth": {
       "phase": "do",
@@ -282,7 +293,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-07T01:28:26.137Z",
-        "lastUpdated": "2026-03-09T06:43:52.245Z"
+        "lastUpdated": "2026-03-10T04:45:16.225Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\research\\page.tsx"
     },
@@ -334,9 +345,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-07T01:59:08.023Z",
-        "lastUpdated": "2026-03-08T09:06:51.755Z"
+        "lastUpdated": "2026-03-10T02:04:27.611Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\prisma\\seed.ts"
+      "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/prisma/seed.ts"
     },
     "upload": {
       "phase": "do",
@@ -347,7 +358,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-07T02:16:42.087Z",
-        "lastUpdated": "2026-03-07T02:17:18.414Z"
+        "lastUpdated": "2026-03-11T01:54:04.184Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\documents\\upload\\route.ts"
     },
@@ -464,9 +475,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-08T10:11:35.688Z",
-        "lastUpdated": "2026-03-08T13:19:16.110Z"
+        "lastUpdated": "2026-03-10T04:59:43.937Z"
       },
-      "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/src/components/lawee/LaweeFloat.tsx"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\lawee\\LaweeFloat.tsx"
     },
     "query": {
       "phase": "do",
@@ -569,9 +580,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-09T06:40:53.201Z",
-        "lastUpdated": "2026-03-09T06:42:21.829Z"
+        "lastUpdated": "2026-03-10T00:19:57.389Z"
       },
-      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\(app)\\research\\case-law\\page.tsx"
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\research\\case-law\\route.ts"
     },
     "bookmarks": {
       "phase": "do",
@@ -585,6 +596,149 @@
         "lastUpdated": "2026-03-09T06:41:33.578Z"
       },
       "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\research\\bookmarks\\route.ts"
+    },
+    "rag": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:18:38.210Z",
+        "lastUpdated": "2026-03-11T01:27:03.897Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\rag\\retriever.ts"
+    },
+    "ingest": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:19:35.433Z",
+        "lastUpdated": "2026-03-09T09:50:31.732Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\rag\\ingest\\extractors.ts"
+    },
+    "knowledge": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:20:15.954Z",
+        "lastUpdated": "2026-03-10T04:33:20.390Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\components\\knowledge\\KnowledgeUploader.tsx"
+    },
+    "chains": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:20:39.875Z",
+        "lastUpdated": "2026-03-09T09:50:57.924Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\rag\\chains\\document-qa.ts"
+    },
+    "agent": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:21:51.468Z",
+        "lastUpdated": "2026-03-09T09:46:22.175Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\rag\\agent\\agent-history.ts"
+    },
+    "search": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:43:46.045Z",
+        "lastUpdated": "2026-03-09T09:43:46.045Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\knowledge\\search\\route.ts"
+    },
+    "stats": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:43:49.503Z",
+        "lastUpdated": "2026-03-10T02:11:11.544Z"
+      },
+      "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/src/app/api/knowledge/stats/route.ts"
+    },
+    "batch": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:44:11.220Z",
+        "lastUpdated": "2026-03-09T09:44:11.220Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\knowledge\\batch\\route.ts"
+    },
+    "execute": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T09:44:27.822Z",
+        "lastUpdated": "2026-03-09T09:44:27.822Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\app\\api\\agent\\execute\\route.ts"
+    },
+    "scripts": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-10T02:10:38.654Z",
+        "lastUpdated": "2026-03-10T02:10:38.654Z"
+      },
+      "lastFile": "C:/gerardo/01 SmallSF/Lawyer-Agent/scripts/check-knowledge.js"
+    },
+    "supabase": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-11T01:52:39.653Z",
+        "lastUpdated": "2026-03-11T01:52:39.654Z"
+      },
+      "lastFile": "C:\\gerardo\\01 SmallSF\\Lawyer-Agent\\src\\lib\\supabase\\storage.ts"
     }
   },
   "pipeline": {
@@ -595,7 +749,7 @@
   "session": {
     "startedAt": "2026-03-06T14:43:44.348Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-09T06:45:52.822Z"
+    "lastActivity": "2026-03-11T01:54:04.184Z"
   },
   "history": [
     {
@@ -2449,6 +2603,1086 @@
     {
       "timestamp": "2026-03-09T06:45:52.822Z",
       "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:26:42.397Z",
+      "feature": "prisma",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:28:10.782Z",
+      "feature": "register",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:28:39.659Z",
+      "feature": "register",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:28:47.726Z",
+      "feature": "register",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:31:07.064Z",
+      "feature": "prisma",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:54:47.969Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:54:51.229Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:54:54.195Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:54:57.852Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:55:03.056Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:56:07.871Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T08:56:12.247Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:06:30.068Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:06:44.611Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:06:51.768Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:06:57.342Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:18:38.210Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:18:43.479Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:18:52.877Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:19:02.084Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:19:27.205Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:19:35.433Z",
+      "feature": "ingest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:19:55.024Z",
+      "feature": "ingest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:20:15.955Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:20:39.875Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:20:59.097Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:21:14.773Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:21:26.336Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:21:51.468Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:22:23.605Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:22:35.305Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:22:55.826Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:43:38.700Z",
+      "feature": "ingest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:43:46.045Z",
+      "feature": "search",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:43:49.503Z",
+      "feature": "stats",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:01.254Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:11.220Z",
+      "feature": "batch",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:16.087Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:27.822Z",
+      "feature": "execute",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:32.229Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:37.058Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:44.590Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:49.466Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:44:54.810Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:45:09.526Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:45:15.144Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:45:21.277Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:46:12.089Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:46:17.186Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:46:22.175Z",
+      "feature": "agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:48:59.789Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:04.955Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:11.306Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:15.575Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:20.218Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:30.009Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:49:49.484Z",
+      "feature": "ingest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:50:31.732Z",
+      "feature": "ingest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:50:40.588Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:50:46.249Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:50:52.965Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T09:50:57.924Z",
+      "feature": "chains",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:12:02.380Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:13:43.766Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:13:45.081Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:13:54.168Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:13:59.694Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:09.302Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:19.376Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:25.948Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:40.419Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:51.644Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:14:54.591Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:15:02.674Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:15:15.398Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:15:24.816Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:15:36.876Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:15:46.999Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:16:23.592Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:17:52.305Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:05.609Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:06.940Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:13.399Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:21.003Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:26.452Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:38.603Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:18:47.448Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:19:57.389Z",
+      "feature": "case-law",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:03.853Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:10.554Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:17.291Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:25.550Z",
+      "feature": "documents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:31.864Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:39.305Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:26:48.710Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:27:02.253Z",
+      "feature": "[id]",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:27:33.905Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:27:40.186Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:27:48.336Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:27:55.462Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:03.567Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:09.020Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:15.426Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:41.273Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:47.015Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:28:55.493Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:29:02.558Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:29:23.131Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:29:30.349Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:29:37.721Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:33:41.914Z",
+      "feature": "analyze",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:33:47.346Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:34:02.600Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:34:11.123Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:34:16.424Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:34:24.170Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T00:34:56.790Z",
+      "feature": "Lawyer-Agent",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:24:47.732Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:25:04.515Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:25:23.125Z",
+      "feature": "upload",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:26:10.196Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:26:49.095Z",
+      "feature": "upload",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:51:10.276Z",
+      "feature": "prisma",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:56:22.309Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:56:43.395Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T01:56:49.966Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:03:39.932Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:03:52.557Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:04:22.097Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:04:27.611Z",
+      "feature": "prisma",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:05:38.895Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:06:10.875Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:07:36.738Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:07:42.495Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:08:24.586Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:10:38.654Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:11:11.544Z",
+      "feature": "stats",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:11:20.466Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T02:11:39.584Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T03:59:54.960Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:00:03.493Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:00:28.085Z",
+      "feature": "chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:07:52.142Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:07:57.658Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:08:09.031Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:33:07.474Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:33:14.827Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:33:20.390Z",
+      "feature": "knowledge",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:42:04.560Z",
+      "feature": "dashboard",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:42:15.651Z",
+      "feature": "dashboard",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:44:12.831Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:45:16.225Z",
+      "feature": "research",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:45:53.463Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:52:06.114Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:57:52.448Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:59:30.666Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T04:59:43.937Z",
+      "feature": "lawee",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T06:10:28.907Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T06:59:24.041Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:21:09.423Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:49:49.783Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:49:58.294Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:06.901Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:14.428Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:29.060Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:39.021Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:46.424Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-10T07:50:53.508Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T00:50:50.170Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:24:19.105Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:25:26.565Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:26:09.956Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:26:35.665Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:27:03.897Z",
+      "feature": "rag",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:27:36.082Z",
+      "feature": "agents",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:52:39.654Z",
+      "feature": "supabase",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:53:15.056Z",
+      "feature": "upload",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:53:45.725Z",
+      "feature": "upload",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:53:55.815Z",
+      "feature": "upload",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-11T01:54:04.184Z",
+      "feature": "upload",
       "phase": "do",
       "action": "updated"
     }

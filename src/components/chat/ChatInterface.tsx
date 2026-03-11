@@ -8,20 +8,27 @@ import {
 import { clsx } from "clsx";
 import { useChat } from "@/hooks/useChat";
 import { useSpeechToText, useTextToSpeech } from "@/hooks/useVoice";
+import { SourceCitations, type SourceDocument } from "@/components/rag/SourceCitations";
+import { AgentStepIndicator, type AgentStep } from "@/components/rag/AgentStepIndicator";
+import { AgentPausePrompt } from "@/components/rag/AgentPausePrompt";
 
 interface ChatInterfaceProps {
   conversationId?: string;
   onTitleUpdate?: (title: string) => void;
   pendingQuestion?: string;
   onPendingQuestionConsumed?: () => void;
+  ragEnabled?: boolean;
 }
 
 export function ChatInterface({
   conversationId,
   pendingQuestion,
   onPendingQuestionConsumed,
+  ragEnabled = true,
 }: ChatInterfaceProps) {
-  const { messages, isStreaming, error, sendMessage } = useChat(conversationId);
+  const { messages, isStreaming, error, sendMessage, sourcesMap: ragSourcesMap } = useChat(conversationId, ragEnabled);
+  const [agentSteps, setAgentSteps] = useState<AgentStep[]>([]);
+  const [agentPause, setAgentPause] = useState<{ message: string } | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
@@ -246,6 +253,11 @@ export function ChatInterface({
                   )}
                 </div>
               )}
+              {/* RAG Source Citations */}
+              {msg.role === "assistant" && ragSourcesMap[msg.id] && ragSourcesMap[msg.id].length > 0 && (
+                <SourceCitations sources={ragSourcesMap[msg.id]} />
+              )}
+
               {msg.role === "assistant" && msg.content &&
                 !("isStreaming" in msg && msg.isStreaming) && (
                   <div className="flex items-center gap-1 mt-1.5 ml-1">
@@ -282,6 +294,23 @@ export function ChatInterface({
             </div>
           </div>
         ))}
+
+          {/* Agent step indicator */}
+        {agentSteps.length > 0 && (
+          <AgentStepIndicator steps={agentSteps} />
+        )}
+
+        {/* Agent pause prompt */}
+        {agentPause && (
+          <AgentPausePrompt
+            message={agentPause.message}
+            onContinue={() => setAgentPause(null)}
+            onModify={(input) => {
+              setAgentPause(null);
+              sendMessage(input);
+            }}
+          />
+        )}
 
         {isStreaming && messages.length > 0 &&
           messages[messages.length - 1]?.role === "assistant" &&

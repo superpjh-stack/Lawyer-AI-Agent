@@ -136,6 +136,7 @@ export default async function DashboardPage() {
       bg: "bg-navy-50",
       trend: "현재 담당 사건",
       trendUp: caseCount > 0,
+      href: "/cases",
     },
     {
       label: "이번주 기일",
@@ -146,6 +147,7 @@ export default async function DashboardPage() {
       bg: "bg-amber-50",
       trend: "7일 이내",
       trendUp: false,
+      href: "/deadlines",
     },
     {
       label: "미결 문서",
@@ -156,6 +158,7 @@ export default async function DashboardPage() {
       bg: "bg-slate-100",
       trend: "분석 대기중",
       trendUp: false,
+      href: "/documents",
     },
     {
       label: "미수금",
@@ -166,6 +169,7 @@ export default async function DashboardPage() {
       bg: "bg-gold-50",
       trend: "청구서 관리",
       trendUp: false,
+      href: "/billing",
     },
   ];
 
@@ -183,7 +187,7 @@ export default async function DashboardPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {stats.map((stat) => (
-          <div key={stat.label} className="stat-card">
+          <Link key={stat.label} href={stat.href} className="stat-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-150 cursor-pointer">
             <div className="flex items-center justify-between">
               <span className="text-sm text-slate-500">{stat.label}</span>
               <div className={`w-8 h-8 rounded-lg ${stat.bg} flex items-center justify-center`}>
@@ -198,7 +202,7 @@ export default async function DashboardPage() {
               {stat.trendUp && <TrendingUp className="w-3 h-3 text-green-500" />}
               <span className="text-xs text-slate-400">{stat.trend}</span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

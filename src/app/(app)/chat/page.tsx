@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Plus, MessageSquare, ChevronRight, ChevronDown, Loader2, Lightbulb } from "lucide-react";
 import { ChatInterface } from "@/components/chat/ChatInterface";
 import { Button } from "@/components/ui/Button";
+import { RAGToggle } from "@/components/rag/RAGToggle";
 import { clsx } from "clsx";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -129,6 +130,21 @@ const QUICK_QUESTIONS = [
       "내용증명 발송 후 효과와 후속 조치는?",
     ],
   },
+  {
+    category: "🗂️ 우리 케이스 조회",
+    questions: [
+      "업로드된 계약서에서 보증금 반환 조건이 어떻게 규정되어 있어?",
+      "우리 사무소 표준 용역계약서의 위약금 규정을 정확히 알려줘",
+      "저장된 NDA 계약서에서 비밀유지 의무 기간이 몇 년으로 되어 있어?",
+      "지난번 저장한 판결문에서 법원이 손해배상 범위를 제한한 근거가 뭐야?",
+      "피고 대리인으로 제출한 준비서면에서 소멸시효 항변 부분을 찾아줘",
+      "의뢰인 건으로 작성한 법률의견서에서 우리 측 유리 쟁점 3가지가 뭐야?",
+      "감정평가 보고서에서 감정인이 산정한 정상가액은 얼마야?",
+      "지식베이스에 저장된 계약서 중 불가항력 조항이 포함된 문서는 어떤 것들이 있어?",
+      "임금체불 사건 준비서면들에서 공통적으로 인용한 판례 패턴을 찾아줘",
+      "우리 사무소 소장 작성 표준 양식에서 청구취지 작성 방법이 어떻게 안내되어 있어?",
+    ],
+  },
 ];
 
 export default function ChatPage() {
@@ -141,6 +157,7 @@ export default function ChatPage() {
   const [creating, setCreating] = useState(false);
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({ "📋 사건 전략": true });
   const [pendingQuestion, setPendingQuestion] = useState<string>("");
+  const [ragEnabled, setRagEnabled] = useState(true);
 
   const fetchConversations = useCallback(async () => {
     try {
@@ -287,6 +304,7 @@ export default function ChatPage() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-400 hidden sm:block">Claude claude-sonnet-4-6 기반</span>
+            <RAGToggle enabled={ragEnabled} onChange={setRagEnabled} />
             <button
               onClick={() => setShowQPanel(!showQPanel)}
               className={clsx(
@@ -307,6 +325,7 @@ export default function ChatPage() {
             conversationId={activeConvId}
             pendingQuestion={pendingQuestion}
             onPendingQuestionConsumed={() => setPendingQuestion("")}
+            ragEnabled={ragEnabled}
             onTitleUpdate={(title) => {
               setConversations((prev) =>
                 prev.map((c) => c.id === activeConvId ? { ...c, title } : c)
@@ -331,43 +350,64 @@ export default function ChatPage() {
           <div className="px-4 py-3 border-b border-slate-100 flex items-center gap-2">
             <Lightbulb className="w-4 h-4 text-amber-500" />
             <span className="text-sm font-semibold text-slate-800">자주 쓰는 질문</span>
-            <span className="ml-auto text-xs text-slate-400">50개</span>
+            <span className="ml-auto text-xs text-slate-400">60개</span>
           </div>
 
           <div className="flex-1 overflow-y-auto scrollbar-thin py-2">
-            {QUICK_QUESTIONS.map((group) => (
-              <div key={group.category} className="mb-1">
-                {/* 카테고리 헤더 */}
-                <button
-                  onClick={() => toggleCategory(group.category)}
-                  className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 transition-colors text-left"
-                >
-                  <span className="text-sm font-medium text-slate-700">{group.category}</span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs text-slate-400">{group.questions.length}</span>
-                    <ChevronDown className={clsx(
-                      "w-3.5 h-3.5 text-slate-400 transition-transform duration-200",
-                      openCategories[group.category] && "rotate-180"
-                    )} />
-                  </div>
-                </button>
+            {QUICK_QUESTIONS.map((group) => {
+              const isRAG = group.category === "🗂️ 우리 케이스 조회";
+              return (
+                <div key={group.category} className={clsx("mb-1", isRAG && "border-t border-slate-200 mt-1 pt-1")}>
+                  {/* 카테고리 헤더 */}
+                  <button
+                    onClick={() => toggleCategory(group.category)}
+                    className={clsx(
+                      "w-full flex items-center justify-between px-4 py-2.5 transition-colors text-left",
+                      isRAG ? "hover:bg-navy-50" : "hover:bg-slate-50"
+                    )}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <span className={clsx("text-sm font-medium", isRAG ? "text-navy-700" : "text-slate-700")}>
+                        {group.category}
+                      </span>
+                      {isRAG && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-navy-100 text-navy-600 font-semibold">
+                          RAG
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs text-slate-400">{group.questions.length}</span>
+                      <ChevronDown className={clsx(
+                        "w-3.5 h-3.5 transition-transform duration-200",
+                        isRAG ? "text-navy-400" : "text-slate-400",
+                        openCategories[group.category] && "rotate-180"
+                      )} />
+                    </div>
+                  </button>
 
-                {/* 질문 목록 */}
-                {openCategories[group.category] && (
-                  <div className="pb-1">
-                    {group.questions.map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => handleQuestionClick(q)}
-                        className="w-full text-left px-4 py-2 text-xs text-slate-600 hover:bg-navy-50 hover:text-navy-800 transition-colors leading-relaxed border-l-2 border-transparent hover:border-navy-400 ml-0 pl-4"
-                      >
-                        {q}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                  {/* 질문 목록 */}
+                  {openCategories[group.category] && (
+                    <div className="pb-1">
+                      {group.questions.map((q) => (
+                        <button
+                          key={q}
+                          onClick={() => handleQuestionClick(q)}
+                          className={clsx(
+                            "w-full text-left px-4 py-2 text-xs transition-colors leading-relaxed border-l-2",
+                            isRAG
+                              ? "text-navy-700 hover:bg-navy-50 border-transparent hover:border-navy-500"
+                              : "text-slate-600 hover:bg-navy-50 hover:text-navy-800 border-transparent hover:border-navy-400"
+                          )}
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <div className="px-4 py-2.5 border-t border-slate-100 text-xs text-slate-400 text-center">

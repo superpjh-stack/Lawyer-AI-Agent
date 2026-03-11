@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { DocumentUpload } from "@/components/documents/DocumentUpload";
+import { EmbeddingStatusBadge } from "@/components/documents/EmbeddingStatusBadge";
 import { clsx } from "clsx";
 
 interface Document {
@@ -26,6 +27,7 @@ interface Document {
   fileSize: number;
   aiSummary: string | null;
   riskLevel: string | null;
+  embeddingStatus?: string | null;
   createdAt: string;
 }
 
@@ -227,6 +229,7 @@ export default function DocumentsPage() {
                 <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden sm:table-cell">유형</th>
                 <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden md:table-cell">사건</th>
                 <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden lg:table-cell">분석</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden xl:table-cell">임베딩</th>
                 <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden md:table-cell">날짜</th>
                 <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 hidden sm:table-cell">크기</th>
                 <th className="px-5 py-3" />
@@ -255,6 +258,9 @@ export default function DocumentsPage() {
                     {doc.aiSummary
                       ? riskBadge(doc.riskLevel) ?? <span className="text-xs text-green-600">분석 완료</span>
                       : <span className="text-xs text-slate-400">대기중</span>}
+                  </td>
+                  <td className="px-5 py-3.5 hidden xl:table-cell">
+                    <EmbeddingStatusBadge status={doc.embeddingStatus as "processing" | "completed" | "failed" | null} />
                   </td>
                   <td className="px-5 py-3.5 text-slate-500 text-xs hidden md:table-cell">{formatDate(doc.createdAt)}</td>
                   <td className="px-5 py-3.5 text-slate-400 text-xs hidden sm:table-cell">{formatBytes(doc.fileSize)}</td>

@@ -2,6 +2,10 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { analyzeDocument } from '@/lib/agents/document-analyzer';
+import { analyzeContractRisk } from '@/lib/rag/chains/risk-analysis';
+import { auth } from '@/lib/auth/config';
+import { prisma } from '@/lib/db/prisma';
+import { RAG_FLAGS } from '@/lib/rag';
 import type { DocumentAnalysisResult } from '@/types';
 
 export const runtime = 'nodejs';
@@ -9,9 +13,10 @@ export const dynamic = 'force-dynamic';
 
 interface AnalyzeRequest {
   documentId: string;
-  documentText: string;
+  documentText?: string;
   documentType?: string;
   analysisType?: 'risk_review' | 'summary' | 'comparison';
+  compareWithKnowledgeBase?: boolean;
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -22,6 +27,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       documentText,
       documentType = '법률 문서',
       analysisType = 'risk_review',
+      compareWithKnowledgeBase = false,
     } = body;
 
     if (!documentId) {
@@ -29,6 +35,43 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { error: { message: 'documentId가 필요합니다.' } },
         { status: 400 }
       );
+    }
+
+    // RAG-based risk analysis (when enabled and compareWithKnowledgeBase requested)
+    if (RAG_FLAGS.ENABLE_RISK_ANALYSIS && compareWithKnowledgeBase) {
+      const session = await auth();
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: { message: '인증이 필요합니다.' } }, { status: 401 });
+      }
+
+      // Fetch document content from DB if not provided
+      let content = documentText ?? '';
+      let title = documentId;
+      if (!content) {
+        const doc = await prisma.document.findUnique({ where: { id: documentId } });
+        if (!doc) {
+          return NextResponse.json({ error: { message: '문서를 찾을 수 없습니다.' } }, { status: 404 });
+        }
+        title = doc.fileName;
+        // Content from DB field if available, else fallback
+        content = (doc as { content?: string }).content ?? '';
+      }
+
+      if (!content) {
+        return NextResponse.json(
+          { error: { message: '분석할 문서 내용이 없습니다.' } },
+          { status: 400 }
+        );
+      }
+
+      const ragResult = await analyzeContractRisk({
+        documentContent: content,
+        documentTitle: title,
+        lawyerId: session.user.id,
+        compareWithKnowledgeBase: true,
+      });
+
+      return NextResponse.json({ data: { riskAnalysis: ragResult } });
     }
 
     if (!documentText || documentText.trim().length === 0) {
