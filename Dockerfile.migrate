@@ -4,5 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 COPY prisma ./prisma
+COPY scripts/db-migrate.sh ./scripts/db-migrate.sh
+RUN chmod +x ./scripts/db-migrate.sh
 RUN npx prisma generate
-CMD ["npx", "prisma", "migrate", "deploy"]
+CMD ["./scripts/db-migrate.sh"]

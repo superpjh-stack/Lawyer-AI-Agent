@@ -30,7 +30,8 @@ steps:
       - 'push'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
 
-  # 4. Prisma db push (Cloud Run Job)
+  # 4. DB Migration (Cloud Run Job)
+  # scripts/db-migrate.sh: pgvector extension → prisma db push → HNSW index
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -41,9 +42,9 @@ steps:
       - '--image'
       - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
       - '--command'
-      - 'npx'
+      - '/bin/sh'
       - '--args'
-      - 'prisma,db,push,--accept-data-loss'
+      - './scripts/db-migrate.sh'
       - '--region'
       - 'asia-northeast3'
       - '--set-cloudsql-instances'
@@ -61,38 +62,7 @@ steps:
       - 'asia-northeast3'
       - '--wait'
 
-  # 5. HNSW index migration (Cloud Run Job — idempotent IF NOT EXISTS)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'jobs'
-      - 'update'
-      - 'prisma-migrate'
-      - '--image'
-      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
-      - '--command'
-      - 'npx'
-      - '--args'
-      - 'prisma,db,execute,--file,./prisma/migrations/20260311_hnsw_index/migration.sql,--schema,./prisma/schema.prisma'
-      - '--region'
-      - 'asia-northeast3'
-      - '--set-cloudsql-instances'
-      - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
-      - '--set-secrets'
-      - 'DATABASE_URL=DATABASE_URL:latest'
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'jobs'
-      - 'execute'
-      - 'prisma-migrate'
-      - '--region'
-      - 'asia-northeast3'
-      - '--wait'
-
-  # 6. Prisma seed (Cloud Run Job)
+  # 5. Prisma seed (Cloud Run Job)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
