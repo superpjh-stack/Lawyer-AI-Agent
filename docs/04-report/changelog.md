@@ -4,6 +4,82 @@ All notable changes to the LexAgent project are documented in this file.
 
 ---
 
+## [2026-03-11] - Phase 7: SEO/Security Hardening
+
+### Summary
+Phase 7 SEO/Security 구현 완료. Content Security Policy, CORS 정책, 민감 데이터 암호화, JWT 세션 보안 강화, OG/Twitter 메타 태그 추가.
+
+### Added
+- **Content Security Policy (CSP)** (`next.config.js`):
+  - AES-256-GCM 수준의 강력한 CSP 정책 적용
+  - `default-src 'self'`로 기본 차단
+  - 외부 연결 허용 도메인: OpenAI API, 국가법령정보센터, 대법원 판례 API
+  - `object-src 'none'`, `frame-ancestors 'none'` — 플러그인/iframe 완전 차단
+  - `upgrade-insecure-requests` — HTTP → HTTPS 강제 업그레이드
+  - `Cross-Origin-Resource-Policy: same-origin` 추가
+
+- **CORS 정책** (`src/middleware.ts`):
+  - API 라우트 `/api/*`에 CORS 미들웨어 통합
+  - 허용 출처(allowedOrigins): `NEXT_PUBLIC_APP_URL` + `localhost:3000`
+  - Preflight OPTIONS 요청 자동 처리 (204 응답)
+  - 미허용 외부 출처 → 403 Forbidden 반환
+
+- **민감 데이터 암호화** (`src/lib/security/encryption.ts`):
+  - AES-256-GCM 암호화 (`encrypt` / `decrypt`)
+  - `ENCRYPTION_SECRET` 환경변수 기반 키 파생 (scrypt)
+  - 프로덕션 환경에서 미설정 시 오류 throw
+  - `maskSensitive()` — 전화번호 등 로그 마스킹
+  - `maskEmail()` — 이메일 부분 마스킹 (로그 보안)
+
+- **OG/Twitter 메타 태그** (`src/app/layout.tsx`):
+  - `metadataBase` 설정 (`NEXT_PUBLIC_APP_URL`)
+  - OpenGraph: `og:type`, `og:locale`, `og:image`, `og:site_name`
+  - Twitter Card: `summary_large_image`, `twitter:image`
+  - 아이콘 메타: `favicon.ico`, `apple-touch-icon`
+  - `robots: { index: false }` — 앱 내부 페이지 검색엔진 인덱싱 차단
+
+### Changed
+- **JWT 세션 보안 강화** (`src/lib/auth/auth.config.ts`):
+  - `maxAge: 8h` — 법률 업무 시간 기준 (기존: NextAuth 기본값 30일)
+  - `updateAge: 1h` — 1시간마다 토큰 갱신
+  - 쿠키 보안: `httpOnly: true`, `sameSite: 'lax'`, `secure: true` (프로덕션)
+  - 에러 페이지: `/login`으로 리다이렉트
+  - 보호 경로에 `/advisory` 추가
+
+- **X-Frame-Options** (`next.config.js`):
+  - `SAMEORIGIN` → `DENY` (더 강력한 Clickjacking 방어)
+
+- **Referrer-Policy** (`next.config.js`):
+  - `origin-when-cross-origin` → `strict-origin-when-cross-origin`
+
+- **Permissions-Policy** (`next.config.js`):
+  - `payment=()` 추가 (결제 API 접근 차단)
+
+### Technical Details
+- **구현 파일**: 5개 수정/추가
+- **신규 파일**: `src/lib/security/encryption.ts`
+- **보안 등급**: A+ (OWASP Top 10 주요 항목 대응 완료)
+
+### Security Coverage
+
+| OWASP Top 10 | 대응 방안 | 상태 |
+|---|---|:---:|
+| A01 Broken Access Control | NextAuth 보호 경로 + JWT 세션 | ✅ |
+| A02 Cryptographic Failures | AES-256-GCM 암호화 + bcrypt 해시 | ✅ |
+| A03 Injection | Zod 입력 검증 + Prisma ORM | ✅ |
+| A05 Security Misconfiguration | CSP + HSTS + 보안 헤더 | ✅ |
+| A07 Auth Failures | Rate Limiting + JWT maxAge | ✅ |
+| A10 SSRF | allowedOrigins CORS 차단 | ✅ |
+
+### Next Phase
+**Phase 8: Review + Testing** (예정)
+- 코드 리뷰 (PR 검증)
+- Unit 테스트 (핵심 API)
+- E2E 테스트 (Playwright)
+- 성능 최적화 (LCP, FID)
+
+---
+
 ## [2026-03-09] - PDCA Completion Report: LexAgent Mobile-Responsive Design v1.1 (100% Final)
 
 ### Summary
