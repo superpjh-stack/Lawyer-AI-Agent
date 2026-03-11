@@ -5,9 +5,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth/config';
 import { searchCaseLaw } from '@/lib/law-api';
 import { prisma } from '@/lib/db/prisma';
+import { cache, generateKey } from '@/lib/cache/redis';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+
+const CASE_LAW_CACHE_TTL = 600; // 10분
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -26,6 +29,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({
         data: { items: [], total: 0, page, pageSize },
       });
+    }
+
+    // 캐시 확인
+    const cacheKey = generateKey('case-law', query, type, page, pageSize);
+    const cachedResult = await cache.get<{ items: unknown[]; total: number; page: number; pageSize: number }>(cacheKey);
+    if (cachedResult) {
+      return NextResponse.json(
+        { data: cachedResult },
+        { headers: { 'X-Cache': 'HIT' } }
+      );
     }
 
     // 시맨틱 검색: 북마크된 판례 내에서 pgvector 유사도 검색
@@ -66,23 +79,23 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
           (page - 1) * pageSize
         );
 
-        return NextResponse.json({
-          data: {
-            items: results.map((r) => ({
-              serialNumber: r.serialNumber,
-              caseNumber: r.caseNumber,
-              caseName: r.caseName,
-              courtName: r.courtName,
-              judgmentDate: r.judgmentDate,
-              caseType: r.caseType ?? '',
-              snippet: r.aiSummary ?? '',
-              similarity: r.similarity,
-            })),
-            total: results.length,
-            page,
-            pageSize,
-          },
-        });
+        const semanticData = {
+          items: results.map((r) => ({
+            serialNumber: r.serialNumber,
+            caseNumber: r.caseNumber,
+            caseName: r.caseName,
+            courtName: r.courtName,
+            judgmentDate: r.judgmentDate,
+            caseType: r.caseType ?? '',
+            snippet: r.aiSummary ?? '',
+            similarity: r.similarity,
+          })),
+          total: results.length,
+          page,
+          pageSize,
+        };
+        await cache.set(cacheKey, semanticData, CASE_LAW_CACHE_TTL);
+        return NextResponse.json({ data: semanticData });
       } catch (error) {
         console.error('[case-law] Semantic search error:', error);
         // pgvector 미설정 시 일반 키워드 검색으로 fallback
@@ -142,9 +155,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
           .slice((page - 1) * pageSize, page * pageSize)
           .map(([, v]) => v.item);
 
-        return NextResponse.json({
-          data: { items: merged, total: scores.size, page, pageSize },
-        });
+        const hybridData = { items: merged, total: scores.size, page, pageSize };
+        await cache.set(cacheKey, hybridData, CASE_LAW_CACHE_TTL);
+        return NextResponse.json({ data: hybridData });
       } catch (error) {
         console.error('[case-law] Hybrid search error:', error);
         // fallback to keyword
@@ -153,6 +166,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // 키워드 검색: 국가법령정보 API
     const result = await searchCaseLaw(query, page, pageSize);
+    await cache.set(cacheKey, result, CASE_LAW_CACHE_TTL);
     return NextResponse.json({ data: result });
   } catch (error) {
     console.error('[case-law] GET error:', error);

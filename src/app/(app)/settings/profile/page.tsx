@@ -57,10 +57,36 @@ export default function ProfilePage() {
     await signOut({ callbackUrl: "/login" });
   };
 
+  const SETTINGS_NAV = [
+    { href: "/settings/profile", label: "프로필" },
+    { href: "/settings/notifications", label: "알림" },
+    { href: "/settings/team", label: "팀 관리" },
+    { href: "/settings/subscription", label: "구독" },
+    { href: "/settings/knowledge", label: "지식베이스" },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto animate-fade-in">
       <div className="page-header">
         <h1 className="page-title">프로필 설정</h1>
+      </div>
+
+      {/* Settings sub-nav */}
+      <div className="flex gap-1 mb-6 overflow-x-auto scrollbar-none">
+        {SETTINGS_NAV.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className={clsx(
+              "flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
+              item.href === "/settings/profile"
+                ? "bg-navy-900 text-white"
+                : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+            )}
+          >
+            {item.label}
+          </a>
+        ))}
       </div>
 
       {/* 아바타 카드 */}

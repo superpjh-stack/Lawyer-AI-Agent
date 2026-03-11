@@ -9,7 +9,32 @@
       "Bash(taskkill:*)",
       "Bash(powershell:*)",
       "Bash(node:*)",
-      "Bash(npx kill-port:*)"
+      "Bash(npx kill-port:*)",
+      "Bash(npx prisma:*)",
+      "Bash(gcloud logging:*)",
+      "Bash(gcloud builds:*)",
+      "Bash(echo:*)",
+      "Bash(printf %s:*)",
+      "Bash(gcloud run:*)",
+      "Skill(bkit:pdca)",
+      "Bash(docker:*)",
+      "Bash(DOCKER_HOST=npipe:////./pipe/docker_engine docker run:*)",
+      "Bash(netstat:*)",
+      "Bash(cmd:*)",
+      "Bash(npm run:*)",
+      "Bash(winget:*)",
+      "Bash(where psql)",
+      "Read(//c/Program Files/PostgreSQL//**)",
+      "Read(//c/Program Files/PostgreSQL/**)",
+      "Bash(PGPASSWORD=postgres powershell:*)",
+      "Read(//c/gerardo/01 SmallSF/Lawyer-Agent/$APPDATA/postgresql/**)",
+      "Read(//c/gerardo/01 SmallSF/Lawyer-Agent/$HOME/**)",
+      "Read(//c/gerardo/01 SmallSF/Lawyer-Agent/$APPDATA/**)",
+      "Bash(PGPASSWORD=lexagent \"C:/Program Files/PostgreSQL/16/bin/initdb.exe\":*)",
+      "Bash(ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\src\\\\app\\\\\\(app\\)\\\\settings\" && ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\docs\")",
+      "Bash(ls \"C:/gerardo/01 SmallSF/Lawyer-Agent/src/app/\\(app\\)/settings/notifications/\" 2>/dev/null && echo \"exists\" || echo \"empty_dir\")",
+      "Bash(ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\src\\\\app\\\\\\(app\\)\\\\settings\")",
+      "Bash(ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\src\\\\app\\\\\\(app\\)\\\\settings\\\\notifications\" && ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\src\\\\app\\\\\\(app\\)\\\\settings\\\\team\" && ls \"C:\\\\gerardo\\\\01 SmallSF\\\\Lawyer-Agent\\\\src\\\\app\\\\\\(app\\)\\\\settings\\\\subscription\")"
     ]
   }
 }

@@ -84,6 +84,10 @@ export function Sidebar({ className }: SidebarProps) {
       // /research/case-law는 별도 메뉴이므로 제외
       return pathname.startsWith("/research/") && !pathname.startsWith("/research/case-law");
     }
+    // /settings/profile 항목은 모든 settings 서브페이지에서 활성 표시
+    if (href === "/settings/profile") {
+      return pathname.startsWith("/settings/");
+    }
     return pathname.startsWith(href + "/");
   };
 

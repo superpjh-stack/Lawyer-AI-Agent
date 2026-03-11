@@ -1,14 +1,45 @@
 {
   "version": "1.0",
-  "enabled": false,
+  "enabled": true,
   "teamName": "",
   "feature": "Lawyer-Agent",
   "pdcaPhase": "do",
   "orchestrationPattern": "leader",
   "ctoAgent": "opus",
-  "startedAt": "2026-03-07T02:15:14.579Z",
-  "lastUpdated": "2026-03-07T02:56:58.273Z",
-  "teammates": [],
+  "startedAt": "2026-03-11T06:25:39.151Z",
+  "lastUpdated": "2026-03-11T06:34:43.652Z",
+  "teammates": [
+    {
+      "name": "aa8bfcc5077b12509",
+      "role": "general-purpose",
+      "model": "sonnet",
+      "status": "completed",
+      "currentTask": null,
+      "taskId": null,
+      "startedAt": "2026-03-11T06:25:39.155Z",
+      "lastActivityAt": "2026-03-11T06:33:36.090Z"
+    },
+    {
+      "name": "a8576f5cdf963f607",
+      "role": "general-purpose",
+      "model": "sonnet",
+      "status": "completed",
+      "currentTask": null,
+      "taskId": null,
+      "startedAt": "2026-03-11T06:25:52.314Z",
+      "lastActivityAt": "2026-03-11T06:30:01.911Z"
+    },
+    {
+      "name": "a31d57f7c2b61f527",
+      "role": "general-purpose",
+      "model": "sonnet",
+      "status": "completed",
+      "currentTask": null,
+      "taskId": null,
+      "startedAt": "2026-03-11T06:26:09.649Z",
+      "lastActivityAt": "2026-03-11T06:34:43.640Z"
+    }
+  ],
   "progress": {
     "totalTasks": 0,
     "completedTasks": 0,
@@ -17,5 +48,5 @@
     "pendingTasks": 0
   },
   "recentMessages": [],
-  "sessionId": "06617e03-3351-4bf0-b809-322ee18219ed"
+  "sessionId": "b107ea88-c995-4040-b574-d761dc8372dd"
 }
