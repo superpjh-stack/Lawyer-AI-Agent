@@ -25,6 +25,17 @@ ENV AUTH_SECRET=build-time-placeholder-secret-32chars!!
 ENV NEXTAUTH_URL=http://localhost:3000
 ENV OPENAI_API_KEY=sk-dummy-build-time-key
 
+# Supabase public vars — anon key is intentionally public (safe to bake in)
+ENV NEXT_PUBLIC_SUPABASE_URL=https://wwoprgtzbwknhilfuwuo.supabase.co
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind3b3ByZ3R6YndrbmhpbGZ1d3VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTk4MzgsImV4cCI6MjA4ODM5NTgzOH0.hPgYZrSl6MjcFTA009TOvjNV6e869mACECs8DynN6xk
+
+# Feature flags (baked in at build time)
+ENV ENABLE_RAG=true
+ENV ENABLE_KNOWLEDGE_BASE=true
+ENV ENABLE_HYBRID_SEARCH=false
+ENV ENABLE_RISK_ANALYSIS=false
+ENV ENABLE_MULTI_STEP_AGENT=false
+
 # Build Next.js (standalone)
 RUN npm run build
 

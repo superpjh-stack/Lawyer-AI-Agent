@@ -61,7 +61,38 @@ steps:
       - 'asia-northeast3'
       - '--wait'
 
-  # 5. Prisma seed (Cloud Run Job)
+  # 5. HNSW index migration (Cloud Run Job — idempotent IF NOT EXISTS)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'update'
+      - 'prisma-migrate'
+      - '--image'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/migrate:latest'
+      - '--command'
+      - 'npx'
+      - '--args'
+      - 'prisma,db,execute,--file,./prisma/migrations/20260311_hnsw_index/migration.sql,--schema,./prisma/schema.prisma'
+      - '--region'
+      - 'asia-northeast3'
+      - '--set-cloudsql-instances'
+      - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
+      - '--set-secrets'
+      - 'DATABASE_URL=DATABASE_URL:latest'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'execute'
+      - 'prisma-migrate'
+      - '--region'
+      - 'asia-northeast3'
+      - '--wait'
+
+  # 6. Prisma seed (Cloud Run Job)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -119,13 +150,17 @@ steps:
       - '--add-cloudsql-instances'
       - 'lawyer-ai-agent-489501:asia-northeast3:lawyer-agent-db'
       - '--set-env-vars'
-      - 'NODE_ENV=production'
+      - 'NODE_ENV=production,ENABLE_RAG=true,ENABLE_KNOWLEDGE_BASE=true,ENABLE_HYBRID_SEARCH=false,ENABLE_RISK_ANALYSIS=false,ENABLE_MULTI_STEP_AGENT=false'
       - '--set-secrets'
       - >-
         NEXTAUTH_URL=NEXTAUTH_URL:latest,
         AUTH_SECRET=AUTH_SECRET:latest,
         DATABASE_URL=DATABASE_URL:latest,
-        OPENAI_API_KEY=OPENAI_API_KEY:latest
+        OPENAI_API_KEY=OPENAI_API_KEY:latest,
+        SUPABASE_SERVICE_ROLE_KEY=SUPABASE_SERVICE_ROLE_KEY:latest,
+        CRON_SECRET=CRON_SECRET:latest,
+        KOREA_LAW_API_KEY=KOREA_LAW_API_KEY:latest,
+        RESEND_API_KEY=RESEND_API_KEY:latest
 
 images:
   - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/lawyer-agent/app:$COMMIT_SHA'
