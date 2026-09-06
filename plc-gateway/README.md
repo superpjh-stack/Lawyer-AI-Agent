@@ -111,8 +111,10 @@ plc-gateway/
 │  └─ utils/logger.ts       JSON 구조화 로거
 ├─ public/index.html        실시간 대시보드 (WebSocket, 외부 의존성 없음)
 ├─ public/replay.html       샘플 리플레이 대시보드 (1초에 1건 재생)
+├─ public/plc-replay-standalone.html  독립 실행형 리플레이 (데이터 인라인, 서버 불필요)
 ├─ public/samples/          생성된 예시 샘플 (sample-100.json / .jsonl)
 ├─ scripts/generate-samples.ts  샘플 데이터 생성 스크립트
+├─ scripts/build-standalone.ts  독립 실행형 HTML 빌드 스크립트
 ├─ test/                    node:test 단위 테스트
 ├─ .env.example             환경변수 설명
 └─ Dockerfile
@@ -129,6 +131,13 @@ npm run dev
 
 실제 Poller + SimulatorDriver 경로로 생성하므로 타임스탬프 정렬, seq, latency, quality 필드가
 운영 데이터와 동일한 형식입니다. `public/samples/sample-100.*` 는 예시 데이터로 저장소에 포함되어 있습니다.
+
+서버 없이 파일만 열어도 동작하는 **독립 실행형 HTML** 은 아래로 만듭니다.
+
+```bash
+npx tsx scripts/build-standalone.ts
+# → public/plc-replay-standalone.html  (대시보드 + 샘플 100건 인라인, 더블클릭으로 실행)
+```
 
 ## 스크립트
 
