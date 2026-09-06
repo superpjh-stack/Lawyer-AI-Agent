@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLC Data Gateway</title>
+<style>
+  /* ---- 기본 레이아웃: 다크 톤의 관제 화면 스타일 ---- */
+  :root {
+    --bg: #0f1419; --panel: #1a222c; --border: #2a3542; --text: #e6edf3; --muted: #8b98a5;
+    --ok: #3fb950; --bad: #f85149; --warn: #d29922; --temp: #ff7b72; --pres: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
+  header { display: flex; align-items: center; gap: 16px; padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--panel); }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); color: var(--muted); }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .badge.ok .dot { background: var(--ok); } .badge.bad .dot { background: var(--bad); }
+  main { padding: 20px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { margin: 0 0 8px; font-size: 13px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; }
+  .value { font-size: 40px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .value small { font-size: 16px; color: var(--muted); margin-left: 4px; font-weight: 400; }
+  .value.temp { color: var(--temp); } .value.pres { color: var(--pres); }
+  .value.alarm { color: var(--bad); }
+  .meta { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .wide { grid-column: 1 / -1; }
+  canvas { width: 100%; height: 260px; display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; }
+  .lvl-HIGH { color: var(--bad); } .lvl-LOW { color: var(--warn); }
+  .state-CLEARED { color: var(--muted); }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>PLC Data Gateway</h1>
+  <span id="wsBadge" class="badge"><span class="dot"></span>Gateway</span>
+  <span id="plcBadge" class="badge"><span class="dot"></span>PLC</span>
+  <span id="seqInfo" class="badge">seq -</span>
+</header>
+
+<main>
+  <section class="card">
+    <h2>온도</h2>
+    <div id="tempVal" class="value temp">--<small>℃</small></div>
+    <div id="tempMeta" class="meta">대기 중…</div>
+  </section>
+  <section class="card">
+    <h2>압력</h2>
+    <div id="presVal" class="value pres">--<small>bar</small></div>
+    <div id="presMeta" class="meta">대기 중…</div>
+  </section>
+  <section class="card">
+    <h2>수집 상태</h2>
+    <div id="statusBox" class="meta" style="font-size:13px;line-height:1.8">-</div>
+  </section>
+
+  <section class="card wide">
+    <h2>최근 5분 추이</h2>
+    <canvas id="chart" width="1200" height="260"></canvas>
+  </section>
+
+  <section class="card wide">
+    <h2>알람</h2>
+    <table>
+      <thead><tr><th>시각</th><th>태그</th><th>종류</th><th>상태</th><th>값</th><th>임계값</th></tr></thead>
+      <tbody id="alarmBody"><tr><td colspan="6" class="empty">알람 없음</td></tr></tbody>
+    </table>
+  </section>
+</main>
+
+<script>
+/**
+ * 실시간 대시보드 스크립트
+ *  - WebSocket(/ws) 으로 매 초 샘플을 받아 숫자/차트/알람 표를 갱신
+ *  - 재접속: 끊기면 2초 후 자동 재연결
+ *  - 차트: 외부 라이브러리 없이 canvas 로 최근 300개(5분) 샘플을 그림
+ */
+(function () {
+  var MAX_POINTS = 300;
+  var history = [];           // 최근 샘플 배열 (오래된 → 최신)
+  var tags = {};              // 태그 정의 (label/unit/alarm)
+  var activeAlarms = {};      // key = tag:level
+  var alarmRows = [];         // 화면에 표시할 알람 이력 (최신이 앞)
+
+  var $ = function (id) { return document.getElementById(id); };
+  var apiKey = new URLSearchParams(location.search).get('apiKey');
+
+  // ---------- WebSocket ----------
+  function connect() {
+    var proto = location.protocol === 'https:' ? 'wss' : 'ws';
+    var url = proto + '://' + location.host + '/ws' + (apiKey ? '?apiKey=' + encodeURIComponent(apiKey) : '');
+    var ws = new WebSocket(url);
+
+    ws.onopen = function () { setBadge('wsBadge', true, 'Gateway 연결됨'); };
+    ws.onclose = function () { setBadge('wsBadge', false, 'Gateway 끊김'); setTimeout(connect, 2000); };
+    ws.onerror = function () { ws.close(); };
+    ws.onmessage = function (ev) {
+      var msg = JSON.parse(ev.data);
+      if (msg.type === 'snapshot') {
+        msg.tags.forEach(function (t) { tags[t.name] = t; });
+        history = msg.history || [];
+        setBadge('plcBadge', msg.plcConnected, msg.plcConnected ? 'PLC 연결됨' : 'PLC 끊김');
+        activeAlarms = {};
+        (msg.activeAlarms || []).forEach(function (a) { activeAlarms[a.tag + ':' + a.level] = a; });
+        alarmRows = (msg.activeAlarms || []).slice().reverse();
+        renderAlarms();
+        if (msg.latest) renderSample(msg.latest);
+        drawChart();
+      } else if (msg.type === 'sample') {
+        history.push(msg.sample);
+        if (history.length > MAX_POINTS) history.shift();
+        renderSample(msg.sample);
+        drawChart();
+      } else if (msg.type === 'alarm') {
+        var key = msg.alarm.tag + ':' + msg.alarm.level;
+        if (msg.alarm.state === 'ACTIVE') activeAlarms[key] = msg.alarm; else delete activeAlarms[key];
+        alarmRows.unshift(msg.alarm);
+        if (alarmRows.length > 50) alarmRows.pop();
+        renderAlarms();
+      } else if (msg.type === 'plc') {
+        setBadge('plcBadge', msg.connected, msg.connected ? 'PLC 연결됨' : 'PLC 끊김' + (msg.reason ? ' (' + msg.reason + ')' : ''));
+      }
+    };
+  }
+
+  function setBadge(id, ok, text) {
+    var el = $(id);
+    el.className = 'badge ' + (ok ? 'ok' : 'bad');
+    el.innerHTML = '<span class="dot"></span>' + text;
+  }
+
+  // ---------- 숫자 표시 ----------
+  function fmt(v, d) { return v === null || v === undefined ? '--' : Number(v).toFixed(d); }
+
+  function renderSample(s) {
+    var t = s.values.temperature, p = s.values.pressure;
+    var tEl = $('tempVal'), pEl = $('presVal');
+    tEl.innerHTML = fmt(t, 1) + '<small>℃</small>';
+    pEl.innerHTML = fmt(p, 2) + '<small>bar</small>';
+    tEl.className = 'value temp' + (activeAlarms['temperature:HIGH'] || activeAlarms['temperature:LOW'] ? ' alarm' : '');
+    pEl.className = 'value pres' + (activeAlarms['pressure:HIGH'] || activeAlarms['pressure:LOW'] ? ' alarm' : '');
+
+    var ta = tags.temperature && tags.temperature.alarm, pa = tags.pressure && tags.pressure.alarm;
+    $('tempMeta').textContent = ta ? '임계값 LOW ' + ta.low + ' / HIGH ' + ta.high + ' ℃' : '';
+    $('presMeta').textContent = pa ? '임계값 LOW ' + pa.low + ' / HIGH ' + pa.high + ' bar' : '';
+
+    $('seqInfo').textContent = 'seq ' + s.seq;
+    $('statusBox').innerHTML =
+      '수집 시각: ' + new Date(s.ts).toLocaleTimeString('ko-KR') + '<br>' +
+      '품질: <span style="color:' + (s.quality === 'GOOD' ? 'var(--ok)' : 'var(--bad)') + '">' + s.quality + '</span>' +
+      (s.error ? ' - ' + s.error : '') + '<br>' +
+      '응답 지연: ' + s.latencyMs + ' ms<br>' +
+      '보유 샘플: ' + history.length + ' / ' + MAX_POINTS;
+  }
+
+  // ---------- 알람 표 ----------
+  function renderAlarms() {
+    var body = $('alarmBody');
+    if (alarmRows.length === 0) { body.innerHTML = '<tr><td colspan="6" class="empty">알람 없음</td></tr>'; return; }
+    body.innerHTML = alarmRows.map(function (a) {
+      var tag = tags[a.tag] || { label: a.tag, unit: '' };
+      var when = a.state === 'CLEARED' && a.clearedAt ? a.clearedAt : a.raisedAt;
+      return '<tr class="state-' + a.state + '">' +
+        '<td>' + new Date(when).toLocaleTimeString('ko-KR') + '</td>' +
+        '<td>' + tag.label + '</td>' +
+        '<td class="lvl-' + a.level + '">' + a.level + '</td>' +
+        '<td>' + (a.state === 'ACTIVE' ? '발생' : '해제') + '</td>' +
+        '<td>' + a.value + ' ' + tag.unit + '</td>' +
+        '<td>' + a.threshold + ' ' + tag.unit + '</td></tr>';
+    }).join('');
+  }
+
+  // ---------- 차트 (canvas, 온도/압력 이중 축) ----------
+  function drawChart() {
+    var c = $('chart'), ctx = c.getContext('2d');
+    var W = c.width, H = c.height, padL = 48, padR = 48, padT = 12, padB = 24;
+    ctx.clearRect(0, 0, W, H);
+    if (history.length < 2) return;
+
+    var series = [
+      { key: 'temperature', color: getComputedStyle(document.documentElement).getPropertyValue('--temp'), side: 'left', d: 1 },
+      { key: 'pressure', color: getComputedStyle(document.documentElement).getPropertyValue('--pres'), side: 'right', d: 2 }
+    ];
+
+    series.forEach(function (s) {
+      var vals = history.map(function (h) { return h.values[s.key]; }).filter(function (v) { return v !== null; });
+      if (vals.length === 0) return;
+      var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+      if (max - min < 1e-6) { min -= 1; max += 1; }
+      var pad = (max - min) * 0.1; min -= pad; max += pad;
+      s.min = min; s.max = max;
+
+      // 축 라벨
+      ctx.fillStyle = s.color; ctx.font = '11px system-ui'; ctx.textAlign = s.side === 'left' ? 'right' : 'left';
+      var x = s.side === 'left' ? padL - 6 : W - padR + 6;
+      ctx.fillText(max.toFixed(s.d), x, padT + 10);
+      ctx.fillText(min.toFixed(s.d), x, H - padB);
+
+      // 선
+      ctx.strokeStyle = s.color; ctx.lineWidth = 1.6; ctx.beginPath();
+      var started = false;
+      history.forEach(function (h, i) {
+        var v = h.values[s.key];
+        var px = padL + (i / (MAX_POINTS - 1)) * (W - padL - padR);
+        if (v === null) { started = false; return; }   // BAD 구간은 선을 끊어서 표시
+        var py = padT + (1 - (v - min) / (max - min)) * (H - padT - padB);
+        if (!started) { ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+    });
+
+    // 시간 축
+    ctx.fillStyle = '#8b98a5'; ctx.font = '11px system-ui'; ctx.textAlign = 'center';
+    ctx.fillText(new Date(history[0].ts).toLocaleTimeString('ko-KR'), padL, H - 6);
+    ctx.fillText(new Date(history[history.length - 1].ts).toLocaleTimeString('ko-KR'), padL + ((history.length - 1) / (MAX_POINTS - 1)) * (W - padL - padR), H - 6);
+  }
+
+  connect();
+})();
+</script>
+</body>
+</html>

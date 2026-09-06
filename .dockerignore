@@ -8,3 +8,4 @@ npm-debug.log*
 README.md
 .dockerignore
 Dockerfile
+plc-gateway

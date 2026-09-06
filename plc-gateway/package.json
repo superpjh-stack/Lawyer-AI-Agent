@@ -1,0 +1,31 @@
+{
+  "name": "plc-data-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PLC(온도·압력) 데이터를 1초 주기로 수집하여 REST/WebSocket 으로 제공하는 Data Gateway 서버",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test test/*.test.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "modbus-serial": "^8.0.25",
+    "ws": "^8.18.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^20",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}

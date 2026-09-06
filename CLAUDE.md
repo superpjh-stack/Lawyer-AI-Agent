@@ -20,3 +20,7 @@ When picking up work, check `docs/.pdca-status.json` to determine the current PD
 - **Level**: Dynamic (fullstack web app with authentication, database, and backend via bkend.ai BaaS)
 - **Pipeline phase**: 1 — Schema (terminology and data model definition comes first)
 - Follow the 9-phase bkit pipeline: Schema → Convention → Mockup → API → Design System → UI Integration → SEO/Security → Review → Deployment
+
+## Sub-projects
+
+- `plc-gateway/` — standalone Node.js/TypeScript Data Gateway that polls a PLC (temperature, pressure) once per second and exposes REST + WebSocket. It has its own `package.json`, tests (`npm test`), and Dockerfile, and is excluded from the root Next.js tsconfig/Docker build. See `plc-gateway/README.md`.
