@@ -9,9 +9,10 @@
  *   정초에 정렬되고 seq/latency/quality 필드가 운영 데이터와 동일합니다)
  *
  *  사용법
- *    npx tsx scripts/generate-samples.ts                # 100개, public/samples/ 에 저장
+ *    npx tsx scripts/generate-samples.ts                # 500개, public/samples/ 에 저장
  *    npx tsx scripts/generate-samples.ts --count 30     # 30개
- *    npx tsx scripts/generate-samples.ts --spike-at 60  # 60초째에 온도 스파이크(알람) 발생
+ *    npx tsx scripts/generate-samples.ts --spike-at 60      # 60초째에 온도 스파이크(알람) 발생
+ *    npx tsx scripts/generate-samples.ts --spike-at 60,300  # 여러 지점 (쉼표 구분), 0 이면 없음
  *    npx tsx scripts/generate-samples.ts --out ./data   # 출력 디렉터리 변경
  *
  *  출력 파일
@@ -38,8 +39,8 @@ function arg(name: string, def: string): string {
 }
 
 async function main(): Promise<void> {
-  const count = Number(arg('count', '100'));
-  const spikeAt = Number(arg('spike-at', '60'));
+  const count = Number(arg('count', '500'));
+  const spikeAt = arg('spike-at', '60,300').split(',').map(Number).filter((n) => Number.isFinite(n) && n > 0);
   const outDir = path.resolve(arg('out', path.join(__dirname, '..', 'public', 'samples')));
   const intervalMs = Number(arg('interval', '1000'));
 
@@ -50,7 +51,7 @@ async function main(): Promise<void> {
     tempBase: config.env.SIM_TEMP_BASE,
     pressureBase: config.env.SIM_PRESSURE_BASE,
     faultRate: config.env.SIM_FAULT_RATE,
-    forceSpikeAtSec: spikeAt > 0 ? spikeAt : undefined,
+    forceSpikeAtSec: spikeAt.length > 0 ? spikeAt : undefined,
   });
   const poller = new Poller(driver, {
     intervalMs,

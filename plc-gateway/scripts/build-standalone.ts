@@ -12,8 +12,8 @@
  *  - 웹폰트(Google Fonts)는 온라인일 때만 적용되고, 오프라인이면 시스템 폰트로 대체됨
  *
  *  사용법
- *    npx tsx scripts/build-standalone.ts                 # public/samples/sample-100.json 사용
- *    npx tsx scripts/build-standalone.ts --sample 30     # sample-30.json 사용
+ *    npx tsx scripts/build-standalone.ts                 # public/samples/sample-500.json 사용
+ *    npx tsx scripts/build-standalone.ts --sample 100    # sample-100.json 사용
  *    npx tsx scripts/build-standalone.ts --out ./dist/plc-replay.html
  *
  *  기본 출력: public/plc-replay-standalone.html
@@ -30,7 +30,7 @@ function arg(name: string, def: string): string {
 }
 
 const publicDir = path.resolve(__dirname, '..', 'public');
-const sampleCount = arg('sample', '100');
+const sampleCount = arg('sample', '500');
 const templatePath = path.join(publicDir, 'replay.html');
 const samplePath = path.join(publicDir, 'samples', `sample-${sampleCount}.json`);
 const outPath = path.resolve(arg('out', path.join(publicDir, 'plc-replay-standalone.html')));

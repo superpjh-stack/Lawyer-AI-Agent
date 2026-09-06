@@ -1,0 +1,5595 @@
+{
+  "meta": {
+    "generatedAt": "2026-09-06T05:58:52.913Z",
+    "count": 500,
+    "intervalMs": 1000,
+    "driver": "simulator",
+    "firstTs": "2026-09-06T05:58:53.012Z",
+    "lastTs": "2026-09-06T06:07:12.012Z"
+  },
+  "tags": [
+    {
+      "name": "temperature",
+      "label": "온도",
+      "unit": "℃",
+      "decimals": 1,
+      "alarm": {
+        "high": 80,
+        "low": -10,
+        "hysteresis": 2
+      }
+    },
+    {
+      "name": "pressure",
+      "label": "압력",
+      "unit": "bar",
+      "decimals": 2,
+      "alarm": {
+        "high": 8,
+        "low": 0.5,
+        "hysteresis": 0.2
+      }
+    }
+  ],
+  "samples": [
+    {
+      "seq": 1,
+      "ts": "2026-09-06T05:58:53.012Z",
+      "epochMs": 1788674333012,
+      "values": {
+        "temperature": 25.09,
+        "pressure": 3.006
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 2,
+      "ts": "2026-09-06T05:58:54.006Z",
+      "epochMs": 1788674334006,
+      "values": {
+        "temperature": 25.12,
+        "pressure": 3.018
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 3,
+      "ts": "2026-09-06T05:58:55.010Z",
+      "epochMs": 1788674335010,
+      "values": {
+        "temperature": 25.11,
+        "pressure": 3.018
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 4,
+      "ts": "2026-09-06T05:58:56.005Z",
+      "epochMs": 1788674336005,
+      "values": {
+        "temperature": 25.19,
+        "pressure": 3.035
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 5,
+      "ts": "2026-09-06T05:58:57.017Z",
+      "epochMs": 1788674337017,
+      "values": {
+        "temperature": 25.44,
+        "pressure": 3.026
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 6,
+      "ts": "2026-09-06T05:58:58.008Z",
+      "epochMs": 1788674338008,
+      "values": {
+        "temperature": 25.3,
+        "pressure": 3.029
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 7,
+      "ts": "2026-09-06T05:58:59.008Z",
+      "epochMs": 1788674339008,
+      "values": {
+        "temperature": 25.36,
+        "pressure": 3.028
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 8,
+      "ts": "2026-09-06T05:59:00.012Z",
+      "epochMs": 1788674340012,
+      "values": {
+        "temperature": 25.34,
+        "pressure": 3.026
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 9,
+      "ts": "2026-09-06T05:59:01.019Z",
+      "epochMs": 1788674341019,
+      "values": {
+        "temperature": 25.45,
+        "pressure": 3.018
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 10,
+      "ts": "2026-09-06T05:59:02.006Z",
+      "epochMs": 1788674342006,
+      "values": {
+        "temperature": 25.63,
+        "pressure": 3.017
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 11,
+      "ts": "2026-09-06T05:59:03.021Z",
+      "epochMs": 1788674343021,
+      "values": {
+        "temperature": 25.81,
+        "pressure": 3.017
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 12,
+      "ts": "2026-09-06T05:59:04.008Z",
+      "epochMs": 1788674344008,
+      "values": {
+        "temperature": 25.76,
+        "pressure": 3.003
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 13,
+      "ts": "2026-09-06T05:59:05.013Z",
+      "epochMs": 1788674345013,
+      "values": {
+        "temperature": 25.63,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 14,
+      "ts": "2026-09-06T05:59:06.023Z",
+      "epochMs": 1788674346023,
+      "values": {
+        "temperature": 25.86,
+        "pressure": 2.996
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 15,
+      "ts": "2026-09-06T05:59:07.019Z",
+      "epochMs": 1788674347019,
+      "values": {
+        "temperature": 25.79,
+        "pressure": 2.987
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 16,
+      "ts": "2026-09-06T05:59:08.016Z",
+      "epochMs": 1788674348016,
+      "values": {
+        "temperature": 26.07,
+        "pressure": 2.986
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 17,
+      "ts": "2026-09-06T05:59:09.018Z",
+      "epochMs": 1788674349018,
+      "values": {
+        "temperature": 25.94,
+        "pressure": 2.991
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 18,
+      "ts": "2026-09-06T05:59:10.009Z",
+      "epochMs": 1788674350009,
+      "values": {
+        "temperature": 26.22,
+        "pressure": 2.994
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 19,
+      "ts": "2026-09-06T05:59:11.007Z",
+      "epochMs": 1788674351007,
+      "values": {
+        "temperature": 25.92,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 20,
+      "ts": "2026-09-06T05:59:12.017Z",
+      "epochMs": 1788674352017,
+      "values": {
+        "temperature": 26.21,
+        "pressure": 2.98
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 21,
+      "ts": "2026-09-06T05:59:13.009Z",
+      "epochMs": 1788674353009,
+      "values": {
+        "temperature": 26.33,
+        "pressure": 2.991
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 22,
+      "ts": "2026-09-06T05:59:14.014Z",
+      "epochMs": 1788674354014,
+      "values": {
+        "temperature": 26.37,
+        "pressure": 2.994
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 23,
+      "ts": "2026-09-06T05:59:15.012Z",
+      "epochMs": 1788674355012,
+      "values": {
+        "temperature": 26.19,
+        "pressure": 2.994
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 24,
+      "ts": "2026-09-06T05:59:16.006Z",
+      "epochMs": 1788674356006,
+      "values": {
+        "temperature": 26.33,
+        "pressure": 2.99
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 25,
+      "ts": "2026-09-06T05:59:17.023Z",
+      "epochMs": 1788674357023,
+      "values": {
+        "temperature": 26.56,
+        "pressure": 2.995
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 26,
+      "ts": "2026-09-06T05:59:18.018Z",
+      "epochMs": 1788674358018,
+      "values": {
+        "temperature": 26.64,
+        "pressure": 2.983
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 27,
+      "ts": "2026-09-06T05:59:19.012Z",
+      "epochMs": 1788674359012,
+      "values": {
+        "temperature": 26.4,
+        "pressure": 2.982
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 28,
+      "ts": "2026-09-06T05:59:20.016Z",
+      "epochMs": 1788674360016,
+      "values": {
+        "temperature": 26.44,
+        "pressure": 2.98
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 29,
+      "ts": "2026-09-06T05:59:21.019Z",
+      "epochMs": 1788674361019,
+      "values": {
+        "temperature": 26.82,
+        "pressure": 3.001
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 30,
+      "ts": "2026-09-06T05:59:22.011Z",
+      "epochMs": 1788674362011,
+      "values": {
+        "temperature": 26.6,
+        "pressure": 3.001
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 31,
+      "ts": "2026-09-06T05:59:23.019Z",
+      "epochMs": 1788674363019,
+      "values": {
+        "temperature": 26.97,
+        "pressure": 2.999
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 32,
+      "ts": "2026-09-06T05:59:24.014Z",
+      "epochMs": 1788674364014,
+      "values": {
+        "temperature": 26.79,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 33,
+      "ts": "2026-09-06T05:59:25.025Z",
+      "epochMs": 1788674365025,
+      "values": {
+        "temperature": 26.68,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 34,
+      "ts": "2026-09-06T05:59:26.013Z",
+      "epochMs": 1788674366013,
+      "values": {
+        "temperature": 27.07,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 35,
+      "ts": "2026-09-06T05:59:27.019Z",
+      "epochMs": 1788674367019,
+      "values": {
+        "temperature": 26.87,
+        "pressure": 2.995
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 36,
+      "ts": "2026-09-06T05:59:28.011Z",
+      "epochMs": 1788674368011,
+      "values": {
+        "temperature": 26.89,
+        "pressure": 3.005
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 37,
+      "ts": "2026-09-06T05:59:29.013Z",
+      "epochMs": 1788674369013,
+      "values": {
+        "temperature": 27.15,
+        "pressure": 3.012
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 38,
+      "ts": "2026-09-06T05:59:30.022Z",
+      "epochMs": 1788674370022,
+      "values": {
+        "temperature": 26.91,
+        "pressure": 3.011
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 39,
+      "ts": "2026-09-06T05:59:31.019Z",
+      "epochMs": 1788674371019,
+      "values": {
+        "temperature": 27.34,
+        "pressure": 3.024
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 40,
+      "ts": "2026-09-06T05:59:32.006Z",
+      "epochMs": 1788674372006,
+      "values": {
+        "temperature": 27.28,
+        "pressure": 3
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 41,
+      "ts": "2026-09-06T05:59:33.005Z",
+      "epochMs": 1788674373005,
+      "values": {
+        "temperature": 27.34,
+        "pressure": 3.011
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 42,
+      "ts": "2026-09-06T05:59:34.019Z",
+      "epochMs": 1788674374019,
+      "values": {
+        "temperature": 27.35,
+        "pressure": 2.999
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 43,
+      "ts": "2026-09-06T05:59:35.015Z",
+      "epochMs": 1788674375015,
+      "values": {
+        "temperature": 27.36,
+        "pressure": 3.012
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 44,
+      "ts": "2026-09-06T05:59:36.013Z",
+      "epochMs": 1788674376013,
+      "values": {
+        "temperature": 27.26,
+        "pressure": 3.003
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 45,
+      "ts": "2026-09-06T05:59:37.014Z",
+      "epochMs": 1788674377014,
+      "values": {
+        "temperature": 27.41,
+        "pressure": 2.996
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 46,
+      "ts": "2026-09-06T05:59:38.023Z",
+      "epochMs": 1788674378023,
+      "values": {
+        "temperature": 27.32,
+        "pressure": 3.005
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 47,
+      "ts": "2026-09-06T05:59:39.010Z",
+      "epochMs": 1788674379010,
+      "values": {
+        "temperature": 27.63,
+        "pressure": 3.013
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 48,
+      "ts": "2026-09-06T05:59:40.006Z",
+      "epochMs": 1788674380006,
+      "values": {
+        "temperature": 27.41,
+        "pressure": 2.998
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 49,
+      "ts": "2026-09-06T05:59:41.021Z",
+      "epochMs": 1788674381021,
+      "values": {
+        "temperature": 27.4,
+        "pressure": 3.01
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 50,
+      "ts": "2026-09-06T05:59:42.023Z",
+      "epochMs": 1788674382023,
+      "values": {
+        "temperature": 27.55,
+        "pressure": 2.996
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 51,
+      "ts": "2026-09-06T05:59:43.010Z",
+      "epochMs": 1788674383010,
+      "values": {
+        "temperature": 27.5,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 52,
+      "ts": "2026-09-06T05:59:44.024Z",
+      "epochMs": 1788674384024,
+      "values": {
+        "temperature": 27.45,
+        "pressure": 2.99
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 53,
+      "ts": "2026-09-06T05:59:45.023Z",
+      "epochMs": 1788674385023,
+      "values": {
+        "temperature": 27.57,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 54,
+      "ts": "2026-09-06T05:59:46.011Z",
+      "epochMs": 1788674386011,
+      "values": {
+        "temperature": 27.66,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 55,
+      "ts": "2026-09-06T05:59:47.013Z",
+      "epochMs": 1788674387013,
+      "values": {
+        "temperature": 27.57,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 56,
+      "ts": "2026-09-06T05:59:48.015Z",
+      "epochMs": 1788674388015,
+      "values": {
+        "temperature": 27.76,
+        "pressure": 2.956
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 57,
+      "ts": "2026-09-06T05:59:49.019Z",
+      "epochMs": 1788674389019,
+      "values": {
+        "temperature": 27.86,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 58,
+      "ts": "2026-09-06T05:59:50.011Z",
+      "epochMs": 1788674390011,
+      "values": {
+        "temperature": 27.61,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 59,
+      "ts": "2026-09-06T05:59:51.009Z",
+      "epochMs": 1788674391009,
+      "values": {
+        "temperature": 27.99,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 60,
+      "ts": "2026-09-06T05:59:52.022Z",
+      "epochMs": 1788674392022,
+      "values": {
+        "temperature": 87.83,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 61,
+      "ts": "2026-09-06T05:59:53.006Z",
+      "epochMs": 1788674393006,
+      "values": {
+        "temperature": 87.81,
+        "pressure": 2.946
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 62,
+      "ts": "2026-09-06T05:59:54.024Z",
+      "epochMs": 1788674394024,
+      "values": {
+        "temperature": 87.8,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 63,
+      "ts": "2026-09-06T05:59:55.007Z",
+      "epochMs": 1788674395007,
+      "values": {
+        "temperature": 87.94,
+        "pressure": 2.953
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 64,
+      "ts": "2026-09-06T05:59:56.021Z",
+      "epochMs": 1788674396021,
+      "values": {
+        "temperature": 88.09,
+        "pressure": 2.935
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 65,
+      "ts": "2026-09-06T05:59:57.018Z",
+      "epochMs": 1788674397018,
+      "values": {
+        "temperature": 87.74,
+        "pressure": 2.938
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 66,
+      "ts": "2026-09-06T05:59:58.022Z",
+      "epochMs": 1788674398022,
+      "values": {
+        "temperature": 88.02,
+        "pressure": 2.939
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 67,
+      "ts": "2026-09-06T05:59:59.009Z",
+      "epochMs": 1788674399009,
+      "values": {
+        "temperature": 87.98,
+        "pressure": 2.93
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 68,
+      "ts": "2026-09-06T06:00:00.006Z",
+      "epochMs": 1788674400006,
+      "values": {
+        "temperature": 88.1,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 69,
+      "ts": "2026-09-06T06:00:01.022Z",
+      "epochMs": 1788674401022,
+      "values": {
+        "temperature": 87.94,
+        "pressure": 2.936
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 70,
+      "ts": "2026-09-06T06:00:02.023Z",
+      "epochMs": 1788674402023,
+      "values": {
+        "temperature": 88.07,
+        "pressure": 2.935
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 71,
+      "ts": "2026-09-06T06:00:03.021Z",
+      "epochMs": 1788674403021,
+      "values": {
+        "temperature": 88.12,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 72,
+      "ts": "2026-09-06T06:00:04.020Z",
+      "epochMs": 1788674404020,
+      "values": {
+        "temperature": 87.87,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 73,
+      "ts": "2026-09-06T06:00:05.008Z",
+      "epochMs": 1788674405008,
+      "values": {
+        "temperature": 87.85,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 74,
+      "ts": "2026-09-06T06:00:06.008Z",
+      "epochMs": 1788674406008,
+      "values": {
+        "temperature": 88.06,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 75,
+      "ts": "2026-09-06T06:00:07.020Z",
+      "epochMs": 1788674407020,
+      "values": {
+        "temperature": 87.91,
+        "pressure": 2.938
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 76,
+      "ts": "2026-09-06T06:00:08.010Z",
+      "epochMs": 1788674408010,
+      "values": {
+        "temperature": 87.94,
+        "pressure": 2.949
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 77,
+      "ts": "2026-09-06T06:00:09.017Z",
+      "epochMs": 1788674409017,
+      "values": {
+        "temperature": 87.88,
+        "pressure": 2.939
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 78,
+      "ts": "2026-09-06T06:00:10.009Z",
+      "epochMs": 1788674410009,
+      "values": {
+        "temperature": 88.07,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 79,
+      "ts": "2026-09-06T06:00:11.009Z",
+      "epochMs": 1788674411009,
+      "values": {
+        "temperature": 88.11,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 80,
+      "ts": "2026-09-06T06:00:12.018Z",
+      "epochMs": 1788674412018,
+      "values": {
+        "temperature": 28.01,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 81,
+      "ts": "2026-09-06T06:00:13.024Z",
+      "epochMs": 1788674413024,
+      "values": {
+        "temperature": 28.12,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 82,
+      "ts": "2026-09-06T06:00:14.016Z",
+      "epochMs": 1788674414016,
+      "values": {
+        "temperature": 27.96,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 83,
+      "ts": "2026-09-06T06:00:15.025Z",
+      "epochMs": 1788674415025,
+      "values": {
+        "temperature": 28.1,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 25
+    },
+    {
+      "seq": 84,
+      "ts": "2026-09-06T06:00:16.010Z",
+      "epochMs": 1788674416010,
+      "values": {
+        "temperature": 27.88,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 85,
+      "ts": "2026-09-06T06:00:17.025Z",
+      "epochMs": 1788674417025,
+      "values": {
+        "temperature": 27.81,
+        "pressure": 2.978
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 86,
+      "ts": "2026-09-06T06:00:18.022Z",
+      "epochMs": 1788674418022,
+      "values": {
+        "temperature": 27.79,
+        "pressure": 2.975
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 87,
+      "ts": "2026-09-06T06:00:19.024Z",
+      "epochMs": 1788674419024,
+      "values": {
+        "temperature": 27.87,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 88,
+      "ts": "2026-09-06T06:00:20.007Z",
+      "epochMs": 1788674420007,
+      "values": {
+        "temperature": 28.01,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 89,
+      "ts": "2026-09-06T06:00:21.012Z",
+      "epochMs": 1788674421012,
+      "values": {
+        "temperature": 27.71,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 90,
+      "ts": "2026-09-06T06:00:22.018Z",
+      "epochMs": 1788674422018,
+      "values": {
+        "temperature": 27.78,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 91,
+      "ts": "2026-09-06T06:00:23.014Z",
+      "epochMs": 1788674423014,
+      "values": {
+        "temperature": 27.98,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 92,
+      "ts": "2026-09-06T06:00:24.007Z",
+      "epochMs": 1788674424007,
+      "values": {
+        "temperature": 27.95,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 93,
+      "ts": "2026-09-06T06:00:25.015Z",
+      "epochMs": 1788674425015,
+      "values": {
+        "temperature": 27.93,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 94,
+      "ts": "2026-09-06T06:00:26.008Z",
+      "epochMs": 1788674426008,
+      "values": {
+        "temperature": 27.95,
+        "pressure": 2.976
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 95,
+      "ts": "2026-09-06T06:00:27.015Z",
+      "epochMs": 1788674427015,
+      "values": {
+        "temperature": 27.71,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 96,
+      "ts": "2026-09-06T06:00:28.012Z",
+      "epochMs": 1788674428012,
+      "values": {
+        "temperature": 27.54,
+        "pressure": 2.967
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 97,
+      "ts": "2026-09-06T06:00:29.008Z",
+      "epochMs": 1788674429008,
+      "values": {
+        "temperature": 27.63,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 98,
+      "ts": "2026-09-06T06:00:30.022Z",
+      "epochMs": 1788674430022,
+      "values": {
+        "temperature": 27.7,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 99,
+      "ts": "2026-09-06T06:00:31.016Z",
+      "epochMs": 1788674431016,
+      "values": {
+        "temperature": 27.74,
+        "pressure": 2.98
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 100,
+      "ts": "2026-09-06T06:00:32.011Z",
+      "epochMs": 1788674432011,
+      "values": {
+        "temperature": 27.55,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 101,
+      "ts": "2026-09-06T06:00:33.019Z",
+      "epochMs": 1788674433019,
+      "values": {
+        "temperature": 27.67,
+        "pressure": 2.972
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 102,
+      "ts": "2026-09-06T06:00:34.022Z",
+      "epochMs": 1788674434022,
+      "values": {
+        "temperature": 27.49,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 103,
+      "ts": "2026-09-06T06:00:35.008Z",
+      "epochMs": 1788674435008,
+      "values": {
+        "temperature": 27.35,
+        "pressure": 2.986
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 104,
+      "ts": "2026-09-06T06:00:36.010Z",
+      "epochMs": 1788674436010,
+      "values": {
+        "temperature": 27.38,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 105,
+      "ts": "2026-09-06T06:00:37.015Z",
+      "epochMs": 1788674437015,
+      "values": {
+        "temperature": 27.51,
+        "pressure": 2.966
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 106,
+      "ts": "2026-09-06T06:00:38.019Z",
+      "epochMs": 1788674438019,
+      "values": {
+        "temperature": 27.32,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 107,
+      "ts": "2026-09-06T06:00:39.014Z",
+      "epochMs": 1788674439014,
+      "values": {
+        "temperature": 27.37,
+        "pressure": 2.991
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 108,
+      "ts": "2026-09-06T06:00:40.010Z",
+      "epochMs": 1788674440010,
+      "values": {
+        "temperature": 27.39,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 109,
+      "ts": "2026-09-06T06:00:41.014Z",
+      "epochMs": 1788674441014,
+      "values": {
+        "temperature": 27.18,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 110,
+      "ts": "2026-09-06T06:00:42.017Z",
+      "epochMs": 1788674442017,
+      "values": {
+        "temperature": 27.13,
+        "pressure": 2.988
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 111,
+      "ts": "2026-09-06T06:00:43.021Z",
+      "epochMs": 1788674443021,
+      "values": {
+        "temperature": 27.42,
+        "pressure": 2.992
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 112,
+      "ts": "2026-09-06T06:00:44.022Z",
+      "epochMs": 1788674444022,
+      "values": {
+        "temperature": 27.23,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 113,
+      "ts": "2026-09-06T06:00:45.009Z",
+      "epochMs": 1788674445009,
+      "values": {
+        "temperature": 27.1,
+        "pressure": 2.99
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 114,
+      "ts": "2026-09-06T06:00:46.008Z",
+      "epochMs": 1788674446008,
+      "values": {
+        "temperature": 27.28,
+        "pressure": 2.985
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 115,
+      "ts": "2026-09-06T06:00:47.006Z",
+      "epochMs": 1788674447006,
+      "values": {
+        "temperature": 27.14,
+        "pressure": 2.998
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 116,
+      "ts": "2026-09-06T06:00:48.019Z",
+      "epochMs": 1788674448019,
+      "values": {
+        "temperature": 27.13,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 117,
+      "ts": "2026-09-06T06:00:49.015Z",
+      "epochMs": 1788674449015,
+      "values": {
+        "temperature": 26.82,
+        "pressure": 3.007
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 118,
+      "ts": "2026-09-06T06:00:50.016Z",
+      "epochMs": 1788674450016,
+      "values": {
+        "temperature": 27.01,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 119,
+      "ts": "2026-09-06T06:00:51.007Z",
+      "epochMs": 1788674451007,
+      "values": {
+        "temperature": 26.81,
+        "pressure": 2.986
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 120,
+      "ts": "2026-09-06T06:00:52.021Z",
+      "epochMs": 1788674452021,
+      "values": {
+        "temperature": 26.95,
+        "pressure": 2.982
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 121,
+      "ts": "2026-09-06T06:00:53.014Z",
+      "epochMs": 1788674453014,
+      "values": {
+        "temperature": 26.89,
+        "pressure": 2.987
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 122,
+      "ts": "2026-09-06T06:00:54.015Z",
+      "epochMs": 1788674454015,
+      "values": {
+        "temperature": 26.56,
+        "pressure": 2.968
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 123,
+      "ts": "2026-09-06T06:00:55.007Z",
+      "epochMs": 1788674455007,
+      "values": {
+        "temperature": 26.46,
+        "pressure": 2.979
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 124,
+      "ts": "2026-09-06T06:00:56.008Z",
+      "epochMs": 1788674456008,
+      "values": {
+        "temperature": 26.47,
+        "pressure": 2.987
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 125,
+      "ts": "2026-09-06T06:00:57.017Z",
+      "epochMs": 1788674457017,
+      "values": {
+        "temperature": 26.47,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 126,
+      "ts": "2026-09-06T06:00:58.022Z",
+      "epochMs": 1788674458022,
+      "values": {
+        "temperature": 26.46,
+        "pressure": 2.983
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 127,
+      "ts": "2026-09-06T06:00:59.018Z",
+      "epochMs": 1788674459018,
+      "values": {
+        "temperature": 26.6,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 128,
+      "ts": "2026-09-06T06:01:00.019Z",
+      "epochMs": 1788674460019,
+      "values": {
+        "temperature": 26.19,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 129,
+      "ts": "2026-09-06T06:01:01.016Z",
+      "epochMs": 1788674461016,
+      "values": {
+        "temperature": 26.41,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 130,
+      "ts": "2026-09-06T06:01:02.011Z",
+      "epochMs": 1788674462011,
+      "values": {
+        "temperature": 26.29,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 131,
+      "ts": "2026-09-06T06:01:03.014Z",
+      "epochMs": 1788674463014,
+      "values": {
+        "temperature": 26.36,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 132,
+      "ts": "2026-09-06T06:01:04.020Z",
+      "epochMs": 1788674464020,
+      "values": {
+        "temperature": 26.06,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 133,
+      "ts": "2026-09-06T06:01:05.012Z",
+      "epochMs": 1788674465012,
+      "values": {
+        "temperature": 25.95,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 134,
+      "ts": "2026-09-06T06:01:06.011Z",
+      "epochMs": 1788674466011,
+      "values": {
+        "temperature": 26.05,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 135,
+      "ts": "2026-09-06T06:01:07.016Z",
+      "epochMs": 1788674467016,
+      "values": {
+        "temperature": 26.14,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 136,
+      "ts": "2026-09-06T06:01:08.019Z",
+      "epochMs": 1788674468019,
+      "values": {
+        "temperature": 25.77,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 137,
+      "ts": "2026-09-06T06:01:09.012Z",
+      "epochMs": 1788674469012,
+      "values": {
+        "temperature": 25.68,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 138,
+      "ts": "2026-09-06T06:01:10.009Z",
+      "epochMs": 1788674470009,
+      "values": {
+        "temperature": 85.79,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 139,
+      "ts": "2026-09-06T06:01:11.013Z",
+      "epochMs": 1788674471013,
+      "values": {
+        "temperature": 85.66,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 140,
+      "ts": "2026-09-06T06:01:12.007Z",
+      "epochMs": 1788674472007,
+      "values": {
+        "temperature": 85.52,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 141,
+      "ts": "2026-09-06T06:01:13.008Z",
+      "epochMs": 1788674473008,
+      "values": {
+        "temperature": 85.75,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 142,
+      "ts": "2026-09-06T06:01:14.020Z",
+      "epochMs": 1788674474020,
+      "values": {
+        "temperature": 85.42,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 143,
+      "ts": "2026-09-06T06:01:15.013Z",
+      "epochMs": 1788674475013,
+      "values": {
+        "temperature": 85.41,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 144,
+      "ts": "2026-09-06T06:01:16.018Z",
+      "epochMs": 1788674476018,
+      "values": {
+        "temperature": 85.34,
+        "pressure": 2.953
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 145,
+      "ts": "2026-09-06T06:01:17.005Z",
+      "epochMs": 1788674477005,
+      "values": {
+        "temperature": 85.17,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 146,
+      "ts": "2026-09-06T06:01:18.011Z",
+      "epochMs": 1788674478011,
+      "values": {
+        "temperature": 85.36,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 147,
+      "ts": "2026-09-06T06:01:19.006Z",
+      "epochMs": 1788674479006,
+      "values": {
+        "temperature": 85.14,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 148,
+      "ts": "2026-09-06T06:01:20.023Z",
+      "epochMs": 1788674480023,
+      "values": {
+        "temperature": 85.36,
+        "pressure": 2.966
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 149,
+      "ts": "2026-09-06T06:01:21.018Z",
+      "epochMs": 1788674481018,
+      "values": {
+        "temperature": 85.08,
+        "pressure": 2.95
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 150,
+      "ts": "2026-09-06T06:01:22.018Z",
+      "epochMs": 1788674482018,
+      "values": {
+        "temperature": 84.97,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 151,
+      "ts": "2026-09-06T06:01:23.018Z",
+      "epochMs": 1788674483018,
+      "values": {
+        "temperature": 85.08,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 152,
+      "ts": "2026-09-06T06:01:24.013Z",
+      "epochMs": 1788674484013,
+      "values": {
+        "temperature": 85.04,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 153,
+      "ts": "2026-09-06T06:01:25.005Z",
+      "epochMs": 1788674485005,
+      "values": {
+        "temperature": 84.71,
+        "pressure": 2.967
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 154,
+      "ts": "2026-09-06T06:01:26.008Z",
+      "epochMs": 1788674486008,
+      "values": {
+        "temperature": 84.72,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 155,
+      "ts": "2026-09-06T06:01:27.013Z",
+      "epochMs": 1788674487013,
+      "values": {
+        "temperature": 84.77,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 156,
+      "ts": "2026-09-06T06:01:28.024Z",
+      "epochMs": 1788674488024,
+      "values": {
+        "temperature": 84.63,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 157,
+      "ts": "2026-09-06T06:01:29.005Z",
+      "epochMs": 1788674489005,
+      "values": {
+        "temperature": 84.57,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 158,
+      "ts": "2026-09-06T06:01:30.013Z",
+      "epochMs": 1788674490013,
+      "values": {
+        "temperature": 24.6,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 159,
+      "ts": "2026-09-06T06:01:31.012Z",
+      "epochMs": 1788674491012,
+      "values": {
+        "temperature": 24.41,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 160,
+      "ts": "2026-09-06T06:01:32.012Z",
+      "epochMs": 1788674492012,
+      "values": {
+        "temperature": 24.42,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 161,
+      "ts": "2026-09-06T06:01:33.009Z",
+      "epochMs": 1788674493009,
+      "values": {
+        "temperature": 24.21,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 162,
+      "ts": "2026-09-06T06:01:34.006Z",
+      "epochMs": 1788674494006,
+      "values": {
+        "temperature": 24.24,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 163,
+      "ts": "2026-09-06T06:01:35.014Z",
+      "epochMs": 1788674495014,
+      "values": {
+        "temperature": 24.23,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 164,
+      "ts": "2026-09-06T06:01:36.011Z",
+      "epochMs": 1788674496011,
+      "values": {
+        "temperature": 24.34,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 165,
+      "ts": "2026-09-06T06:01:37.009Z",
+      "epochMs": 1788674497009,
+      "values": {
+        "temperature": 23.93,
+        "pressure": 2.975
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 166,
+      "ts": "2026-09-06T06:01:38.009Z",
+      "epochMs": 1788674498009,
+      "values": {
+        "temperature": 23.94,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 167,
+      "ts": "2026-09-06T06:01:39.016Z",
+      "epochMs": 1788674499016,
+      "values": {
+        "temperature": 23.83,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 168,
+      "ts": "2026-09-06T06:01:40.013Z",
+      "epochMs": 1788674500013,
+      "values": {
+        "temperature": 24.05,
+        "pressure": 2.972
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 169,
+      "ts": "2026-09-06T06:01:41.007Z",
+      "epochMs": 1788674501007,
+      "values": {
+        "temperature": 23.71,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 170,
+      "ts": "2026-09-06T06:01:42.024Z",
+      "epochMs": 1788674502024,
+      "values": {
+        "temperature": 23.66,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 171,
+      "ts": "2026-09-06T06:01:43.015Z",
+      "epochMs": 1788674503015,
+      "values": {
+        "temperature": 23.77,
+        "pressure": 2.968
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 172,
+      "ts": "2026-09-06T06:01:44.024Z",
+      "epochMs": 1788674504024,
+      "values": {
+        "temperature": 23.52,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 173,
+      "ts": "2026-09-06T06:01:45.017Z",
+      "epochMs": 1788674505017,
+      "values": {
+        "temperature": 23.76,
+        "pressure": 2.979
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 174,
+      "ts": "2026-09-06T06:01:46.017Z",
+      "epochMs": 1788674506017,
+      "values": {
+        "temperature": 23.75,
+        "pressure": 2.988
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 175,
+      "ts": "2026-09-06T06:01:47.009Z",
+      "epochMs": 1788674507009,
+      "values": {
+        "temperature": 23.59,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 176,
+      "ts": "2026-09-06T06:01:48.022Z",
+      "epochMs": 1788674508022,
+      "values": {
+        "temperature": 23.5,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 177,
+      "ts": "2026-09-06T06:01:49.025Z",
+      "epochMs": 1788674509025,
+      "values": {
+        "temperature": 23.4,
+        "pressure": 2.972
+      },
+      "quality": "GOOD",
+      "latencyMs": 25
+    },
+    {
+      "seq": 178,
+      "ts": "2026-09-06T06:01:50.023Z",
+      "epochMs": 1788674510023,
+      "values": {
+        "temperature": 23.43,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 179,
+      "ts": "2026-09-06T06:01:51.018Z",
+      "epochMs": 1788674511018,
+      "values": {
+        "temperature": 23.37,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 180,
+      "ts": "2026-09-06T06:01:52.023Z",
+      "epochMs": 1788674512023,
+      "values": {
+        "temperature": 23.23,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 181,
+      "ts": "2026-09-06T06:01:53.009Z",
+      "epochMs": 1788674513009,
+      "values": {
+        "temperature": 23.31,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 182,
+      "ts": "2026-09-06T06:01:54.011Z",
+      "epochMs": 1788674514011,
+      "values": {
+        "temperature": 23.02,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 183,
+      "ts": "2026-09-06T06:01:55.008Z",
+      "epochMs": 1788674515008,
+      "values": {
+        "temperature": 23.12,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 184,
+      "ts": "2026-09-06T06:01:56.009Z",
+      "epochMs": 1788674516009,
+      "values": {
+        "temperature": 23.14,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 185,
+      "ts": "2026-09-06T06:01:57.016Z",
+      "epochMs": 1788674517016,
+      "values": {
+        "temperature": 22.86,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 186,
+      "ts": "2026-09-06T06:01:58.014Z",
+      "epochMs": 1788674518014,
+      "values": {
+        "temperature": 23.14,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 187,
+      "ts": "2026-09-06T06:01:59.015Z",
+      "epochMs": 1788674519015,
+      "values": {
+        "temperature": 23.05,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 188,
+      "ts": "2026-09-06T06:02:00.023Z",
+      "epochMs": 1788674520023,
+      "values": {
+        "temperature": 22.92,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 189,
+      "ts": "2026-09-06T06:02:01.015Z",
+      "epochMs": 1788674521015,
+      "values": {
+        "temperature": 22.98,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 190,
+      "ts": "2026-09-06T06:02:02.010Z",
+      "epochMs": 1788674522010,
+      "values": {
+        "temperature": 22.62,
+        "pressure": 2.978
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 191,
+      "ts": "2026-09-06T06:02:03.015Z",
+      "epochMs": 1788674523015,
+      "values": {
+        "temperature": 22.76,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 192,
+      "ts": "2026-09-06T06:02:04.016Z",
+      "epochMs": 1788674524016,
+      "values": {
+        "temperature": 22.64,
+        "pressure": 2.968
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 193,
+      "ts": "2026-09-06T06:02:05.009Z",
+      "epochMs": 1788674525009,
+      "values": {
+        "temperature": 22.87,
+        "pressure": 2.968
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 194,
+      "ts": "2026-09-06T06:02:06.022Z",
+      "epochMs": 1788674526022,
+      "values": {
+        "temperature": 22.73,
+        "pressure": 2.982
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 195,
+      "ts": "2026-09-06T06:02:07.016Z",
+      "epochMs": 1788674527016,
+      "values": {
+        "temperature": 22.43,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 196,
+      "ts": "2026-09-06T06:02:08.015Z",
+      "epochMs": 1788674528015,
+      "values": {
+        "temperature": 22.76,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 197,
+      "ts": "2026-09-06T06:02:09.012Z",
+      "epochMs": 1788674529012,
+      "values": {
+        "temperature": 22.63,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 198,
+      "ts": "2026-09-06T06:02:10.012Z",
+      "epochMs": 1788674530012,
+      "values": {
+        "temperature": 22.41,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 199,
+      "ts": "2026-09-06T06:02:11.020Z",
+      "epochMs": 1788674531020,
+      "values": {
+        "temperature": 22.29,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 200,
+      "ts": "2026-09-06T06:02:12.018Z",
+      "epochMs": 1788674532018,
+      "values": {
+        "temperature": 22.49,
+        "pressure": 2.978
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 201,
+      "ts": "2026-09-06T06:02:13.022Z",
+      "epochMs": 1788674533022,
+      "values": {
+        "temperature": 22.49,
+        "pressure": 2.979
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 202,
+      "ts": "2026-09-06T06:02:14.011Z",
+      "epochMs": 1788674534011,
+      "values": {
+        "temperature": 22.48,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 203,
+      "ts": "2026-09-06T06:02:15.013Z",
+      "epochMs": 1788674535013,
+      "values": {
+        "temperature": 22.29,
+        "pressure": 2.976
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 204,
+      "ts": "2026-09-06T06:02:16.019Z",
+      "epochMs": 1788674536019,
+      "values": {
+        "temperature": 22.45,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 205,
+      "ts": "2026-09-06T06:02:17.013Z",
+      "epochMs": 1788674537013,
+      "values": {
+        "temperature": 22.23,
+        "pressure": 2.985
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 206,
+      "ts": "2026-09-06T06:02:18.010Z",
+      "epochMs": 1788674538010,
+      "values": {
+        "temperature": 22.4,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 207,
+      "ts": "2026-09-06T06:02:19.010Z",
+      "epochMs": 1788674539010,
+      "values": {
+        "temperature": 22.16,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 208,
+      "ts": "2026-09-06T06:02:20.008Z",
+      "epochMs": 1788674540008,
+      "values": {
+        "temperature": 22.22,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 209,
+      "ts": "2026-09-06T06:02:21.011Z",
+      "epochMs": 1788674541011,
+      "values": {
+        "temperature": 21.99,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 210,
+      "ts": "2026-09-06T06:02:22.020Z",
+      "epochMs": 1788674542020,
+      "values": {
+        "temperature": 22.35,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 211,
+      "ts": "2026-09-06T06:02:23.022Z",
+      "epochMs": 1788674543022,
+      "values": {
+        "temperature": 22.01,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 212,
+      "ts": "2026-09-06T06:02:24.015Z",
+      "epochMs": 1788674544015,
+      "values": {
+        "temperature": 22.29,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 213,
+      "ts": "2026-09-06T06:02:25.019Z",
+      "epochMs": 1788674545019,
+      "values": {
+        "temperature": 22.05,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 214,
+      "ts": "2026-09-06T06:02:26.014Z",
+      "epochMs": 1788674546014,
+      "values": {
+        "temperature": 22.01,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 215,
+      "ts": "2026-09-06T06:02:27.024Z",
+      "epochMs": 1788674547024,
+      "values": {
+        "temperature": 21.95,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 216,
+      "ts": "2026-09-06T06:02:28.021Z",
+      "epochMs": 1788674548021,
+      "values": {
+        "temperature": 21.96,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 217,
+      "ts": "2026-09-06T06:02:29.022Z",
+      "epochMs": 1788674549022,
+      "values": {
+        "temperature": 22.02,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 218,
+      "ts": "2026-09-06T06:02:30.024Z",
+      "epochMs": 1788674550024,
+      "values": {
+        "temperature": 22.15,
+        "pressure": 2.969
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 219,
+      "ts": "2026-09-06T06:02:31.021Z",
+      "epochMs": 1788674551021,
+      "values": {
+        "temperature": 22.12,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 220,
+      "ts": "2026-09-06T06:02:32.022Z",
+      "epochMs": 1788674552022,
+      "values": {
+        "temperature": 22.1,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 221,
+      "ts": "2026-09-06T06:02:33.014Z",
+      "epochMs": 1788674553014,
+      "values": {
+        "temperature": 22.15,
+        "pressure": 2.983
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 222,
+      "ts": "2026-09-06T06:02:34.023Z",
+      "epochMs": 1788674554023,
+      "values": {
+        "temperature": 22.02,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 223,
+      "ts": "2026-09-06T06:02:35.013Z",
+      "epochMs": 1788674555013,
+      "values": {
+        "temperature": 22.01,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 224,
+      "ts": "2026-09-06T06:02:36.015Z",
+      "epochMs": 1788674556015,
+      "values": {
+        "temperature": 21.98,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 225,
+      "ts": "2026-09-06T06:02:37.025Z",
+      "epochMs": 1788674557025,
+      "values": {
+        "temperature": 22.07,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 226,
+      "ts": "2026-09-06T06:02:38.023Z",
+      "epochMs": 1788674558023,
+      "values": {
+        "temperature": 21.87,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 227,
+      "ts": "2026-09-06T06:02:39.013Z",
+      "epochMs": 1788674559013,
+      "values": {
+        "temperature": 21.91,
+        "pressure": 2.99
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 228,
+      "ts": "2026-09-06T06:02:40.017Z",
+      "epochMs": 1788674560017,
+      "values": {
+        "temperature": 22.15,
+        "pressure": 2.989
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 229,
+      "ts": "2026-09-06T06:02:41.013Z",
+      "epochMs": 1788674561013,
+      "values": {
+        "temperature": 21.87,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 230,
+      "ts": "2026-09-06T06:02:42.019Z",
+      "epochMs": 1788674562019,
+      "values": {
+        "temperature": 21.95,
+        "pressure": 2.995
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 231,
+      "ts": "2026-09-06T06:02:43.008Z",
+      "epochMs": 1788674563008,
+      "values": {
+        "temperature": 22.19,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 232,
+      "ts": "2026-09-06T06:02:44.006Z",
+      "epochMs": 1788674564006,
+      "values": {
+        "temperature": 22.19,
+        "pressure": 2.983
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 233,
+      "ts": "2026-09-06T06:02:45.008Z",
+      "epochMs": 1788674565008,
+      "values": {
+        "temperature": 21.96,
+        "pressure": 2.988
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 234,
+      "ts": "2026-09-06T06:02:46.010Z",
+      "epochMs": 1788674566010,
+      "values": {
+        "temperature": 21.92,
+        "pressure": 2.988
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 235,
+      "ts": "2026-09-06T06:02:47.023Z",
+      "epochMs": 1788674567023,
+      "values": {
+        "temperature": 21.92,
+        "pressure": 2.992
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 236,
+      "ts": "2026-09-06T06:02:48.014Z",
+      "epochMs": 1788674568014,
+      "values": {
+        "temperature": 21.97,
+        "pressure": 3.007
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 237,
+      "ts": "2026-09-06T06:02:49.009Z",
+      "epochMs": 1788674569009,
+      "values": {
+        "temperature": 22.02,
+        "pressure": 2.999
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 238,
+      "ts": "2026-09-06T06:02:50.012Z",
+      "epochMs": 1788674570012,
+      "values": {
+        "temperature": 22.09,
+        "pressure": 3.015
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 239,
+      "ts": "2026-09-06T06:02:51.008Z",
+      "epochMs": 1788674571008,
+      "values": {
+        "temperature": 22.14,
+        "pressure": 2.997
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 240,
+      "ts": "2026-09-06T06:02:52.009Z",
+      "epochMs": 1788674572009,
+      "values": {
+        "temperature": 22.29,
+        "pressure": 3.014
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 241,
+      "ts": "2026-09-06T06:02:53.010Z",
+      "epochMs": 1788674573010,
+      "values": {
+        "temperature": 22.07,
+        "pressure": 3.014
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 242,
+      "ts": "2026-09-06T06:02:54.008Z",
+      "epochMs": 1788674574008,
+      "values": {
+        "temperature": 22.03,
+        "pressure": 3.008
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 243,
+      "ts": "2026-09-06T06:02:55.005Z",
+      "epochMs": 1788674575005,
+      "values": {
+        "temperature": 22.35,
+        "pressure": 2.992
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 244,
+      "ts": "2026-09-06T06:02:56.013Z",
+      "epochMs": 1788674576013,
+      "values": {
+        "temperature": 22.15,
+        "pressure": 2.986
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 245,
+      "ts": "2026-09-06T06:02:57.022Z",
+      "epochMs": 1788674577022,
+      "values": {
+        "temperature": 22.07,
+        "pressure": 3.005
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 246,
+      "ts": "2026-09-06T06:02:58.013Z",
+      "epochMs": 1788674578013,
+      "values": {
+        "temperature": 22.1,
+        "pressure": 2.996
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 247,
+      "ts": "2026-09-06T06:02:59.023Z",
+      "epochMs": 1788674579023,
+      "values": {
+        "temperature": 22.33,
+        "pressure": 2.998
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 248,
+      "ts": "2026-09-06T06:03:00.009Z",
+      "epochMs": 1788674580009,
+      "values": {
+        "temperature": 22.42,
+        "pressure": 2.984
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 249,
+      "ts": "2026-09-06T06:03:01.015Z",
+      "epochMs": 1788674581015,
+      "values": {
+        "temperature": 22.3,
+        "pressure": 3.001
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 250,
+      "ts": "2026-09-06T06:03:02.019Z",
+      "epochMs": 1788674582019,
+      "values": {
+        "temperature": 22.33,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 251,
+      "ts": "2026-09-06T06:03:03.010Z",
+      "epochMs": 1788674583010,
+      "values": {
+        "temperature": 22.47,
+        "pressure": 2.992
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 252,
+      "ts": "2026-09-06T06:03:04.013Z",
+      "epochMs": 1788674584013,
+      "values": {
+        "temperature": 22.53,
+        "pressure": 3.002
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 253,
+      "ts": "2026-09-06T06:03:05.017Z",
+      "epochMs": 1788674585017,
+      "values": {
+        "temperature": 22.38,
+        "pressure": 2.991
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 254,
+      "ts": "2026-09-06T06:03:06.015Z",
+      "epochMs": 1788674586015,
+      "values": {
+        "temperature": 22.31,
+        "pressure": 2.977
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 255,
+      "ts": "2026-09-06T06:03:07.024Z",
+      "epochMs": 1788674587024,
+      "values": {
+        "temperature": 22.63,
+        "pressure": 2.982
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 256,
+      "ts": "2026-09-06T06:03:08.013Z",
+      "epochMs": 1788674588013,
+      "values": {
+        "temperature": 22.73,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 257,
+      "ts": "2026-09-06T06:03:09.009Z",
+      "epochMs": 1788674589009,
+      "values": {
+        "temperature": 22.49,
+        "pressure": 2.972
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 258,
+      "ts": "2026-09-06T06:03:10.019Z",
+      "epochMs": 1788674590019,
+      "values": {
+        "temperature": 22.5,
+        "pressure": 2.973
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 259,
+      "ts": "2026-09-06T06:03:11.011Z",
+      "epochMs": 1788674591011,
+      "values": {
+        "temperature": 22.67,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 260,
+      "ts": "2026-09-06T06:03:12.015Z",
+      "epochMs": 1788674592015,
+      "values": {
+        "temperature": 22.88,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 261,
+      "ts": "2026-09-06T06:03:13.022Z",
+      "epochMs": 1788674593022,
+      "values": {
+        "temperature": 22.94,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 262,
+      "ts": "2026-09-06T06:03:14.024Z",
+      "epochMs": 1788674594024,
+      "values": {
+        "temperature": 22.66,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 263,
+      "ts": "2026-09-06T06:03:15.014Z",
+      "epochMs": 1788674595014,
+      "values": {
+        "temperature": 22.93,
+        "pressure": 2.98
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 264,
+      "ts": "2026-09-06T06:03:16.022Z",
+      "epochMs": 1788674596022,
+      "values": {
+        "temperature": 22.82,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 265,
+      "ts": "2026-09-06T06:03:17.020Z",
+      "epochMs": 1788674597020,
+      "values": {
+        "temperature": 23.13,
+        "pressure": 2.953
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 266,
+      "ts": "2026-09-06T06:03:18.015Z",
+      "epochMs": 1788674598015,
+      "values": {
+        "temperature": 22.89,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 267,
+      "ts": "2026-09-06T06:03:19.006Z",
+      "epochMs": 1788674599006,
+      "values": {
+        "temperature": 23.03,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 268,
+      "ts": "2026-09-06T06:03:20.013Z",
+      "epochMs": 1788674600013,
+      "values": {
+        "temperature": 22.97,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 269,
+      "ts": "2026-09-06T06:03:21.016Z",
+      "epochMs": 1788674601016,
+      "values": {
+        "temperature": 23.27,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 270,
+      "ts": "2026-09-06T06:03:22.019Z",
+      "epochMs": 1788674602019,
+      "values": {
+        "temperature": 23.35,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 271,
+      "ts": "2026-09-06T06:03:23.023Z",
+      "epochMs": 1788674603023,
+      "values": {
+        "temperature": 23.2,
+        "pressure": 2.937
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 272,
+      "ts": "2026-09-06T06:03:24.007Z",
+      "epochMs": 1788674604007,
+      "values": {
+        "temperature": 23.13,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 273,
+      "ts": "2026-09-06T06:03:25.012Z",
+      "epochMs": 1788674605012,
+      "values": {
+        "temperature": 23.48,
+        "pressure": 2.937
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 274,
+      "ts": "2026-09-06T06:03:26.011Z",
+      "epochMs": 1788674606011,
+      "values": {
+        "temperature": 23.41,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 275,
+      "ts": "2026-09-06T06:03:27.016Z",
+      "epochMs": 1788674607016,
+      "values": {
+        "temperature": 23.63,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 276,
+      "ts": "2026-09-06T06:03:28.025Z",
+      "epochMs": 1788674608025,
+      "values": {
+        "temperature": 23.43,
+        "pressure": 2.949
+      },
+      "quality": "GOOD",
+      "latencyMs": 25
+    },
+    {
+      "seq": 277,
+      "ts": "2026-09-06T06:03:29.016Z",
+      "epochMs": 1788674609016,
+      "values": {
+        "temperature": 23.67,
+        "pressure": 2.956
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 278,
+      "ts": "2026-09-06T06:03:30.010Z",
+      "epochMs": 1788674610010,
+      "values": {
+        "temperature": 23.64,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 279,
+      "ts": "2026-09-06T06:03:31.017Z",
+      "epochMs": 1788674611017,
+      "values": {
+        "temperature": 23.74,
+        "pressure": 2.974
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 280,
+      "ts": "2026-09-06T06:03:32.018Z",
+      "epochMs": 1788674612018,
+      "values": {
+        "temperature": 23.79,
+        "pressure": 2.966
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 281,
+      "ts": "2026-09-06T06:03:33.018Z",
+      "epochMs": 1788674613018,
+      "values": {
+        "temperature": 23.59,
+        "pressure": 2.971
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 282,
+      "ts": "2026-09-06T06:03:34.015Z",
+      "epochMs": 1788674614015,
+      "values": {
+        "temperature": 23.97,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 283,
+      "ts": "2026-09-06T06:03:35.023Z",
+      "epochMs": 1788674615023,
+      "values": {
+        "temperature": 24,
+        "pressure": 2.982
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 284,
+      "ts": "2026-09-06T06:03:36.008Z",
+      "epochMs": 1788674616008,
+      "values": {
+        "temperature": 24.09,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 285,
+      "ts": "2026-09-06T06:03:37.012Z",
+      "epochMs": 1788674617012,
+      "values": {
+        "temperature": 23.83,
+        "pressure": 2.968
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 286,
+      "ts": "2026-09-06T06:03:38.013Z",
+      "epochMs": 1788674618013,
+      "values": {
+        "temperature": 23.9,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 287,
+      "ts": "2026-09-06T06:03:39.013Z",
+      "epochMs": 1788674619013,
+      "values": {
+        "temperature": 24.12,
+        "pressure": 2.965
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 288,
+      "ts": "2026-09-06T06:03:40.011Z",
+      "epochMs": 1788674620011,
+      "values": {
+        "temperature": 24.02,
+        "pressure": 2.946
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 289,
+      "ts": "2026-09-06T06:03:41.016Z",
+      "epochMs": 1788674621016,
+      "values": {
+        "temperature": 24.34,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 290,
+      "ts": "2026-09-06T06:03:42.016Z",
+      "epochMs": 1788674622016,
+      "values": {
+        "temperature": 24.26,
+        "pressure": 2.949
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 291,
+      "ts": "2026-09-06T06:03:43.025Z",
+      "epochMs": 1788674623025,
+      "values": {
+        "temperature": 24.47,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 292,
+      "ts": "2026-09-06T06:03:44.023Z",
+      "epochMs": 1788674624023,
+      "values": {
+        "temperature": 24.29,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 293,
+      "ts": "2026-09-06T06:03:45.022Z",
+      "epochMs": 1788674625022,
+      "values": {
+        "temperature": 24.5,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 294,
+      "ts": "2026-09-06T06:03:46.018Z",
+      "epochMs": 1788674626018,
+      "values": {
+        "temperature": 24.54,
+        "pressure": 2.94
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 295,
+      "ts": "2026-09-06T06:03:47.006Z",
+      "epochMs": 1788674627006,
+      "values": {
+        "temperature": 24.55,
+        "pressure": 2.96
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 296,
+      "ts": "2026-09-06T06:03:48.023Z",
+      "epochMs": 1788674628023,
+      "values": {
+        "temperature": 24.59,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 297,
+      "ts": "2026-09-06T06:03:49.020Z",
+      "epochMs": 1788674629020,
+      "values": {
+        "temperature": 24.62,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 298,
+      "ts": "2026-09-06T06:03:50.010Z",
+      "epochMs": 1788674630010,
+      "values": {
+        "temperature": 24.86,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 299,
+      "ts": "2026-09-06T06:03:51.009Z",
+      "epochMs": 1788674631009,
+      "values": {
+        "temperature": 24.78,
+        "pressure": 2.948
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 300,
+      "ts": "2026-09-06T06:03:52.024Z",
+      "epochMs": 1788674632024,
+      "values": {
+        "temperature": 85.09,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 301,
+      "ts": "2026-09-06T06:03:53.012Z",
+      "epochMs": 1788674633012,
+      "values": {
+        "temperature": 85.04,
+        "pressure": 2.932
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 302,
+      "ts": "2026-09-06T06:03:54.019Z",
+      "epochMs": 1788674634019,
+      "values": {
+        "temperature": 84.96,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 303,
+      "ts": "2026-09-06T06:03:55.021Z",
+      "epochMs": 1788674635021,
+      "values": {
+        "temperature": 85.22,
+        "pressure": 2.95
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 304,
+      "ts": "2026-09-06T06:03:56.009Z",
+      "epochMs": 1788674636009,
+      "values": {
+        "temperature": 85.23,
+        "pressure": 2.95
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 305,
+      "ts": "2026-09-06T06:03:57.022Z",
+      "epochMs": 1788674637022,
+      "values": {
+        "temperature": 85.41,
+        "pressure": 2.978
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 306,
+      "ts": "2026-09-06T06:03:58.021Z",
+      "epochMs": 1788674638021,
+      "values": {
+        "temperature": 85.13,
+        "pressure": 2.972
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 307,
+      "ts": "2026-09-06T06:03:59.020Z",
+      "epochMs": 1788674639020,
+      "values": {
+        "temperature": 85.53,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 308,
+      "ts": "2026-09-06T06:04:00.024Z",
+      "epochMs": 1788674640024,
+      "values": {
+        "temperature": 85.63,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 309,
+      "ts": "2026-09-06T06:04:01.023Z",
+      "epochMs": 1788674641023,
+      "values": {
+        "temperature": 85.54,
+        "pressure": 2.967
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 310,
+      "ts": "2026-09-06T06:04:02.012Z",
+      "epochMs": 1788674642012,
+      "values": {
+        "temperature": 85.59,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 311,
+      "ts": "2026-09-06T06:04:03.018Z",
+      "epochMs": 1788674643018,
+      "values": {
+        "temperature": 85.52,
+        "pressure": 2.948
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 312,
+      "ts": "2026-09-06T06:04:04.018Z",
+      "epochMs": 1788674644018,
+      "values": {
+        "temperature": 85.85,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 313,
+      "ts": "2026-09-06T06:04:05.012Z",
+      "epochMs": 1788674645012,
+      "values": {
+        "temperature": 85.79,
+        "pressure": 2.946
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 314,
+      "ts": "2026-09-06T06:04:06.016Z",
+      "epochMs": 1788674646016,
+      "values": {
+        "temperature": 85.71,
+        "pressure": 2.95
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 315,
+      "ts": "2026-09-06T06:04:07.018Z",
+      "epochMs": 1788674647018,
+      "values": {
+        "temperature": 85.83,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 316,
+      "ts": "2026-09-06T06:04:08.016Z",
+      "epochMs": 1788674648016,
+      "values": {
+        "temperature": 85.93,
+        "pressure": 2.953
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 317,
+      "ts": "2026-09-06T06:04:09.009Z",
+      "epochMs": 1788674649009,
+      "values": {
+        "temperature": 86.15,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 318,
+      "ts": "2026-09-06T06:04:10.023Z",
+      "epochMs": 1788674650023,
+      "values": {
+        "temperature": 86.23,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 319,
+      "ts": "2026-09-06T06:04:11.016Z",
+      "epochMs": 1788674651016,
+      "values": {
+        "temperature": 86.02,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 320,
+      "ts": "2026-09-06T06:04:12.024Z",
+      "epochMs": 1788674652024,
+      "values": {
+        "temperature": 26.06,
+        "pressure": 2.962
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 321,
+      "ts": "2026-09-06T06:04:13.024Z",
+      "epochMs": 1788674653024,
+      "values": {
+        "temperature": 26.12,
+        "pressure": 2.967
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 322,
+      "ts": "2026-09-06T06:04:14.023Z",
+      "epochMs": 1788674654023,
+      "values": {
+        "temperature": 26.17,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 323,
+      "ts": "2026-09-06T06:04:15.010Z",
+      "epochMs": 1788674655010,
+      "values": {
+        "temperature": 26.51,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 324,
+      "ts": "2026-09-06T06:04:16.013Z",
+      "epochMs": 1788674656013,
+      "values": {
+        "temperature": 26.24,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 325,
+      "ts": "2026-09-06T06:04:17.015Z",
+      "epochMs": 1788674657015,
+      "values": {
+        "temperature": 26.61,
+        "pressure": 2.964
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 326,
+      "ts": "2026-09-06T06:04:18.024Z",
+      "epochMs": 1788674658024,
+      "values": {
+        "temperature": 26.55,
+        "pressure": 2.981
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 327,
+      "ts": "2026-09-06T06:04:19.024Z",
+      "epochMs": 1788674659024,
+      "values": {
+        "temperature": 26.62,
+        "pressure": 2.97
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 328,
+      "ts": "2026-09-06T06:04:20.006Z",
+      "epochMs": 1788674660006,
+      "values": {
+        "temperature": 26.81,
+        "pressure": 2.958
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 329,
+      "ts": "2026-09-06T06:04:21.012Z",
+      "epochMs": 1788674661012,
+      "values": {
+        "temperature": 26.58,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 330,
+      "ts": "2026-09-06T06:04:22.018Z",
+      "epochMs": 1788674662018,
+      "values": {
+        "temperature": 26.68,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 331,
+      "ts": "2026-09-06T06:04:23.015Z",
+      "epochMs": 1788674663015,
+      "values": {
+        "temperature": 26.94,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 332,
+      "ts": "2026-09-06T06:04:24.011Z",
+      "epochMs": 1788674664011,
+      "values": {
+        "temperature": 26.67,
+        "pressure": 2.956
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 333,
+      "ts": "2026-09-06T06:04:25.016Z",
+      "epochMs": 1788674665016,
+      "values": {
+        "temperature": 26.96,
+        "pressure": 2.952
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 334,
+      "ts": "2026-09-06T06:04:26.009Z",
+      "epochMs": 1788674666009,
+      "values": {
+        "temperature": 27.01,
+        "pressure": 2.961
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 335,
+      "ts": "2026-09-06T06:04:27.005Z",
+      "epochMs": 1788674667005,
+      "values": {
+        "temperature": 27.14,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 336,
+      "ts": "2026-09-06T06:04:28.010Z",
+      "epochMs": 1788674668010,
+      "values": {
+        "temperature": 26.92,
+        "pressure": 2.956
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 337,
+      "ts": "2026-09-06T06:04:29.008Z",
+      "epochMs": 1788674669008,
+      "values": {
+        "temperature": 27.16,
+        "pressure": 2.954
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 338,
+      "ts": "2026-09-06T06:04:30.013Z",
+      "epochMs": 1788674670013,
+      "values": {
+        "temperature": 27.18,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 339,
+      "ts": "2026-09-06T06:04:31.013Z",
+      "epochMs": 1788674671013,
+      "values": {
+        "temperature": 27.1,
+        "pressure": 2.948
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 340,
+      "ts": "2026-09-06T06:04:32.022Z",
+      "epochMs": 1788674672022,
+      "values": {
+        "temperature": 27.06,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 341,
+      "ts": "2026-09-06T06:04:33.007Z",
+      "epochMs": 1788674673007,
+      "values": {
+        "temperature": 27.12,
+        "pressure": 2.937
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 342,
+      "ts": "2026-09-06T06:04:34.009Z",
+      "epochMs": 1788674674009,
+      "values": {
+        "temperature": 27.39,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 343,
+      "ts": "2026-09-06T06:04:35.020Z",
+      "epochMs": 1788674675020,
+      "values": {
+        "temperature": 27.27,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 344,
+      "ts": "2026-09-06T06:04:36.008Z",
+      "epochMs": 1788674676008,
+      "values": {
+        "temperature": 27.41,
+        "pressure": 2.938
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 345,
+      "ts": "2026-09-06T06:04:37.018Z",
+      "epochMs": 1788674677018,
+      "values": {
+        "temperature": 27.21,
+        "pressure": 2.942
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 346,
+      "ts": "2026-09-06T06:04:38.021Z",
+      "epochMs": 1788674678021,
+      "values": {
+        "temperature": 27.54,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 347,
+      "ts": "2026-09-06T06:04:39.008Z",
+      "epochMs": 1788674679008,
+      "values": {
+        "temperature": 27.46,
+        "pressure": 2.957
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 348,
+      "ts": "2026-09-06T06:04:40.009Z",
+      "epochMs": 1788674680009,
+      "values": {
+        "temperature": 27.5,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 349,
+      "ts": "2026-09-06T06:04:41.009Z",
+      "epochMs": 1788674681009,
+      "values": {
+        "temperature": 27.43,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 350,
+      "ts": "2026-09-06T06:04:42.014Z",
+      "epochMs": 1788674682014,
+      "values": {
+        "temperature": 27.45,
+        "pressure": 2.963
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 351,
+      "ts": "2026-09-06T06:04:43.005Z",
+      "epochMs": 1788674683005,
+      "values": {
+        "temperature": 27.79,
+        "pressure": 2.955
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 352,
+      "ts": "2026-09-06T06:04:44.022Z",
+      "epochMs": 1788674684022,
+      "values": {
+        "temperature": 27.64,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 353,
+      "ts": "2026-09-06T06:04:45.009Z",
+      "epochMs": 1788674685009,
+      "values": {
+        "temperature": 27.49,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 354,
+      "ts": "2026-09-06T06:04:46.011Z",
+      "epochMs": 1788674686011,
+      "values": {
+        "temperature": 27.59,
+        "pressure": 2.951
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 355,
+      "ts": "2026-09-06T06:04:47.026Z",
+      "epochMs": 1788674687026,
+      "values": {
+        "temperature": 27.67,
+        "pressure": 2.959
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 356,
+      "ts": "2026-09-06T06:04:48.009Z",
+      "epochMs": 1788674688009,
+      "values": {
+        "temperature": 27.83,
+        "pressure": 2.953
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 357,
+      "ts": "2026-09-06T06:04:49.024Z",
+      "epochMs": 1788674689024,
+      "values": {
+        "temperature": 27.86,
+        "pressure": 2.95
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 358,
+      "ts": "2026-09-06T06:04:50.021Z",
+      "epochMs": 1788674690021,
+      "values": {
+        "temperature": 27.67,
+        "pressure": 2.94
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 359,
+      "ts": "2026-09-06T06:04:51.015Z",
+      "epochMs": 1788674691015,
+      "values": {
+        "temperature": 27.66,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 360,
+      "ts": "2026-09-06T06:04:52.023Z",
+      "epochMs": 1788674692023,
+      "values": {
+        "temperature": 27.77,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 361,
+      "ts": "2026-09-06T06:04:53.010Z",
+      "epochMs": 1788674693010,
+      "values": {
+        "temperature": 28,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 362,
+      "ts": "2026-09-06T06:04:54.038Z",
+      "epochMs": 1788674694038,
+      "values": {
+        "temperature": 27.97,
+        "pressure": 2.928
+      },
+      "quality": "GOOD",
+      "latencyMs": 38
+    },
+    {
+      "seq": 363,
+      "ts": "2026-09-06T06:04:55.021Z",
+      "epochMs": 1788674695021,
+      "values": {
+        "temperature": 28.06,
+        "pressure": 2.921
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 364,
+      "ts": "2026-09-06T06:04:56.019Z",
+      "epochMs": 1788674696019,
+      "values": {
+        "temperature": 27.8,
+        "pressure": 2.91
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 365,
+      "ts": "2026-09-06T06:04:57.005Z",
+      "epochMs": 1788674697005,
+      "values": {
+        "temperature": 27.98,
+        "pressure": 2.91
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 366,
+      "ts": "2026-09-06T06:04:58.025Z",
+      "epochMs": 1788674698025,
+      "values": {
+        "temperature": 27.81,
+        "pressure": 2.908
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 367,
+      "ts": "2026-09-06T06:04:59.016Z",
+      "epochMs": 1788674699016,
+      "values": {
+        "temperature": 28.05,
+        "pressure": 2.902
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 368,
+      "ts": "2026-09-06T06:05:00.012Z",
+      "epochMs": 1788674700012,
+      "values": {
+        "temperature": 27.94,
+        "pressure": 2.893
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 369,
+      "ts": "2026-09-06T06:05:01.021Z",
+      "epochMs": 1788674701021,
+      "values": {
+        "temperature": 28.06,
+        "pressure": 2.898
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 370,
+      "ts": "2026-09-06T06:05:02.021Z",
+      "epochMs": 1788674702021,
+      "values": {
+        "temperature": 27.92,
+        "pressure": 2.908
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 371,
+      "ts": "2026-09-06T06:05:03.016Z",
+      "epochMs": 1788674703016,
+      "values": {
+        "temperature": 28.11,
+        "pressure": 2.903
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 372,
+      "ts": "2026-09-06T06:05:04.005Z",
+      "epochMs": 1788674704005,
+      "values": {
+        "temperature": 27.99,
+        "pressure": 2.919
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 373,
+      "ts": "2026-09-06T06:05:05.009Z",
+      "epochMs": 1788674705009,
+      "values": {
+        "temperature": 27.92,
+        "pressure": 2.911
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 374,
+      "ts": "2026-09-06T06:05:06.021Z",
+      "epochMs": 1788674706021,
+      "values": {
+        "temperature": 27.82,
+        "pressure": 2.931
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 375,
+      "ts": "2026-09-06T06:05:07.008Z",
+      "epochMs": 1788674707008,
+      "values": {
+        "temperature": 28.02,
+        "pressure": 2.922
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 376,
+      "ts": "2026-09-06T06:05:08.015Z",
+      "epochMs": 1788674708015,
+      "values": {
+        "temperature": 28.11,
+        "pressure": 2.913
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 377,
+      "ts": "2026-09-06T06:05:09.010Z",
+      "epochMs": 1788674709010,
+      "values": {
+        "temperature": 27.98,
+        "pressure": 2.919
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 378,
+      "ts": "2026-09-06T06:05:10.009Z",
+      "epochMs": 1788674710009,
+      "values": {
+        "temperature": 28.1,
+        "pressure": 2.927
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 379,
+      "ts": "2026-09-06T06:05:11.016Z",
+      "epochMs": 1788674711016,
+      "values": {
+        "temperature": 28.15,
+        "pressure": 2.926
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 380,
+      "ts": "2026-09-06T06:05:12.008Z",
+      "epochMs": 1788674712008,
+      "values": {
+        "temperature": 28.01,
+        "pressure": 2.916
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 381,
+      "ts": "2026-09-06T06:05:13.007Z",
+      "epochMs": 1788674713007,
+      "values": {
+        "temperature": 27.88,
+        "pressure": 2.922
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 382,
+      "ts": "2026-09-06T06:05:14.013Z",
+      "epochMs": 1788674714013,
+      "values": {
+        "temperature": 28.16,
+        "pressure": 2.901
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 383,
+      "ts": "2026-09-06T06:05:15.010Z",
+      "epochMs": 1788674715010,
+      "values": {
+        "temperature": 27.88,
+        "pressure": 2.907
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 384,
+      "ts": "2026-09-06T06:05:16.020Z",
+      "epochMs": 1788674716020,
+      "values": {
+        "temperature": 27.83,
+        "pressure": 2.912
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 385,
+      "ts": "2026-09-06T06:05:17.018Z",
+      "epochMs": 1788674717018,
+      "values": {
+        "temperature": 28.03,
+        "pressure": 2.912
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 386,
+      "ts": "2026-09-06T06:05:18.009Z",
+      "epochMs": 1788674718009,
+      "values": {
+        "temperature": 27.76,
+        "pressure": 2.911
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 387,
+      "ts": "2026-09-06T06:05:19.022Z",
+      "epochMs": 1788674719022,
+      "values": {
+        "temperature": 28.12,
+        "pressure": 2.911
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 388,
+      "ts": "2026-09-06T06:05:20.019Z",
+      "epochMs": 1788674720019,
+      "values": {
+        "temperature": 27.75,
+        "pressure": 2.923
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 389,
+      "ts": "2026-09-06T06:05:21.005Z",
+      "epochMs": 1788674721005,
+      "values": {
+        "temperature": 27.7,
+        "pressure": 2.912
+      },
+      "quality": "GOOD",
+      "latencyMs": 4
+    },
+    {
+      "seq": 390,
+      "ts": "2026-09-06T06:05:22.011Z",
+      "epochMs": 1788674722011,
+      "values": {
+        "temperature": 27.71,
+        "pressure": 2.921
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 391,
+      "ts": "2026-09-06T06:05:23.010Z",
+      "epochMs": 1788674723010,
+      "values": {
+        "temperature": 27.86,
+        "pressure": 2.911
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 392,
+      "ts": "2026-09-06T06:05:24.006Z",
+      "epochMs": 1788674724006,
+      "values": {
+        "temperature": 27.84,
+        "pressure": 2.918
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 393,
+      "ts": "2026-09-06T06:05:25.008Z",
+      "epochMs": 1788674725008,
+      "values": {
+        "temperature": 28,
+        "pressure": 2.922
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 394,
+      "ts": "2026-09-06T06:05:26.021Z",
+      "epochMs": 1788674726021,
+      "values": {
+        "temperature": 27.63,
+        "pressure": 2.922
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 395,
+      "ts": "2026-09-06T06:05:27.013Z",
+      "epochMs": 1788674727013,
+      "values": {
+        "temperature": 27.78,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 396,
+      "ts": "2026-09-06T06:05:28.011Z",
+      "epochMs": 1788674728011,
+      "values": {
+        "temperature": 27.63,
+        "pressure": 2.931
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 397,
+      "ts": "2026-09-06T06:05:29.013Z",
+      "epochMs": 1788674729013,
+      "values": {
+        "temperature": 27.53,
+        "pressure": 2.919
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 398,
+      "ts": "2026-09-06T06:05:30.024Z",
+      "epochMs": 1788674730024,
+      "values": {
+        "temperature": 27.51,
+        "pressure": 2.924
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 399,
+      "ts": "2026-09-06T06:05:31.024Z",
+      "epochMs": 1788674731024,
+      "values": {
+        "temperature": 27.84,
+        "pressure": 2.925
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 400,
+      "ts": "2026-09-06T06:05:32.022Z",
+      "epochMs": 1788674732022,
+      "values": {
+        "temperature": 27.49,
+        "pressure": 2.925
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 401,
+      "ts": "2026-09-06T06:05:33.012Z",
+      "epochMs": 1788674733012,
+      "values": {
+        "temperature": 27.67,
+        "pressure": 2.94
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 402,
+      "ts": "2026-09-06T06:05:34.020Z",
+      "epochMs": 1788674734020,
+      "values": {
+        "temperature": 27.39,
+        "pressure": 2.927
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 403,
+      "ts": "2026-09-06T06:05:35.007Z",
+      "epochMs": 1788674735007,
+      "values": {
+        "temperature": 27.38,
+        "pressure": 2.939
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 404,
+      "ts": "2026-09-06T06:05:36.017Z",
+      "epochMs": 1788674736017,
+      "values": {
+        "temperature": 27.46,
+        "pressure": 2.945
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 405,
+      "ts": "2026-09-06T06:05:37.019Z",
+      "epochMs": 1788674737019,
+      "values": {
+        "temperature": 27.66,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 406,
+      "ts": "2026-09-06T06:05:38.006Z",
+      "epochMs": 1788674738006,
+      "values": {
+        "temperature": 27.61,
+        "pressure": 2.947
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 407,
+      "ts": "2026-09-06T06:05:39.009Z",
+      "epochMs": 1788674739009,
+      "values": {
+        "temperature": 27.19,
+        "pressure": 2.94
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 408,
+      "ts": "2026-09-06T06:05:40.025Z",
+      "epochMs": 1788674740025,
+      "values": {
+        "temperature": 27.28,
+        "pressure": 2.926
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 409,
+      "ts": "2026-09-06T06:05:41.006Z",
+      "epochMs": 1788674741006,
+      "values": {
+        "temperature": 27.42,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 410,
+      "ts": "2026-09-06T06:05:42.018Z",
+      "epochMs": 1788674742018,
+      "values": {
+        "temperature": 27.27,
+        "pressure": 2.938
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 411,
+      "ts": "2026-09-06T06:05:43.019Z",
+      "epochMs": 1788674743019,
+      "values": {
+        "temperature": 27.27,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 412,
+      "ts": "2026-09-06T06:05:44.013Z",
+      "epochMs": 1788674744013,
+      "values": {
+        "temperature": 27.37,
+        "pressure": 2.94
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 413,
+      "ts": "2026-09-06T06:05:45.011Z",
+      "epochMs": 1788674745011,
+      "values": {
+        "temperature": 27.32,
+        "pressure": 2.936
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 414,
+      "ts": "2026-09-06T06:05:46.007Z",
+      "epochMs": 1788674746007,
+      "values": {
+        "temperature": 26.93,
+        "pressure": 2.938
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 415,
+      "ts": "2026-09-06T06:05:47.025Z",
+      "epochMs": 1788674747025,
+      "values": {
+        "temperature": 27.17,
+        "pressure": 2.924
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 416,
+      "ts": "2026-09-06T06:05:48.014Z",
+      "epochMs": 1788674748014,
+      "values": {
+        "temperature": 26.93,
+        "pressure": 2.924
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 417,
+      "ts": "2026-09-06T06:05:49.016Z",
+      "epochMs": 1788674749016,
+      "values": {
+        "temperature": 26.99,
+        "pressure": 2.939
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 418,
+      "ts": "2026-09-06T06:05:50.013Z",
+      "epochMs": 1788674750013,
+      "values": {
+        "temperature": 27.11,
+        "pressure": 2.932
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 419,
+      "ts": "2026-09-06T06:05:51.020Z",
+      "epochMs": 1788674751020,
+      "values": {
+        "temperature": 26.66,
+        "pressure": 2.934
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 420,
+      "ts": "2026-09-06T06:05:52.024Z",
+      "epochMs": 1788674752024,
+      "values": {
+        "temperature": 26.65,
+        "pressure": 2.931
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 421,
+      "ts": "2026-09-06T06:05:53.016Z",
+      "epochMs": 1788674753016,
+      "values": {
+        "temperature": 26.63,
+        "pressure": 2.943
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 422,
+      "ts": "2026-09-06T06:05:54.020Z",
+      "epochMs": 1788674754020,
+      "values": {
+        "temperature": 26.81,
+        "pressure": 2.944
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 423,
+      "ts": "2026-09-06T06:05:55.018Z",
+      "epochMs": 1788674755018,
+      "values": {
+        "temperature": 26.74,
+        "pressure": 2.929
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 424,
+      "ts": "2026-09-06T06:05:56.010Z",
+      "epochMs": 1788674756010,
+      "values": {
+        "temperature": 26.71,
+        "pressure": 2.929
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 425,
+      "ts": "2026-09-06T06:05:57.007Z",
+      "epochMs": 1788674757007,
+      "values": {
+        "temperature": 26.62,
+        "pressure": 2.929
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 426,
+      "ts": "2026-09-06T06:05:58.016Z",
+      "epochMs": 1788674758016,
+      "values": {
+        "temperature": 26.32,
+        "pressure": 2.921
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 427,
+      "ts": "2026-09-06T06:05:59.011Z",
+      "epochMs": 1788674759011,
+      "values": {
+        "temperature": 26.46,
+        "pressure": 2.936
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 428,
+      "ts": "2026-09-06T06:06:00.019Z",
+      "epochMs": 1788674760019,
+      "values": {
+        "temperature": 26.48,
+        "pressure": 2.932
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 429,
+      "ts": "2026-09-06T06:06:01.020Z",
+      "epochMs": 1788674761020,
+      "values": {
+        "temperature": 26.51,
+        "pressure": 2.927
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 430,
+      "ts": "2026-09-06T06:06:02.024Z",
+      "epochMs": 1788674762024,
+      "values": {
+        "temperature": 26.46,
+        "pressure": 2.915
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 431,
+      "ts": "2026-09-06T06:06:03.021Z",
+      "epochMs": 1788674763021,
+      "values": {
+        "temperature": 26.02,
+        "pressure": 2.915
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 432,
+      "ts": "2026-09-06T06:06:04.009Z",
+      "epochMs": 1788674764009,
+      "values": {
+        "temperature": 26.07,
+        "pressure": 2.926
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 433,
+      "ts": "2026-09-06T06:06:05.020Z",
+      "epochMs": 1788674765020,
+      "values": {
+        "temperature": 26.06,
+        "pressure": 2.923
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 434,
+      "ts": "2026-09-06T06:06:06.023Z",
+      "epochMs": 1788674766023,
+      "values": {
+        "temperature": 25.92,
+        "pressure": 2.915
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 435,
+      "ts": "2026-09-06T06:06:07.011Z",
+      "epochMs": 1788674767011,
+      "values": {
+        "temperature": 26.11,
+        "pressure": 2.908
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 436,
+      "ts": "2026-09-06T06:06:08.014Z",
+      "epochMs": 1788674768014,
+      "values": {
+        "temperature": 25.73,
+        "pressure": 2.898
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 437,
+      "ts": "2026-09-06T06:06:09.013Z",
+      "epochMs": 1788674769013,
+      "values": {
+        "temperature": 25.75,
+        "pressure": 2.904
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 438,
+      "ts": "2026-09-06T06:06:10.024Z",
+      "epochMs": 1788674770024,
+      "values": {
+        "temperature": 25.81,
+        "pressure": 2.888
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 439,
+      "ts": "2026-09-06T06:06:11.023Z",
+      "epochMs": 1788674771023,
+      "values": {
+        "temperature": 25.6,
+        "pressure": 2.894
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 440,
+      "ts": "2026-09-06T06:06:12.011Z",
+      "epochMs": 1788674772011,
+      "values": {
+        "temperature": 25.51,
+        "pressure": 2.917
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 441,
+      "ts": "2026-09-06T06:06:13.006Z",
+      "epochMs": 1788674773006,
+      "values": {
+        "temperature": 25.54,
+        "pressure": 2.92
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 442,
+      "ts": "2026-09-06T06:06:14.014Z",
+      "epochMs": 1788674774014,
+      "values": {
+        "temperature": 25.64,
+        "pressure": 2.905
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 443,
+      "ts": "2026-09-06T06:06:15.006Z",
+      "epochMs": 1788674775006,
+      "values": {
+        "temperature": 25.68,
+        "pressure": 2.899
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 444,
+      "ts": "2026-09-06T06:06:16.018Z",
+      "epochMs": 1788674776018,
+      "values": {
+        "temperature": 25.32,
+        "pressure": 2.892
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 445,
+      "ts": "2026-09-06T06:06:17.024Z",
+      "epochMs": 1788674777024,
+      "values": {
+        "temperature": 25.24,
+        "pressure": 2.913
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 446,
+      "ts": "2026-09-06T06:06:18.009Z",
+      "epochMs": 1788674778009,
+      "values": {
+        "temperature": 25.17,
+        "pressure": 2.901
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 447,
+      "ts": "2026-09-06T06:06:19.005Z",
+      "epochMs": 1788674779005,
+      "values": {
+        "temperature": 25.09,
+        "pressure": 2.901
+      },
+      "quality": "GOOD",
+      "latencyMs": 5
+    },
+    {
+      "seq": 448,
+      "ts": "2026-09-06T06:06:20.020Z",
+      "epochMs": 1788674780020,
+      "values": {
+        "temperature": 25.05,
+        "pressure": 2.907
+      },
+      "quality": "GOOD",
+      "latencyMs": 20
+    },
+    {
+      "seq": 449,
+      "ts": "2026-09-06T06:06:21.025Z",
+      "epochMs": 1788674781025,
+      "values": {
+        "temperature": 25.28,
+        "pressure": 2.914
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 450,
+      "ts": "2026-09-06T06:06:22.014Z",
+      "epochMs": 1788674782014,
+      "values": {
+        "temperature": 25.02,
+        "pressure": 2.892
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 451,
+      "ts": "2026-09-06T06:06:23.020Z",
+      "epochMs": 1788674783020,
+      "values": {
+        "temperature": 25.16,
+        "pressure": 2.91
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 452,
+      "ts": "2026-09-06T06:06:24.011Z",
+      "epochMs": 1788674784011,
+      "values": {
+        "temperature": 24.73,
+        "pressure": 2.893
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 453,
+      "ts": "2026-09-06T06:06:25.007Z",
+      "epochMs": 1788674785007,
+      "values": {
+        "temperature": 24.83,
+        "pressure": 2.911
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 454,
+      "ts": "2026-09-06T06:06:26.012Z",
+      "epochMs": 1788674786012,
+      "values": {
+        "temperature": 24.78,
+        "pressure": 2.901
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 455,
+      "ts": "2026-09-06T06:06:27.015Z",
+      "epochMs": 1788674787015,
+      "values": {
+        "temperature": 24.81,
+        "pressure": 2.912
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 456,
+      "ts": "2026-09-06T06:06:28.012Z",
+      "epochMs": 1788674788012,
+      "values": {
+        "temperature": 24.57,
+        "pressure": 2.914
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 457,
+      "ts": "2026-09-06T06:06:29.008Z",
+      "epochMs": 1788674789008,
+      "values": {
+        "temperature": 24.66,
+        "pressure": 2.913
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 458,
+      "ts": "2026-09-06T06:06:30.022Z",
+      "epochMs": 1788674790022,
+      "values": {
+        "temperature": 24.71,
+        "pressure": 2.907
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 459,
+      "ts": "2026-09-06T06:06:31.016Z",
+      "epochMs": 1788674791016,
+      "values": {
+        "temperature": 24.42,
+        "pressure": 2.912
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 460,
+      "ts": "2026-09-06T06:06:32.023Z",
+      "epochMs": 1788674792023,
+      "values": {
+        "temperature": 24.42,
+        "pressure": 2.922
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 461,
+      "ts": "2026-09-06T06:06:33.010Z",
+      "epochMs": 1788674793010,
+      "values": {
+        "temperature": 24.24,
+        "pressure": 2.902
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 462,
+      "ts": "2026-09-06T06:06:34.012Z",
+      "epochMs": 1788674794012,
+      "values": {
+        "temperature": 24.5,
+        "pressure": 2.892
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 463,
+      "ts": "2026-09-06T06:06:35.017Z",
+      "epochMs": 1788674795017,
+      "values": {
+        "temperature": 24.33,
+        "pressure": 2.886
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 464,
+      "ts": "2026-09-06T06:06:36.025Z",
+      "epochMs": 1788674796025,
+      "values": {
+        "temperature": 24.04,
+        "pressure": 2.9
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 465,
+      "ts": "2026-09-06T06:06:37.021Z",
+      "epochMs": 1788674797021,
+      "values": {
+        "temperature": 24.29,
+        "pressure": 2.884
+      },
+      "quality": "GOOD",
+      "latencyMs": 21
+    },
+    {
+      "seq": 466,
+      "ts": "2026-09-06T06:06:38.022Z",
+      "epochMs": 1788674798022,
+      "values": {
+        "temperature": 24.17,
+        "pressure": 2.88
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 467,
+      "ts": "2026-09-06T06:06:39.011Z",
+      "epochMs": 1788674799011,
+      "values": {
+        "temperature": 24.02,
+        "pressure": 2.881
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 468,
+      "ts": "2026-09-06T06:06:40.019Z",
+      "epochMs": 1788674800019,
+      "values": {
+        "temperature": 24.02,
+        "pressure": 2.897
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 469,
+      "ts": "2026-09-06T06:06:41.022Z",
+      "epochMs": 1788674801022,
+      "values": {
+        "temperature": 23.98,
+        "pressure": 2.884
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 470,
+      "ts": "2026-09-06T06:06:42.012Z",
+      "epochMs": 1788674802012,
+      "values": {
+        "temperature": 23.79,
+        "pressure": 2.891
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 471,
+      "ts": "2026-09-06T06:06:43.009Z",
+      "epochMs": 1788674803009,
+      "values": {
+        "temperature": 23.61,
+        "pressure": 2.906
+      },
+      "quality": "GOOD",
+      "latencyMs": 9
+    },
+    {
+      "seq": 472,
+      "ts": "2026-09-06T06:06:44.018Z",
+      "epochMs": 1788674804018,
+      "values": {
+        "temperature": 23.72,
+        "pressure": 2.902
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 473,
+      "ts": "2026-09-06T06:06:45.011Z",
+      "epochMs": 1788674805011,
+      "values": {
+        "temperature": 23.65,
+        "pressure": 2.916
+      },
+      "quality": "GOOD",
+      "latencyMs": 10
+    },
+    {
+      "seq": 474,
+      "ts": "2026-09-06T06:06:46.018Z",
+      "epochMs": 1788674806018,
+      "values": {
+        "temperature": 23.64,
+        "pressure": 2.897
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 475,
+      "ts": "2026-09-06T06:06:47.012Z",
+      "epochMs": 1788674807012,
+      "values": {
+        "temperature": 23.43,
+        "pressure": 2.895
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 476,
+      "ts": "2026-09-06T06:06:48.025Z",
+      "epochMs": 1788674808025,
+      "values": {
+        "temperature": 23.49,
+        "pressure": 2.887
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 477,
+      "ts": "2026-09-06T06:06:49.018Z",
+      "epochMs": 1788674809018,
+      "values": {
+        "temperature": 23.45,
+        "pressure": 2.881
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 478,
+      "ts": "2026-09-06T06:06:50.011Z",
+      "epochMs": 1788674810011,
+      "values": {
+        "temperature": 23.24,
+        "pressure": 2.9
+      },
+      "quality": "GOOD",
+      "latencyMs": 11
+    },
+    {
+      "seq": 479,
+      "ts": "2026-09-06T06:06:51.017Z",
+      "epochMs": 1788674811017,
+      "values": {
+        "temperature": 23.44,
+        "pressure": 2.894
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 480,
+      "ts": "2026-09-06T06:06:52.013Z",
+      "epochMs": 1788674812013,
+      "values": {
+        "temperature": 23.17,
+        "pressure": 2.884
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 481,
+      "ts": "2026-09-06T06:06:53.016Z",
+      "epochMs": 1788674813016,
+      "values": {
+        "temperature": 23.08,
+        "pressure": 2.885
+      },
+      "quality": "GOOD",
+      "latencyMs": 16
+    },
+    {
+      "seq": 482,
+      "ts": "2026-09-06T06:06:54.019Z",
+      "epochMs": 1788674814019,
+      "values": {
+        "temperature": 23.03,
+        "pressure": 2.89
+      },
+      "quality": "GOOD",
+      "latencyMs": 19
+    },
+    {
+      "seq": 483,
+      "ts": "2026-09-06T06:06:55.018Z",
+      "epochMs": 1788674815018,
+      "values": {
+        "temperature": 23.22,
+        "pressure": 2.883
+      },
+      "quality": "GOOD",
+      "latencyMs": 17
+    },
+    {
+      "seq": 484,
+      "ts": "2026-09-06T06:06:56.007Z",
+      "epochMs": 1788674816007,
+      "values": {
+        "temperature": 23.12,
+        "pressure": 2.868
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 485,
+      "ts": "2026-09-06T06:06:57.012Z",
+      "epochMs": 1788674817012,
+      "values": {
+        "temperature": 23.07,
+        "pressure": 2.883
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 486,
+      "ts": "2026-09-06T06:06:58.023Z",
+      "epochMs": 1788674818023,
+      "values": {
+        "temperature": 23.11,
+        "pressure": 2.891
+      },
+      "quality": "GOOD",
+      "latencyMs": 22
+    },
+    {
+      "seq": 487,
+      "ts": "2026-09-06T06:06:59.019Z",
+      "epochMs": 1788674819019,
+      "values": {
+        "temperature": 23.1,
+        "pressure": 2.876
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 488,
+      "ts": "2026-09-06T06:07:00.007Z",
+      "epochMs": 1788674820007,
+      "values": {
+        "temperature": 22.82,
+        "pressure": 2.886
+      },
+      "quality": "GOOD",
+      "latencyMs": 7
+    },
+    {
+      "seq": 489,
+      "ts": "2026-09-06T06:07:01.013Z",
+      "epochMs": 1788674821013,
+      "values": {
+        "temperature": 22.68,
+        "pressure": 2.867
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    },
+    {
+      "seq": 490,
+      "ts": "2026-09-06T06:07:02.007Z",
+      "epochMs": 1788674822007,
+      "values": {
+        "temperature": 23,
+        "pressure": 2.887
+      },
+      "quality": "GOOD",
+      "latencyMs": 6
+    },
+    {
+      "seq": 491,
+      "ts": "2026-09-06T06:07:03.014Z",
+      "epochMs": 1788674823014,
+      "values": {
+        "temperature": 22.89,
+        "pressure": 2.868
+      },
+      "quality": "GOOD",
+      "latencyMs": 14
+    },
+    {
+      "seq": 492,
+      "ts": "2026-09-06T06:07:04.025Z",
+      "epochMs": 1788674824025,
+      "values": {
+        "temperature": 22.59,
+        "pressure": 2.883
+      },
+      "quality": "GOOD",
+      "latencyMs": 24
+    },
+    {
+      "seq": 493,
+      "ts": "2026-09-06T06:07:05.015Z",
+      "epochMs": 1788674825015,
+      "values": {
+        "temperature": 22.73,
+        "pressure": 2.884
+      },
+      "quality": "GOOD",
+      "latencyMs": 15
+    },
+    {
+      "seq": 494,
+      "ts": "2026-09-06T06:07:06.023Z",
+      "epochMs": 1788674826023,
+      "values": {
+        "temperature": 22.79,
+        "pressure": 2.878
+      },
+      "quality": "GOOD",
+      "latencyMs": 23
+    },
+    {
+      "seq": 495,
+      "ts": "2026-09-06T06:07:07.013Z",
+      "epochMs": 1788674827013,
+      "values": {
+        "temperature": 22.75,
+        "pressure": 2.873
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 496,
+      "ts": "2026-09-06T06:07:08.013Z",
+      "epochMs": 1788674828013,
+      "values": {
+        "temperature": 22.54,
+        "pressure": 2.866
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 497,
+      "ts": "2026-09-06T06:07:09.018Z",
+      "epochMs": 1788674829018,
+      "values": {
+        "temperature": 22.37,
+        "pressure": 2.874
+      },
+      "quality": "GOOD",
+      "latencyMs": 18
+    },
+    {
+      "seq": 498,
+      "ts": "2026-09-06T06:07:10.015Z",
+      "epochMs": 1788674830015,
+      "values": {
+        "temperature": 22.59,
+        "pressure": 2.863
+      },
+      "quality": "GOOD",
+      "latencyMs": 13
+    },
+    {
+      "seq": 499,
+      "ts": "2026-09-06T06:07:11.008Z",
+      "epochMs": 1788674831008,
+      "values": {
+        "temperature": 22.39,
+        "pressure": 2.871
+      },
+      "quality": "GOOD",
+      "latencyMs": 8
+    },
+    {
+      "seq": 500,
+      "ts": "2026-09-06T06:07:12.012Z",
+      "epochMs": 1788674832012,
+      "values": {
+        "temperature": 22.37,
+        "pressure": 2.876
+      },
+      "quality": "GOOD",
+      "latencyMs": 12
+    }
+  ],
+  "alarms": [
+    {
+      "id": "7d8b8a09-3245-45bf-9434-ec423fadfb06",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "ACTIVE",
+      "value": 87.83,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T05:59:52.022Z"
+    },
+    {
+      "id": "7d8b8a09-3245-45bf-9434-ec423fadfb06",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "CLEARED",
+      "value": 28.01,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T05:59:52.022Z",
+      "clearedAt": "2026-09-06T06:00:12.018Z"
+    },
+    {
+      "id": "71c043a0-df68-4ccd-93bd-552468327e9f",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "ACTIVE",
+      "value": 85.79,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T06:01:10.009Z"
+    },
+    {
+      "id": "71c043a0-df68-4ccd-93bd-552468327e9f",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "CLEARED",
+      "value": 24.6,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T06:01:10.009Z",
+      "clearedAt": "2026-09-06T06:01:30.013Z"
+    },
+    {
+      "id": "db780ad2-8d17-43de-9dc8-fe0e0c7ddaf0",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "ACTIVE",
+      "value": 85.09,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T06:03:52.024Z"
+    },
+    {
+      "id": "db780ad2-8d17-43de-9dc8-fe0e0c7ddaf0",
+      "tag": "temperature",
+      "level": "HIGH",
+      "state": "CLEARED",
+      "value": 26.06,
+      "threshold": 80,
+      "raisedAt": "2026-09-06T06:03:52.024Z",
+      "clearedAt": "2026-09-06T06:04:12.024Z"
+    }
+  ]
+}

@@ -28,9 +28,9 @@ export interface SimulatorOptions {
   latencyMs?: number;
   /**
    * 기동 후 이 초(秒)에 도달하면 온도 스파이크(20초간 +60℃)를 강제로 발생시킵니다.
-   * 알람 데모/샘플 데이터 생성용. 미설정 시 랜덤 발생만 적용.
+   * 배열을 주면 여러 지점에서 발생. 알람 데모/샘플 데이터 생성용. 미설정 시 랜덤 발생만 적용.
    */
-  forceSpikeAtSec?: number;
+  forceSpikeAtSec?: number | number[];
 }
 
 export class SimulatorDriver implements PlcDriver {
@@ -88,7 +88,9 @@ export class SimulatorDriver implements PlcDriver {
       this.spikeRemaining = 20;
     }
     // 강제 스파이크: 지정한 읽기 횟수(≒초)에 도달하면 시작
-    if (this.opts.forceSpikeAtSec !== undefined && this.readCount === this.opts.forceSpikeAtSec) {
+    const spikeAt = this.opts.forceSpikeAtSec;
+    const spikeList = spikeAt === undefined ? [] : Array.isArray(spikeAt) ? spikeAt : [spikeAt];
+    if (spikeList.includes(this.readCount)) {
       this.spikeRemaining = 20;
     }
     if (this.spikeRemaining > 0) {
