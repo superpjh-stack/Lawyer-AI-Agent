@@ -23,6 +23,7 @@ import type { AppConfig } from '../config';
 import type { AlarmEngine } from '../core/AlarmEngine';
 import type { DataStore } from '../core/DataStore';
 import type { Poller } from '../core/Poller';
+import { publicTag } from '../types';
 import { createLogger } from '../utils/logger';
 
 const log = createLogger('ws');
@@ -89,7 +90,7 @@ export function createWsServer(deps: WsServerDeps): WebSocketServer {
         latest: store.getLatest(),
         activeAlarms: alarms.getActive(),
         plcConnected: poller.getStats().connected,
-        tags: config.tags.map((t) => ({ name: t.name, label: t.label, unit: t.unit, decimals: t.decimals, alarm: t.alarm ?? null })),
+        tags: config.tags.map((t) => publicTag(t)),
         // 최근 5분 이력을 함께 보내 차트가 즉시 채워지도록 함
         history: store.getHistory({ limit: 300 }),
       }),

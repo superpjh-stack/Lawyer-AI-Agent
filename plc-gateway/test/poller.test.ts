@@ -9,9 +9,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { Poller, withTimeout } from '../src/core/Poller';
 import type { Sample } from '../src/types';
-import { FakeDriver, sleep } from './helpers';
+import { FakeDriver, TEST_TAG_NAMES, sleep } from './helpers';
 
-const fastOpts = { intervalMs: 50, timeoutMs: 30, reconnectBaseMs: 60, reconnectMaxMs: 200 };
+const fastOpts = { tagNames: TEST_TAG_NAMES, intervalMs: 50, timeoutMs: 30, reconnectBaseMs: 60, reconnectMaxMs: 200 };
 
 test('주기마다 GOOD 샘플을 발행한다', async () => {
   const driver = new FakeDriver();

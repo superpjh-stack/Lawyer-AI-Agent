@@ -28,7 +28,7 @@ import type { AppConfig } from '../config';
 import type { AlarmEngine } from '../core/AlarmEngine';
 import type { DataStore } from '../core/DataStore';
 import type { Poller } from '../core/Poller';
-import { TAG_NAMES } from '../types';
+import { publicTag } from '../types';
 import { createLogger } from '../utils/logger';
 
 const log = createLogger('http');
@@ -154,8 +154,8 @@ export function createHttpServer(deps: HttpServerDeps): { app: express.Express; 
     g('plc_gateway_last_latency_ms', '최근 읽기 지연(ms)', p.lastLatencyMs);
     g('plc_gateway_active_alarms', '활성 알람 수', alarms.getActive().length);
     if (latest && latest.quality === 'GOOD') {
-      for (const name of TAG_NAMES) {
-        g('plc_tag_value', '태그 현재값', latest.values[name], `{tag="${name}"}`);
+      for (const t of tags) {
+        g('plc_tag_value', '태그 현재값', latest.values[t.name], `{tag="${t.name}",kind="${t.kind}",unit="${t.unit}"}`);
       }
     }
     res.type('text/plain; version=0.0.4').send(lines.join('\n') + '\n');
@@ -168,16 +168,7 @@ export function createHttpServer(deps: HttpServerDeps): { app: express.Express; 
   api.use(apiKeyGuard(env.GATEWAY_API_KEY));
 
   api.get('/tags', (_req, res) => {
-    res.json({
-      tags: tags.map((t) => ({
-        name: t.name,
-        label: t.label,
-        unit: t.unit,
-        decimals: t.decimals,
-        alarm: t.alarm ?? null,
-        ...(env.PLC_DRIVER === 'modbus-tcp' ? { register: t.register, scale: t.scale, offset: t.offset } : {}),
-      })),
-    });
+    res.json({ tags: tags.map((t) => publicTag(t, env.PLC_DRIVER === 'modbus-tcp')) });
   });
 
   api.get('/latest', (_req, res) => {

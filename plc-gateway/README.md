@@ -1,6 +1,6 @@
 # PLC Data Gateway
 
-PLC(온도·압력)에서 **1초에 1회** 데이터를 수집하여 REST API / WebSocket 으로 제공하고,
+PLC(㈜임진강김치 김치 공장 설비: 냉장·냉동고 온도, 염수 염도, 소독수 농도, 세척수 온도, 금속검출, 자동포장기 등 15개 태그)에서 **1초에 1회** 데이터를 수집하여 REST API / WebSocket 으로 제공하고,
 파일·상위 서버로 전달하는 경량 Data Gateway 서버입니다.
 
 ```
@@ -25,11 +25,51 @@ PLC_DRIVER=modbus-tcp
 PLC_HOST=192.168.0.10
 PLC_PORT=502
 PLC_UNIT_ID=1
-PLC_TEMP_REGISTER=0        # 온도 레지스터 주소 (0-base)
-PLC_TEMP_SCALE=0.1         # raw 253 → 25.3 ℃
-PLC_PRESSURE_REGISTER=1
-PLC_PRESSURE_SCALE=0.01    # raw 305 → 3.05 bar
+PLC_TAGS_FILE=./tags.json     # 현장 레지스터 주소·스케일·임계값 (생략 시 임진강김치 기본 태그 세트)
 ```
+
+## 수집 항목 (㈜임진강김치 기본 태그 세트)
+
+사업계획서 4.3 H/W 구입 내역과 2.5 데이터 집계 포인트를 기준으로 15개 태그를 기본 제공합니다
+(`src/tags/imjingang.ts`). 알람 기준은 MES CCP 기준(세척수 1~15℃, 염수 염도 10±1% 등)을 참고한 초안입니다.
+
+| 공정 | 태그 | 종류 | 단위 | 수집 장비 | LOW / HIGH (히스테리시스) |
+|---|---|---|---|---|---|
+| 숙성발효 | `aging_room_temp` 숙성고 온도 | analog | ℃ | 온도조절기 FOX-2003CC #1 | -3 / 5 (1) |
+| 입고/보관 | `raw_cold_temp` 원재료 냉장창고 온도 | analog | ℃ | 온도조절기 #2 (WH-002) | -3 / 5 (1) |
+| 포장/출고 | `product_cold_temp` 완제품 냉장창고 온도 | analog | ℃ | 온도조절기 #3 (WH-003) | -3 / 5 (1) |
+| 입고/보관 | `freezer_temp` 냉동고 온도 | analog | ℃ | 온도조절기 #4 | -25 / -15 (1) |
+| 절단/전처리 | `prep_room_temp` 전처리실 온도 | analog | ℃ | 온습도센서 THD-WD1-T | 5 / 25 (2) |
+| 절단/전처리 | `prep_room_humidity` 전처리실 습도 | analog | % | 온습도센서 THD-WD1-T | - / 85 (3) |
+| 세척/절임 | `brine_tank1_salinity` 염수탱크 1호 염도 | analog | % | 염도센서 #1 | 9 / 11 (0.3) |
+| 세척/절임 | `brine_tank2_salinity` 염수탱크 2호 염도 | analog | % | 염도센서 #2 | 9 / 11 (0.3) |
+| 세척/절임 | `sanitizer_ppm` 소독수 농도 | analog | ppm | 소독수 Interface Module | 8 / 15 (1) |
+| 세척/절임 | `wash_water_temp` 세척수 온도 | analog | ℃ | 온습도센서 | 1 / 15 (1) |
+| 금속검출 | `metal_detector_ng` 금속검출 NG | digital | ON/OFF | 금속검출기 | ON 시 즉시 |
+| 금속검출 | `metal_inspected_count` 검사수량 | counter | EA | 금속검출기 | - |
+| 금속검출 | `metal_rejected_count` 불합격수량 | counter | EA | 금속검출기 | - |
+| 포장/출고 | `packer_running` 자동포장기 가동 | digital | ON/OFF | 아이스박스 자동포장기 KF 100 | - |
+| 포장/출고 | `packer_count` 포장완료 수량 | counter | EA | 아이스박스 자동포장기 KF 100 | - |
+
+레지스터 주소는 PLC 프로그램 확정 전 임시값(0~14 순차)입니다.
+
+### 태그 정의 파일 (`PLC_TAGS_FILE`)
+
+현장 PLC 에 맞게 주소·스케일·임계값을 바꾸려면 JSON 배열을 작성해 지정합니다. 값 = `raw × scale + offset`.
+
+```json
+[
+  { "name": "aging_room_temp", "label": "숙성고 온도", "process": "숙성발효", "group": "냉장·냉동 온도",
+    "kind": "analog", "unit": "℃", "register": 100, "scale": 0.1, "signed": true, "decimals": 1,
+    "alarm": { "low": -3, "high": 5, "hysteresis": 1 } },
+  { "name": "packer_count", "label": "포장완료 수량", "process": "포장/출고", "group": "검사·포장 수량",
+    "kind": "counter", "unit": "EA", "register": 120, "scale": 1, "signed": false, "decimals": 0 }
+]
+```
+
+- `kind`: `analog`(연속값, 차트) / `digital`(0·1 상태, 알람은 `high: 0.5, hysteresis: 0`) / `counter`(누적 수량)
+- `group`: 같은 group 의 analog·counter 태그는 대시보드에서 한 차트에 그려집니다(단위가 같아야 함, 최대 4개 권장)
+- `sim`: 시뮬레이터 파라미터(`base`, `amplitude`, `noise`, `periodSec`, `incrementEverySec`, `toggleProbability`, `holdSec`, `spikeDelta`). 실제 PLC 연동 시 불필요
 
 ## 주요 기능
 
@@ -54,7 +94,7 @@ PLC_PRESSURE_SCALE=0.01    # raw 305 → 3.05 bar
 |---|---|---|
 | GET | `/health` | 게이트웨이/PLC 상태 (인증 없음) |
 | GET | `/metrics` | Prometheus 메트릭 (인증 없음) |
-| GET | `/api/v1/tags` | 태그 정의(단위, 임계값, 레지스터) |
+| GET | `/api/v1/tags` | 태그 정의(공정, 그룹, 종류, 단위, 임계값, 레지스터) |
 | GET | `/api/v1/latest` | 최신 샘플 1건 |
 | GET | `/api/v1/history?limit=300&since=<ISO or epochMs>&goodOnly=true` | 이력 (시간순) |
 | GET | `/api/v1/stats?window=60` | 최근 N초 통계 (min/max/avg) |
@@ -67,7 +107,7 @@ PLC_PRESSURE_SCALE=0.01    # raw 305 → 3.05 bar
   "seq": 128,
   "ts": "2026-09-06T02:26:07.012Z",
   "epochMs": 1788661567012,
-  "values": { "temperature": 25.2, "pressure": 2.98 },
+  "values": { "aging_room_temp": 1.5, "freezer_temp": -19.9, "brine_tank1_salinity": 9.98, "sanitizer_ppm": 10.4, "metal_detector_ng": 0, "packer_count": 128, "…": "…" },
   "quality": "GOOD",
   "latencyMs": 11
 }
@@ -90,11 +130,12 @@ PLC_PRESSURE_SCALE=0.01    # raw 305 → 3.05 bar
 plc-gateway/
 ├─ src/
 │  ├─ index.ts              진입점 - 구성요소 배선, graceful shutdown
-│  ├─ config.ts             환경변수 로드/검증 (zod), 태그 정의
+│  ├─ config.ts             환경변수 로드/검증 (zod), 태그 정의 파일 로드
+│  ├─ tags/imjingang.ts     ㈜임진강김치 기본 태그 세트 15개
 │  ├─ types.ts              공통 타입 (Sample, Alarm, TagDefinition, Sink)
 │  ├─ drivers/
 │  │  ├─ PlcDriver.ts       드라이버 인터페이스
-│  │  ├─ SimulatorDriver.ts 가상 PLC (개발/시연)
+│  │  ├─ SimulatorDriver.ts 가상 PLC (태그 정의 기반 값 생성, 개발/시연)
 │  │  ├─ ModbusTcpDriver.ts Modbus TCP 구현 (블록 읽기, 스케일 변환)
 │  │  └─ index.ts           드라이버 팩토리
 │  ├─ core/
@@ -162,7 +203,7 @@ docker run -p 4000:4000 \
 
 ## 확장 포인트
 
-- **새 태그 추가**: `types.ts` 의 `TagName` 유니온과 `config.ts` 의 태그 정의에 항목 추가.
+- **새 태그 추가**: `src/tags/imjingang.ts` 에 항목 추가 또는 `PLC_TAGS_FILE` JSON 지정. 대시보드는 자동 반영.
 - **새 프로토콜**: `drivers/PlcDriver.ts` 인터페이스를 구현하고 `drivers/index.ts` 팩토리에 등록
   (예: S7, MC Protocol, OPC UA).
 - **새 출력 채널**: `types.ts` 의 `Sink` 인터페이스 구현 (예: MQTT, Kafka, DB insert) 후

@@ -23,4 +23,4 @@ When picking up work, check `docs/.pdca-status.json` to determine the current PD
 
 ## Sub-projects
 
-- `plc-gateway/` — standalone Node.js/TypeScript Data Gateway that polls a PLC (temperature, pressure) once per second and exposes REST + WebSocket. It has its own `package.json`, tests (`npm test`), and Dockerfile, and is excluded from the root Next.js tsconfig/Docker build. See `plc-gateway/README.md`.
+- `plc-gateway/` — standalone Node.js/TypeScript Data Gateway that polls a PLC (Imjingang Kimchi plant tag set: cold-storage temps, brine salinity, sanitizer ppm, metal detector, auto-packer counters) once per second and exposes REST + WebSocket. It has its own `package.json`, tests (`npm test`), and Dockerfile, and is excluded from the root Next.js tsconfig/Docker build. See `plc-gateway/README.md`.

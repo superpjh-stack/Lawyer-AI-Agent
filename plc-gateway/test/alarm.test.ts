@@ -8,8 +8,9 @@ import type { Alarm, TagDefinition } from '../src/types';
 import { makeSample } from './helpers';
 
 const tags: TagDefinition[] = [
-  { name: 'temperature', label: '온도', unit: '℃', register: 0, scale: 1, offset: 0, signed: true, decimals: 1, alarm: { high: 80, low: -10, hysteresis: 2 } },
-  { name: 'pressure', label: '압력', unit: 'bar', register: 1, scale: 1, offset: 0, signed: true, decimals: 2, alarm: { high: 8, hysteresis: 0.2 } },
+  { name: 'temperature', label: '온도', process: 'T', group: '온도', kind: 'analog', unit: '℃', register: 0, scale: 1, offset: 0, signed: true, decimals: 1, alarm: { high: 80, low: -10, hysteresis: 2 } },
+  { name: 'pressure', label: '압력', process: 'T', group: '압력', kind: 'analog', unit: 'bar', register: 1, scale: 1, offset: 0, signed: true, decimals: 2, alarm: { high: 8, hysteresis: 0.2 } },
+  { name: 'ng', label: 'NG', process: 'T', group: 'NG', kind: 'digital', unit: 'ON/OFF', register: 2, scale: 1, offset: 0, signed: false, decimals: 0, alarm: { high: 0.5, hysteresis: 0 } },
 ];
 
 test('HIGH 알람은 임계값 초과 시 발생하고 히스테리시스 아래로 내려와야 해제된다', () => {
@@ -17,10 +18,10 @@ test('HIGH 알람은 임계값 초과 시 발생하고 히스테리시스 아래
   const events: Alarm[] = [];
   engine.on('alarm', (a) => events.push(a));
 
-  engine.evaluate(makeSample({ temperature: 79.9, pressure: 3 })); // 미발생
-  engine.evaluate(makeSample({ temperature: 80.1, pressure: 3 })); // 발생
-  engine.evaluate(makeSample({ temperature: 79.0, pressure: 3 })); // 히스테리시스 구간 → 유지
-  engine.evaluate(makeSample({ temperature: 78.0, pressure: 3 })); // 해제 (<= 80-2)
+  engine.evaluate(makeSample({ temperature: 79.9, pressure: 3, ng: 0 })); // 미발생
+  engine.evaluate(makeSample({ temperature: 80.1, pressure: 3, ng: 0 })); // 발생
+  engine.evaluate(makeSample({ temperature: 79.0, pressure: 3, ng: 0 })); // 히스테리시스 구간 → 유지
+  engine.evaluate(makeSample({ temperature: 78.0, pressure: 3, ng: 0 })); // 해제 (<= 80-2)
 
   assert.equal(events.length, 2);
   assert.equal(events[0].state, 'ACTIVE');
@@ -60,4 +61,12 @@ test('이력은 용량을 초과하지 않으며 최신순으로 반환된다', 
   const h = engine.getHistory();
   assert.equal(h.length, 3);
   assert.equal(h[0].state, 'CLEARED'); // 가장 최근 이벤트
+});
+
+test('digital 태그는 값 1에서 발생, 0에서 해제된다 (히스테리시스 0)', () => {
+  const engine = new AlarmEngine(tags, 100);
+  engine.evaluate(makeSample({ temperature: 20, pressure: 3, ng: 1 }));
+  assert.deepEqual(engine.getActive().map((a) => `${a.tag}:${a.level}`), ['ng:HIGH']);
+  engine.evaluate(makeSample({ temperature: 20, pressure: 3, ng: 0 }));
+  assert.equal(engine.getActive().length, 0);
 });

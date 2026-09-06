@@ -40,11 +40,22 @@ if (!fs.existsSync(samplePath)) {
   process.exit(1);
 }
 
-const template = fs.readFileSync(templatePath, 'utf8');
+let template = fs.readFileSync(templatePath, 'utf8');
 const sample = JSON.parse(fs.readFileSync(samplePath, 'utf8'));
 
+// 공용 스타일/렌더러(dashboard.css, dashboard.js)를 인라인하여 단일 파일로 만듭니다.
+const inlineCss = fs.readFileSync(path.join(publicDir, 'dashboard.css'), 'utf8');
+const inlineJs = fs.readFileSync(path.join(publicDir, 'dashboard.js'), 'utf8').replace(/<\//g, '<\\/');
+template = template
+  .replace('<link rel="stylesheet" href="dashboard.css">', '<style>\n' + inlineCss + '\n</style>')
+  .replace('<script src="dashboard.js"></script>', '<script>\n' + inlineJs + '\n</script>');
+if (template.includes('dashboard.css') || template.includes('src="dashboard.js"')) {
+  console.error('dashboard.css / dashboard.js 인라인 치환에 실패했습니다.');
+  process.exit(1);
+}
+
 // 대시보드 스크립트 블록 바로 앞에 데이터 주입 스크립트를 끼워 넣음
-const marker = '<script>\n/**';
+const marker = '<script>\n/**\n * 리플레이 제어';
 if (template.split(marker).length !== 2) {
   console.error('replay.html 에서 스크립트 삽입 위치(marker)를 찾지 못했습니다.');
   process.exit(1);

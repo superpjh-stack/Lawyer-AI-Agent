@@ -1,10 +1,17 @@
 /**
  * 테스트 공통 헬퍼
- *  - FakeDriver: 읽기 결과/실패를 스크립트로 제어할 수 있는 가짜 PLC 드라이버
- *  - makeSample: 테스트용 Sample 생성기
+ *  - TEST_TAGS  : 테스트용 최소 태그 세트 2개 (온도 analog, 카운터)
+ *  - FakeDriver : 읽기 결과/실패를 스크립트로 제어할 수 있는 가짜 PLC 드라이버
+ *  - makeSample : 테스트용 Sample 생성기
  */
 import type { PlcDriver, PlcReadResult } from '../src/drivers/PlcDriver';
-import type { Sample } from '../src/types';
+import type { Sample, TagDefinition } from '../src/types';
+
+export const TEST_TAGS: TagDefinition[] = [
+  { name: 'temperature', label: '온도', process: '테스트', group: '온도', kind: 'analog', unit: '℃', register: 0, scale: 0.1, offset: 0, signed: true, decimals: 1, alarm: { high: 80, low: -10, hysteresis: 2 } },
+  { name: 'pressure', label: '압력', process: '테스트', group: '압력', kind: 'analog', unit: 'bar', register: 1, scale: 0.01, offset: 0, signed: true, decimals: 2, alarm: { high: 8, hysteresis: 0.2 } },
+];
+export const TEST_TAG_NAMES = TEST_TAGS.map((t) => t.name);
 
 export class FakeDriver implements PlcDriver {
   readonly name = 'fake';
@@ -14,7 +21,7 @@ export class FakeDriver implements PlcDriver {
   connectCalls = 0;
   /** true 면 connect() 가 실패 */
   failConnect = false;
-  /** 마지막 read 값 (queue 가 비면 이 값을 반환) */
+  /** queue 가 비면 반환하는 기본값 */
   fallback: PlcReadResult = { temperature: 25, pressure: 3 };
 
   get isConnected(): boolean {
@@ -36,16 +43,9 @@ export class FakeDriver implements PlcDriver {
 }
 
 let seq = 0;
-export function makeSample(values: { temperature: number | null; pressure: number | null }, quality: 'GOOD' | 'BAD' = 'GOOD', epochMs = Date.now()): Sample {
+export function makeSample(values: Record<string, number | null>, quality: 'GOOD' | 'BAD' = 'GOOD', epochMs = Date.now()): Sample {
   seq += 1;
-  return {
-    seq,
-    ts: new Date(epochMs).toISOString(),
-    epochMs,
-    values,
-    quality,
-    latencyMs: 1,
-  };
+  return { seq, ts: new Date(epochMs).toISOString(), epochMs, values, quality, latencyMs: 1 };
 }
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

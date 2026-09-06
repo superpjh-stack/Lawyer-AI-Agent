@@ -30,8 +30,7 @@ export function createDriver(config: AppConfig): PlcDriver {
     case 'simulator':
     default:
       return new SimulatorDriver({
-        tempBase: env.SIM_TEMP_BASE,
-        pressureBase: env.SIM_PRESSURE_BASE,
+        tags,
         faultRate: env.SIM_FAULT_RATE,
       });
   }

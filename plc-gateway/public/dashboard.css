@@ -1,0 +1,152 @@
+/* =====================================================================
+   PLC Data Gateway 대시보드 공통 스타일 (index.html / replay.html 공용)
+   - 태그 정의 기반 KPI 카드, 그룹별 차트, 알람 로그, 샘플 표
+   - 테마: 라이트/다크/시스템 3상태 모두 토큰으로 대응
+   - 시리즈 색상 4종은 dataviz 검증(CVD/명도/대비) 통과 값
+   ===================================================================== */
+
+/* ---- 토큰: 라이트 (기본) ---- */
+:root {
+  --bg: #F2F4F3; --panel: #FFFFFF; --panel-2: #E9EDEC; --line: #D5DBD9; --grid: #E3E8E6;
+  --ink: #1A2328; --ink-2: #5C6B73; --ink-3: #8C9AA2;
+  --s1: #D9632B; --s2: #2F6FA8; --s3: #2A8A5B; --s4: #7B5EA7;
+  --good: #2A8A5B; --good-soft: rgba(42, 138, 91, 0.14);
+  --crit: #C33A3A; --crit-soft: rgba(195, 58, 58, 0.14);
+  --warn: #B8860B; --warn-soft: rgba(184, 134, 11, 0.14);
+  --focus: #2F6FA8; --shadow: 0 1px 2px rgba(20, 30, 35, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1518; --panel: #171F24; --panel-2: #1F2A30; --line: #2B373E; --grid: #223038;
+    --ink: #E4EAED; --ink-2: #8A9AA4; --ink-3: #62727C;
+    --s1: #E06A2A; --s2: #3D8FD6; --s3: #3FA46F; --s4: #9B7FC4;
+    --good: #3FA46F; --good-soft: rgba(63, 164, 111, 0.18);
+    --crit: #E05252; --crit-soft: rgba(224, 82, 82, 0.18);
+    --warn: #D4A017; --warn-soft: rgba(212, 160, 23, 0.18);
+    --focus: #3D8FD6; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1518; --panel: #171F24; --panel-2: #1F2A30; --line: #2B373E; --grid: #223038;
+  --ink: #E4EAED; --ink-2: #8A9AA4; --ink-3: #62727C;
+  --s1: #E06A2A; --s2: #3D8FD6; --s3: #3FA46F; --s4: #9B7FC4;
+  --good: #3FA46F; --good-soft: rgba(63, 164, 111, 0.18);
+  --crit: #E05252; --crit-soft: rgba(224, 82, 82, 0.18);
+  --warn: #D4A017; --warn-soft: rgba(212, 160, 23, 0.18);
+  --focus: #3D8FD6; --shadow: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 "IBM Plex Sans", "Noto Sans KR", system-ui, sans-serif; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { font-family: "Barlow", "IBM Plex Sans", system-ui, sans-serif; margin: 0; text-wrap: balance; }
+button { font: inherit; color: inherit; }
+button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---- 상단 바 ---- */
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 14px 24px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.top h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.01em; }
+.top .sub { color: var(--ink-2); font-size: 12px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); color: var(--ink-2); }
+.badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); }
+.badge.ok .dot { background: var(--good); } .badge.bad .dot { background: var(--crit); }
+.transport { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel-2); cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.btn:hover { border-color: var(--ink-3); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { height: 32px; padding: 0 10px; border: 0; background: transparent; cursor: pointer; font-size: 12px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.progress { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.track { flex: 1; height: 4px; background: var(--panel-2); border-radius: 2px; overflow: hidden; }
+.track > i { display: block; height: 100%; width: 0%; background: var(--ink); transition: width 0.3s linear; }
+@media (prefers-reduced-motion: reduce) { .track > i { transition: none; } }
+
+/* ---- 본문 ---- */
+main { padding: 20px 24px 32px; display: grid; gap: 16px; max-width: 1400px; margin: 0 auto; }
+main > * { min-width: 0; }
+.section-title { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); margin: 4px 0 -6px; }
+
+/* KPI 카드: 공정별 묶음 */
+.process-block { display: grid; gap: 8px; }
+.process-name { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; box-shadow: var(--shadow); display: grid; gap: 3px; border-left: 3px solid var(--line); }
+.kpi .label { font-size: 12px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.kpi .label i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; background: var(--ink-3); }
+.kpi .num { font-size: 26px; line-height: 1.1; font-weight: 500; }
+.kpi .num small { font-size: 12px; color: var(--ink-2); margin-left: 4px; font-weight: 400; }
+.kpi .foot { font-size: 11px; color: var(--ink-3); }
+.kpi.alarm-active { border-color: var(--crit); border-left-color: var(--crit); background: var(--crit-soft); }
+.kpi.bad .num { color: var(--ink-3); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.crit { background: var(--crit-soft); color: var(--crit); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.off { background: var(--panel-2); color: var(--ink-2); }
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* 차트 */
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 12px; }
+.chart { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px 6px; box-shadow: var(--shadow); min-width: 0; }
+.chart header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+.chart h2 { font-size: 14px; font-weight: 600; }
+.chart .unit { color: var(--ink-2); font-size: 12px; }
+.chart .legend { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--ink-2); }
+.chart .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.chart svg { width: 100%; height: 190px; display: block; overflow: visible; touch-action: pan-y; }
+.chart .axis text { fill: var(--ink-2); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.chart .grid line { stroke: var(--grid); stroke-width: 1; }
+.chart .thr line { stroke: var(--crit); stroke-width: 1; stroke-dasharray: 4 4; }
+.chart .thr text { fill: var(--crit); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
+.chart .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .end { stroke: var(--panel); stroke-width: 2; }
+.chart .dlabel { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 10px; }
+.chart .cross line { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }
+.chart .cross circle { stroke: var(--panel); stroke-width: 2; }
+.chart .alarm-band { fill: var(--crit-soft); }
+.tip { position: fixed; pointer-events: none; z-index: 10; padding: 6px 10px; border-radius: 6px; background: var(--ink); color: var(--bg); font-size: 12px; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.2); line-height: 1.4; }
+.tip[hidden] { display: none; }
+
+/* 하단 표 */
+.bottom { display: grid; grid-template-columns: minmax(300px, 1fr) minmax(0, 2fr); gap: 16px; }
+@media (max-width: 900px) { .bottom { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
+.panel header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.panel h2 { font-size: 15px; font-weight: 600; }
+.panel header .count { margin-left: auto; color: var(--ink-2); font-size: 12px; }
+.panel .body { padding: 0; overflow: auto; max-height: 360px; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--panel-2); color: var(--ink-2); font-weight: 500; font-size: 12px; }
+td.n, th.n { text-align: right; }
+tr.current td { background: var(--panel-2); font-weight: 500; }
+tr.bad td { color: var(--ink-3); }
+.empty { padding: 20px 16px; color: var(--ink-2); font-size: 13px; }
+.lvl { font-weight: 600; } .lvl.HIGH { color: var(--crit); } .lvl.LOW { color: var(--warn); }
+.ev-CLEARED td { color: var(--ink-2); }
+footer { color: var(--ink-3); font-size: 12px; padding: 0 24px 24px; max-width: 1400px; margin: 0 auto; }
+
+/* ---- 모바일 ---- */
+@media (max-width: 640px) {
+  .top { padding: 12px 16px; gap: 10px; }
+  .top h1 { font-size: 18px; }
+  .top .sub { font-size: 11px; }
+  .transport { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 8px; }
+  .progress { width: 100%; min-width: 0; order: -1; }
+  .btn, .seg button { height: 40px; }
+  .btn.primary { flex: 1; justify-content: center; }
+  .seg { flex-basis: 100%; display: flex; }
+  .seg button { flex: 1; }
+  main { padding: 14px 12px 24px; gap: 12px; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .kpi { padding: 10px 12px; }
+  .kpi .num { font-size: 22px; }
+  .charts { grid-template-columns: minmax(0, 1fr); }
+  .chart svg { height: 170px; }
+  .panel .body { max-height: 300px; }
+  th, td { padding: 8px 10px; font-size: 12px; }
+  footer { padding: 0 16px 24px; }
+}

@@ -6,9 +6,12 @@ import assert from 'node:assert/strict';
 import { decodeRegister, planReads, toInt16 } from '../src/drivers/ModbusTcpDriver';
 import type { TagDefinition } from '../src/types';
 
-const tag = (name: 'temperature' | 'pressure', register: number): TagDefinition => ({
+const tag = (name: string, register: number): TagDefinition => ({
   name,
   label: name,
+  process: 'T',
+  group: name,
+  kind: 'analog',
   unit: '',
   register,
   scale: 0.1,

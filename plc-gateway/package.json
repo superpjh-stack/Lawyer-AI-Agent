@@ -2,7 +2,7 @@
   "name": "plc-data-gateway",
   "version": "1.0.0",
   "private": true,
-  "description": "PLC(온도·압력) 데이터를 1초 주기로 수집하여 REST/WebSocket 으로 제공하는 Data Gateway 서버",
+  "description": "PLC 설비 데이터(임진강김치 김치 공장 태그 세트)를 1초 주기로 수집하여 REST/WebSocket 으로 제공하는 Data Gateway 서버",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",

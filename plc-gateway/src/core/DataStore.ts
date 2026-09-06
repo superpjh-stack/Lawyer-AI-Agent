@@ -13,7 +13,6 @@
  */
 
 import type { Sample, TagName, TagStats } from '../types';
-import { TAG_NAMES } from '../types';
 
 export interface HistoryQuery {
   /** 최대 반환 개수 (최신순 정렬 후 잘라냄) */
@@ -32,7 +31,11 @@ export class DataStore {
   private size = 0;
   private latest: Sample | null = null;
 
-  constructor(private readonly capacity: number) {
+  /**
+   * @param capacity 링버퍼 용량 (샘플 수)
+   * @param tagNames 통계 대상 태그 이름 목록
+   */
+  constructor(private readonly capacity: number, private readonly tagNames: string[]) {
     if (!Number.isInteger(capacity) || capacity <= 0) {
       throw new Error(`HISTORY_CAPACITY 는 양의 정수여야 합니다: ${capacity}`);
     }
@@ -93,7 +96,7 @@ export class DataStore {
     const samples = this.getHistory({ sinceEpochMs: since, goodOnly: true });
 
     const stats = {} as Record<TagName, TagStats>;
-    for (const name of TAG_NAMES) {
+    for (const name of this.tagNames) {
       let count = 0;
       let min: number | null = null;
       let max: number | null = null;

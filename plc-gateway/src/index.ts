@@ -42,19 +42,22 @@ async function main(): Promise<void> {
   log.info('PLC Data Gateway 기동', {
     driver: config.env.PLC_DRIVER,
     intervalMs: config.env.POLL_INTERVAL_MS,
+    tagCount: config.tags.length,
     tags: config.tags.map((t) => `${t.name}(${t.unit})`),
     nodeEnv: config.env.NODE_ENV,
   });
 
   // 2~4. 핵심 객체 생성
   const driver = createDriver(config);
+  const tagNames = config.tags.map((t) => t.name);
   const poller = new Poller(driver, {
+    tagNames,
     intervalMs: config.env.POLL_INTERVAL_MS,
     timeoutMs: config.env.POLL_TIMEOUT_MS,
     reconnectBaseMs: config.env.RECONNECT_BASE_MS,
     reconnectMaxMs: config.env.RECONNECT_MAX_MS,
   });
-  const store = new DataStore(config.env.HISTORY_CAPACITY);
+  const store = new DataStore(config.env.HISTORY_CAPACITY, tagNames);
   const alarms = new AlarmEngine(config.tags, config.env.ALARM_HISTORY_CAPACITY);
   const sinks = createSinks(config);
 

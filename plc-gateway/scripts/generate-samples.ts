@@ -11,7 +11,7 @@
  *  사용법
  *    npx tsx scripts/generate-samples.ts                # 500개, public/samples/ 에 저장
  *    npx tsx scripts/generate-samples.ts --count 30     # 30개
- *    npx tsx scripts/generate-samples.ts --spike-at 60      # 60초째에 온도 스파이크(알람) 발생
+ *    npx tsx scripts/generate-samples.ts --spike-at 60      # 60초째에 숙성고 온도 스파이크(알람) 발생
  *    npx tsx scripts/generate-samples.ts --spike-at 60,300  # 여러 지점 (쉼표 구분), 0 이면 없음
  *    npx tsx scripts/generate-samples.ts --out ./data   # 출력 디렉터리 변경
  *
@@ -27,7 +27,7 @@ import { loadConfig } from '../src/config';
 import { AlarmEngine } from '../src/core/AlarmEngine';
 import { Poller } from '../src/core/Poller';
 import { SimulatorDriver } from '../src/drivers/SimulatorDriver';
-import type { Alarm, Sample } from '../src/types';
+import { publicTag, type Alarm, type Sample } from '../src/types';
 import { createLogger, setLogLevel } from '../src/utils/logger';
 
 const log = createLogger('gen');
@@ -47,13 +47,14 @@ async function main(): Promise<void> {
   const config = loadConfig({ ...process.env, POLL_INTERVAL_MS: String(intervalMs), POLL_TIMEOUT_MS: String(Math.floor(intervalMs * 0.8)) });
   setLogLevel('warn'); // 폴러 로그는 조용히, 진행 상황만 직접 출력
 
+  const tagNames = config.tags.map((t) => t.name);
   const driver = new SimulatorDriver({
-    tempBase: config.env.SIM_TEMP_BASE,
-    pressureBase: config.env.SIM_PRESSURE_BASE,
+    tags: config.tags,
     faultRate: config.env.SIM_FAULT_RATE,
     forceSpikeAtSec: spikeAt.length > 0 ? spikeAt : undefined,
   });
   const poller = new Poller(driver, {
+    tagNames,
     intervalMs,
     timeoutMs: Math.floor(intervalMs * 0.8),
     reconnectBaseMs: 1000,
@@ -69,9 +70,8 @@ async function main(): Promise<void> {
     poller.on('sample', (s) => {
       samples.push(s);
       alarms.evaluate(s);
-      process.stdout.write(
-        `\r[${String(samples.length).padStart(3)}/${count}] ${s.ts}  온도 ${s.values.temperature ?? '-'} ℃  압력 ${s.values.pressure ?? '-'} bar  (${s.quality})   `,
-      );
+      const head = config.tags.slice(0, 3).map((t) => `${t.label} ${s.values[t.name] ?? '-'}${t.unit === 'ON/OFF' ? '' : t.unit}`).join('  ');
+      process.stdout.write(`\r[${String(samples.length).padStart(3)}/${count}] ${s.ts}  ${head} …  (${s.quality})   `);
       if (samples.length >= count) resolve();
     });
   });
@@ -99,7 +99,7 @@ async function main(): Promise<void> {
           firstTs: samples[0]?.ts ?? null,
           lastTs: samples[samples.length - 1]?.ts ?? null,
         },
-        tags: config.tags.map((t) => ({ name: t.name, label: t.label, unit: t.unit, decimals: t.decimals, alarm: t.alarm ?? null })),
+        tags: config.tags.map((t) => publicTag(t)),
         samples,
         alarms: alarmEvents,
       },

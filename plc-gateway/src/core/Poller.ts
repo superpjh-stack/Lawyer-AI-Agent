@@ -34,13 +34,14 @@
 
 import { EventEmitter } from 'node:events';
 import type { PlcDriver, PlcReadResult } from '../drivers/PlcDriver';
-import type { Quality, Sample, TagName, TagValues } from '../types';
-import { TAG_NAMES } from '../types';
+import type { Quality, Sample, TagValues } from '../types';
 import { createLogger } from '../utils/logger';
 
 const log = createLogger('poller');
 
 export interface PollerOptions {
+  /** 수집 태그 이름 목록 (샘플 values 의 키 순서) */
+  tagNames: string[];
   /** 폴링 주기 (ms). 기본 1000 */
   intervalMs: number;
   /** 1회 읽기 타임아웃 (ms). intervalMs 보다 작아야 함 */
@@ -321,9 +322,9 @@ export class Poller extends EventEmitter {
     const now = Date.now();
     const quality: Quality = result ? 'GOOD' : 'BAD';
 
-    const values = {} as TagValues;
-    for (const name of TAG_NAMES) {
-      values[name as TagName] = result ? result[name] : null;
+    const values: TagValues = {};
+    for (const name of this.opts.tagNames) {
+      values[name] = result ? (result[name] ?? null) : null;
     }
 
     const sample: Sample = {
