@@ -4,8 +4,10 @@
 <style>
   /* =====================================================================
      PLC 샘플 리플레이 대시보드
-     - 시뮬레이터로 생성한 100건(1초 간격) 샘플을 1초에 1개씩 재생합니다.
-     - 데이터 소스: window.__PLC_SAMPLES__ (인라인 주입) 또는 samples/sample-100.json (fetch)
+     - 시뮬레이터로 생성한 N건(1초 간격) 샘플을 1초에 1개씩 재생합니다.
+     - 데이터 소스: window.__PLC_SAMPLES__ (인라인 주입) 또는 samples/sample-<N>.json (fetch)
+       N 은 URL 의 ?sample=<N> 으로 지정 (기본 500)
+     - 데이터 표는 성능을 위해 최근 100건만 표시 (전체는 samples/*.json 참고)
      - 테마: 라이트/다크/시스템 3상태 모두 토큰으로 대응
      ===================================================================== */
 
@@ -185,11 +187,11 @@
 <div class="top">
   <div>
     <h1>PLC 샘플 리플레이</h1>
-    <div class="sub" id="subtitle">시뮬레이터 생성 데이터 · 1초 간격 100건 · 온도(℃) / 압력(bar)</div>
+    <div class="sub" id="subtitle">시뮬레이터 생성 데이터 · 1초 간격 · 온도(℃) / 압력(bar)</div>
   </div>
   <div class="transport">
     <div class="progress">
-      <span class="mono" id="progressText">0 / 100</span>
+      <span class="mono" id="progressText">0 / -</span>
       <div class="track" aria-hidden="true"><i id="progressBar"></i></div>
     </div>
     <button class="btn" id="btnRestart" title="처음부터">⟲ 처음</button>
@@ -248,7 +250,7 @@
       </div>
     </div>
     <div class="panel">
-      <header><h2>샘플 데이터</h2><span class="count" id="tableCount">0 / 100</span></header>
+      <header><h2>샘플 데이터</h2><span class="count" id="tableCount">-</span></header>
       <div class="body">
         <table>
           <thead><tr><th class="n">seq</th><th>수집 시각 (UTC)</th><th class="n">온도 ℃</th><th class="n">압력 bar</th><th>품질</th><th class="n col-latency">지연 ms</th></tr></thead>
@@ -265,7 +267,7 @@
 /**
  * ---------------------------------------------------------------------
  *  리플레이 로직
- *  - 데이터 로딩: window.__PLC_SAMPLES__ 가 있으면 사용, 없으면 samples/sample-100.json fetch
+ *  - 데이터 로딩: window.__PLC_SAMPLES__ 가 있으면 사용, 없으면 samples/sample-<N>.json fetch (?sample=N, 기본 500)
  *  - 1초(÷속도)마다 cursor 를 1 증가시켜 KPI/차트/표/알람을 갱신
  *  - 알람은 게이트웨이 AlarmEngine 과 동일한 히스테리시스 규칙으로 재계산
  *    (생성 시 기록된 alarms 배열과 동일한 결과가 나오도록 함)
@@ -282,10 +284,14 @@
   var active = {};      // 활성 알람 key → alarm
   var events = [];      // 재생 중 발생한 알람 이벤트 (최신이 앞)
 
+  var TABLE_ROWS = 100; // 데이터 표에 표시할 최근 행 수 (매초 재렌더링 비용 제한)
+
   // ---------- 데이터 로딩 ----------
   function load() {
     if (window.__PLC_SAMPLES__) return Promise.resolve(window.__PLC_SAMPLES__);
-    return fetch('samples/sample-100.json').then(function (r) {
+    // 샘플 파일 선택: ?sample=500 → samples/sample-500.json (기본 500)
+    var n = parseInt(new URLSearchParams(location.search).get('sample') || '500', 10) || 500;
+    return fetch('samples/sample-' + n + '.json').then(function (r) {
       if (!r.ok) throw new Error('샘플 파일을 불러오지 못했습니다 (' + r.status + ')');
       return r.json();
     });
@@ -379,7 +385,7 @@
     var n = data.samples.length, s = data.samples[cursor - 1];
     $('progressText').textContent = cursor + ' / ' + n;
     $('progressBar').style.width = (cursor / n * 100) + '%';
-    $('tableCount').textContent = cursor + ' / ' + n;
+    $('tableCount').textContent = (cursor > TABLE_ROWS ? '최근 ' + TABLE_ROWS + '건 표시 · ' : '') + cursor + ' / ' + n;
 
     // KPI
     $('kTemp').innerHTML = fmt(s.values.temperature, 1) + '<small>℃</small>';
@@ -412,9 +418,9 @@
         '<td class="n mono">' + a.value + ' ' + t.unit + '</td></tr>';
     }).join('');
 
-    // 데이터 표: 최신이 위. 현재 행 강조
+    // 데이터 표: 최신이 위, 최근 TABLE_ROWS 건만. 현재 행 강조
     var rows = [];
-    for (var i = cursor - 1; i >= 0; i--) {
+    for (var i = cursor - 1; i >= Math.max(0, cursor - TABLE_ROWS); i--) {
       var r = data.samples[i];
       rows.push('<tr class="' + (i === cursor - 1 ? 'current' : '') + (r.quality !== 'GOOD' ? ' bad' : '') + '">' +
         '<td class="n mono">' + r.seq + '</td><td class="mono">' + r.ts.slice(11, 23) + '</td>' +
