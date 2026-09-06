@@ -1,4 +1,5 @@
 <title>PLC 샘플 리플레이</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   /* =====================================================================
@@ -87,6 +88,8 @@
 
   /* ---- 본문 그리드 ---- */
   main { padding: 20px 24px 32px; display: grid; gap: 16px; max-width: 1280px; margin: 0 auto; }
+  /* 그리드 자식의 기본 min-width:auto 가 표(nowrap)의 고유 폭만큼 페이지를 넓히지 않도록 차단 */
+  main > * { min-width: 0; }
   .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
   .kpi {
     background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
@@ -109,7 +112,7 @@
   .chart header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
   .chart h2 { font-size: 15px; font-weight: 600; }
   .chart .hint { color: var(--ink-2); font-size: 12px; margin-left: auto; }
-  .chart svg { width: 100%; height: 220px; display: block; overflow: visible; }
+  .chart svg { width: 100%; height: 220px; display: block; overflow: visible; touch-action: pan-y; }
   .chart .axis text { fill: var(--ink-2); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
   .chart .grid line { stroke: var(--grid); stroke-width: 1; }
   .chart .thr line { stroke: var(--crit); stroke-width: 1; stroke-dasharray: 4 4; }
@@ -128,12 +131,12 @@
 
   /* ---- 하단: 알람 로그 + 데이터 표 ---- */
   .bottom { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); gap: 16px; }
-  @media (max-width: 900px) { .bottom { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .bottom { grid-template-columns: minmax(0, 1fr); } }
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
   .panel header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
   .panel h2 { font-size: 15px; font-weight: 600; }
   .panel header .count { margin-left: auto; color: var(--ink-2); font-size: 12px; }
-  .panel .body { padding: 0; overflow: auto; max-height: 360px; }
+  .panel .body { padding: 0; overflow: auto; max-height: 360px; -webkit-overflow-scrolling: touch; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
   th { position: sticky; top: 0; background: var(--panel-2); color: var(--ink-2); font-weight: 500; font-size: 12px; }
@@ -145,6 +148,38 @@
   .ev-CLEARED td { color: var(--ink-2); }
 
   footer { color: var(--ink-3); font-size: 12px; padding: 0 24px 24px; max-width: 1280px; margin: 0 auto; }
+
+  /* ---- 모바일 (≤ 640px): 조작부 2단 배치, KPI 2열, 표 열 축소, 터치 타깃 확대 ---- */
+  @media (max-width: 640px) {
+    .top { padding: 12px 16px; gap: 10px; }
+    .top h1 { font-size: 18px; }
+    .top .sub { font-size: 11px; }
+    .transport { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 8px; }
+    .progress { width: 100%; min-width: 0; order: -1; }
+    .btn, .seg button { height: 40px; }           /* 터치 타깃 44px 근접 */
+    .btn { padding: 0 12px; font-size: 13px; }
+    .btn { white-space: nowrap; }
+    .btn.primary { flex: 1; justify-content: center; }
+    .seg { flex-basis: 100%; display: flex; }   /* 속도 선택은 다음 줄 전체 폭 */
+    .seg button { flex: 1; }
+    main { padding: 14px 12px 24px; gap: 12px; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .kpi { padding: 12px 12px; }
+    .kpi .num { font-size: 28px; }
+    .kpi .foot { font-size: 11px; line-height: 1.35; }
+    .chart { padding: 12px 10px 6px; }
+    .chart header { flex-wrap: wrap; gap: 2px 8px; }
+    .chart .hint { margin-left: 0; width: 100%; font-size: 11px; }
+    .chart svg { height: 180px; }
+    .panel .body { max-height: 300px; }
+    th, td { padding: 8px 10px; font-size: 12px; }
+    .col-latency { display: none; }              /* 좁은 화면에서는 지연(ms) 열 숨김 */
+    footer { padding: 0 16px 24px; }
+  }
+  @media (max-width: 380px) {
+    .kpi .num { font-size: 24px; }
+    .seg button { padding: 0 8px; }
+  }
 </style>
 
 <div class="top">
@@ -194,11 +229,11 @@
 
   <section class="chart" id="chartTemp">
     <header><h2>온도</h2><span class="hint">℃ · HIGH 임계값 80 ℃ 점선 · 알람 구간 음영</span></header>
-    <svg viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="온도 추이 차트"></svg>
+    <svg viewBox="0 0 1000 220" aria-label="온도 추이 차트"></svg>
   </section>
   <section class="chart" id="chartPres">
     <header><h2>압력</h2><span class="hint">bar · 임계값(0.5 / 8 bar)은 표시 범위 밖</span></header>
-    <svg viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="압력 추이 차트"></svg>
+    <svg viewBox="0 0 1000 220" aria-label="압력 추이 차트"></svg>
   </section>
 
   <section class="bottom">
@@ -216,7 +251,7 @@
       <header><h2>샘플 데이터</h2><span class="count" id="tableCount">0 / 100</span></header>
       <div class="body">
         <table>
-          <thead><tr><th class="n">seq</th><th>수집 시각 (UTC)</th><th class="n">온도 ℃</th><th class="n">압력 bar</th><th>품질</th><th class="n">지연 ms</th></tr></thead>
+          <thead><tr><th class="n">seq</th><th>수집 시각 (UTC)</th><th class="n">온도 ℃</th><th class="n">압력 bar</th><th>품질</th><th class="n col-latency">지연 ms</th></tr></thead>
           <tbody id="tableBody"></tbody>
         </table>
       </div>
@@ -384,7 +419,7 @@
       rows.push('<tr class="' + (i === cursor - 1 ? 'current' : '') + (r.quality !== 'GOOD' ? ' bad' : '') + '">' +
         '<td class="n mono">' + r.seq + '</td><td class="mono">' + r.ts.slice(11, 23) + '</td>' +
         '<td class="n mono">' + fmt(r.values.temperature, 2) + '</td><td class="n mono">' + fmt(r.values.pressure, 3) + '</td>' +
-        '<td>' + r.quality + '</td><td class="n mono">' + r.latencyMs + '</td></tr>');
+        '<td>' + r.quality + '</td><td class="n mono col-latency">' + r.latencyMs + '</td></tr>');
     }
     $('tableBody').innerHTML = rows.join('');
 
@@ -395,6 +430,17 @@
   // ---------- 차트 ----------
   var charts = {};
   var W = 1000, H = 220, PL = 56, PR = 20, PT = 14, PB = 28;
+  var narrow = false;   // 좁은 화면 여부 (라벨 수/여백 축소)
+
+  /** 컨테이너 실제 폭에 맞춰 viewBox 크기를 정하고 여백/라벨 밀도를 조정 */
+  function measure(svg) {
+    var w = Math.max(280, Math.round(svg.getBoundingClientRect().width || 1000));
+    var h = Math.round(svg.getBoundingClientRect().height || 220);
+    narrow = w < 560;
+    W = w; H = h > 0 ? h : 220;
+    PL = narrow ? 44 : 56; PR = narrow ? 12 : 20;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  }
 
   function setupCharts() {
     var temps = data.samples.map(function (s) { return s.values.temperature; }).filter(function (v) { return v !== null; });
@@ -422,6 +468,7 @@
   function yOf(v, dom) { return PT + (1 - (v - dom[0]) / (dom[1] - dom[0])) * (H - PT - PB); }
 
   function drawChart(c) {
+    measure(c.svg);
     var n = data.samples.length, dom = c.domain, shown = data.samples.slice(0, cursor);
     var g = '';
 
@@ -440,11 +487,12 @@
     }
     g += '</g>';
 
-    // X축 라벨 (시각, 5개)
+    // X축 라벨 (시각): 넓으면 5개, 좁으면 3개
+    var ticks = narrow ? 2 : 4;
     g += '<g class="axis">';
-    for (var j = 0; j <= 4; j++) {
-      var idx = Math.round((n - 1) * j / 4);
-      g += '<text x="' + xOf(idx, n) + '" y="' + (H - 8) + '" text-anchor="' + (j === 0 ? 'start' : j === 4 ? 'end' : 'middle') + '">' + fmtTime(data.samples[idx].ts) + '</text>';
+    for (var j = 0; j <= ticks; j++) {
+      var idx = Math.round((n - 1) * j / ticks);
+      g += '<text x="' + xOf(idx, n) + '" y="' + (H - 8) + '" text-anchor="' + (j === 0 ? 'start' : j === ticks ? 'end' : 'middle') + '">' + fmtTime(data.samples[idx].ts) + '</text>';
     }
     g += '</g>';
 
@@ -494,12 +542,19 @@
     return out;
   }
 
-  // ---------- 호버: 크로스헤어 + 툴팁 ----------
+  // 화면 회전/리사이즈 시 차트를 새 폭으로 다시 그림
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { if (data) { drawChart(charts.temp); drawChart(charts.pres); } }, 120);
+  });
+
+  // ---------- 호버/터치: 크로스헤어 + 툴팁 ----------
   function attachHover(c) {
     var tip = $('tip');
-    c.svg.addEventListener('mousemove', function (e) {
+    function show(clientX, clientY) {
       var rect = c.svg.getBoundingClientRect();
-      var px = (e.clientX - rect.left) / rect.width * W;
+      var px = (clientX - rect.left) / rect.width * W;
       var n = data.samples.length;
       var i = Math.round((px - PL) / (W - PL - PR) * (n - 1));
       i = Math.max(0, Math.min(cursor - 1, i));
@@ -511,11 +566,19 @@
         '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + c.color + '"/>';
       tip.hidden = false;
       tip.textContent = fmtTime(s.ts) + ' · seq ' + s.seq + ' · ' + v.toFixed(c.d + 1) + ' ' + c.unit;
-      tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY - 30) + 'px';
-    });
-    c.svg.addEventListener('mouseleave', function () {
-      c.svg.querySelector('[data-cross]').innerHTML = ''; tip.hidden = true;
-    });
+      // 화면 오른쪽 끝에서 잘리지 않도록 위치 보정
+      var tw = tip.offsetWidth || 160;
+      var left = clientX + 14; if (left + tw > window.innerWidth - 8) left = clientX - tw - 14;
+      tip.style.left = Math.max(8, left) + 'px'; tip.style.top = (clientY - 36) + 'px';
+    }
+    function hide() { c.svg.querySelector('[data-cross]').innerHTML = ''; tip.hidden = true; }
+
+    c.svg.addEventListener('mousemove', function (e) { show(e.clientX, e.clientY); });
+    c.svg.addEventListener('mouseleave', hide);
+    // 터치: 손가락을 따라 크로스헤어 이동, 떼면 잠시 후 숨김 (세로 스크롤은 touch-action: pan-y 로 유지)
+    c.svg.addEventListener('touchstart', function (e) { var t = e.touches[0]; show(t.clientX, t.clientY); }, { passive: true });
+    c.svg.addEventListener('touchmove', function (e) { var t = e.touches[0]; show(t.clientX, t.clientY); }, { passive: true });
+    c.svg.addEventListener('touchend', function () { setTimeout(hide, 1500); }, { passive: true });
   }
 })();
 </script>
