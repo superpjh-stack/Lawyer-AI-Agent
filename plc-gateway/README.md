@@ -109,11 +109,26 @@ plc-gateway/
 │  │  ├─ httpServer.ts      Express REST API, /health, /metrics, 정적 파일
 │  │  └─ wsServer.ts        WebSocket 브로드캐스트, 하트비트
 │  └─ utils/logger.ts       JSON 구조화 로거
-├─ public/index.html        실시간 대시보드 (외부 의존성 없음)
+├─ public/index.html        실시간 대시보드 (WebSocket, 외부 의존성 없음)
+├─ public/replay.html       샘플 리플레이 대시보드 (1초에 1건 재생)
+├─ public/samples/          생성된 예시 샘플 (sample-100.json / .jsonl)
+├─ scripts/generate-samples.ts  샘플 데이터 생성 스크립트
 ├─ test/                    node:test 단위 테스트
 ├─ .env.example             환경변수 설명
 └─ Dockerfile
 ```
+
+## 샘플 데이터 생성 / 리플레이 대시보드
+
+```bash
+npx tsx scripts/generate-samples.ts --count 100 --spike-at 60
+# → public/samples/sample-100.json / .jsonl  (1초 간격 100건, 60초째 온도 스파이크로 HIGH 알람 1회)
+npm run dev
+# → http://localhost:4000/replay.html  생성된 샘플을 1초에 1건씩 재생 (재생/일시정지/속도/끝으로)
+```
+
+실제 Poller + SimulatorDriver 경로로 생성하므로 타임스탬프 정렬, seq, latency, quality 필드가
+운영 데이터와 동일한 형식입니다. `public/samples/sample-100.*` 는 예시 데이터로 저장소에 포함되어 있습니다.
 
 ## 스크립트
 

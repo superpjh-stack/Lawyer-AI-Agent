@@ -1,0 +1,521 @@
+<title>PLC 샘플 리플레이</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* =====================================================================
+     PLC 샘플 리플레이 대시보드
+     - 시뮬레이터로 생성한 100건(1초 간격) 샘플을 1초에 1개씩 재생합니다.
+     - 데이터 소스: window.__PLC_SAMPLES__ (인라인 주입) 또는 samples/sample-100.json (fetch)
+     - 테마: 라이트/다크/시스템 3상태 모두 토큰으로 대응
+     ===================================================================== */
+
+  /* ---- 토큰: 라이트 (기본) ---- */
+  :root {
+    --bg: #F2F4F3;          /* 페이지 바탕: 약간 녹청 기운의 회색 */
+    --panel: #FFFFFF;       /* 패널 */
+    --panel-2: #E9EDEC;     /* 보조 면 (트랙, 표 헤더) */
+    --line: #D5DBD9;        /* 경계선 */
+    --grid: #E3E8E6;        /* 차트 그리드 */
+    --ink: #1A2328;         /* 본문 글자 */
+    --ink-2: #5C6B73;       /* 보조 글자 */
+    --ink-3: #8C9AA2;       /* 약한 글자 */
+    --temp: #D9632B;        /* 온도 시리즈 */
+    --temp-soft: rgba(217, 99, 43, 0.12);
+    --pres: #2F6FA8;        /* 압력 시리즈 */
+    --pres-soft: rgba(47, 111, 168, 0.12);
+    --good: #2A8A5B;
+    --good-soft: rgba(42, 138, 91, 0.14);
+    --crit: #C33A3A;
+    --crit-soft: rgba(195, 58, 58, 0.14);
+    --warn: #B8860B;
+    --focus: #2F6FA8;
+    --shadow: 0 1px 2px rgba(20, 30, 35, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1518; --panel: #171F24; --panel-2: #1F2A30; --line: #2B373E; --grid: #223038;
+      --ink: #E4EAED; --ink-2: #8A9AA4; --ink-3: #62727C;
+      --temp: #E06A2A; --temp-soft: rgba(224, 106, 42, 0.18);
+      --pres: #3D8FD6; --pres-soft: rgba(61, 143, 214, 0.18);
+      --good: #3FA46F; --good-soft: rgba(63, 164, 111, 0.18);
+      --crit: #E05252; --crit-soft: rgba(224, 82, 82, 0.18);
+      --warn: #D4A017; --focus: #3D8FD6; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1518; --panel: #171F24; --panel-2: #1F2A30; --line: #2B373E; --grid: #223038;
+    --ink: #E4EAED; --ink-2: #8A9AA4; --ink-3: #62727C;
+    --temp: #E06A2A; --temp-soft: rgba(224, 106, 42, 0.18);
+    --pres: #3D8FD6; --pres-soft: rgba(61, 143, 214, 0.18);
+    --good: #3FA46F; --good-soft: rgba(63, 164, 111, 0.18);
+    --crit: #E05252; --crit-soft: rgba(224, 82, 82, 0.18);
+    --warn: #D4A017; --focus: #3D8FD6; --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.5 "IBM Plex Sans", "Noto Sans KR", system-ui, sans-serif;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  h1, h2 { font-family: "Barlow", "IBM Plex Sans", system-ui, sans-serif; margin: 0; text-wrap: balance; }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  /* ---- 상단 바: 이름 + 재생 조작 ---- */
+  .top {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+    padding: 14px 24px; background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  .top h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.01em; }
+  .top .sub { color: var(--ink-2); font-size: 12px; }
+  .transport { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
+    border: 1px solid var(--line); border-radius: 6px; background: var(--panel-2); cursor: pointer;
+    font-size: 13px; font-weight: 500;
+  }
+  .btn:hover { border-color: var(--ink-3); }
+  .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .seg button { height: 32px; padding: 0 10px; border: 0; background: transparent; cursor: pointer; font-size: 12px; }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .progress { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+  .track { flex: 1; height: 4px; background: var(--panel-2); border-radius: 2px; overflow: hidden; }
+  .track > i { display: block; height: 100%; width: 0%; background: var(--ink); transition: width 0.3s linear; }
+  @media (prefers-reduced-motion: reduce) { .track > i { transition: none; } }
+
+  /* ---- 본문 그리드 ---- */
+  main { padding: 20px 24px 32px; display: grid; gap: 16px; max-width: 1280px; margin: 0 auto; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .kpi {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
+    box-shadow: var(--shadow); display: grid; gap: 4px; position: relative;
+  }
+  .kpi .label { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+  .kpi .label i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .kpi .num { font-size: 34px; line-height: 1.05; font-weight: 500; }
+  .kpi .num small { font-size: 14px; color: var(--ink-2); margin-left: 4px; font-weight: 400; }
+  .kpi .foot { font-size: 12px; color: var(--ink-2); }
+  .kpi.temp .num { color: var(--temp); } .kpi.pres .num { color: var(--pres); }
+  .kpi.alarm-active { border-color: var(--crit); background: var(--crit-soft); }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+  .pill.good { background: var(--good-soft); color: var(--good); }
+  .pill.crit { background: var(--crit-soft); color: var(--crit); }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  /* ---- 차트 ---- */
+  .chart { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 8px; box-shadow: var(--shadow); }
+  .chart header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .chart h2 { font-size: 15px; font-weight: 600; }
+  .chart .hint { color: var(--ink-2); font-size: 12px; margin-left: auto; }
+  .chart svg { width: 100%; height: 220px; display: block; overflow: visible; }
+  .chart .axis text { fill: var(--ink-2); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+  .chart .grid line { stroke: var(--grid); stroke-width: 1; }
+  .chart .thr line { stroke: var(--crit); stroke-width: 1; stroke-dasharray: 4 4; }
+  .chart .thr text { fill: var(--crit); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+  .chart .area { opacity: 1; }
+  .chart .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .end { stroke: var(--panel); stroke-width: 2; }
+  .chart .cross line { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }
+  .chart .cross circle { stroke: var(--panel); stroke-width: 2; }
+  .chart .alarm-band { fill: var(--crit-soft); }
+  .tip {
+    position: fixed; pointer-events: none; z-index: 10; padding: 6px 10px; border-radius: 6px;
+    background: var(--ink); color: var(--bg); font-size: 12px; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .tip[hidden] { display: none; }
+
+  /* ---- 하단: 알람 로그 + 데이터 표 ---- */
+  .bottom { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); gap: 16px; }
+  @media (max-width: 900px) { .bottom { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
+  .panel header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .panel h2 { font-size: 15px; font-weight: 600; }
+  .panel header .count { margin-left: auto; color: var(--ink-2); font-size: 12px; }
+  .panel .body { padding: 0; overflow: auto; max-height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { position: sticky; top: 0; background: var(--panel-2); color: var(--ink-2); font-weight: 500; font-size: 12px; }
+  td.n, th.n { text-align: right; }
+  tr.current td { background: var(--panel-2); font-weight: 500; }
+  tr.bad td { color: var(--ink-3); }
+  .empty { padding: 20px 16px; color: var(--ink-2); font-size: 13px; }
+  .lvl { font-weight: 600; } .lvl.HIGH { color: var(--crit); } .lvl.LOW { color: var(--warn); }
+  .ev-CLEARED td { color: var(--ink-2); }
+
+  footer { color: var(--ink-3); font-size: 12px; padding: 0 24px 24px; max-width: 1280px; margin: 0 auto; }
+</style>
+
+<div class="top">
+  <div>
+    <h1>PLC 샘플 리플레이</h1>
+    <div class="sub" id="subtitle">시뮬레이터 생성 데이터 · 1초 간격 100건 · 온도(℃) / 압력(bar)</div>
+  </div>
+  <div class="transport">
+    <div class="progress">
+      <span class="mono" id="progressText">0 / 100</span>
+      <div class="track" aria-hidden="true"><i id="progressBar"></i></div>
+    </div>
+    <button class="btn" id="btnRestart" title="처음부터">⟲ 처음</button>
+    <button class="btn primary" id="btnPlay" aria-pressed="true">❚❚ 일시정지</button>
+    <button class="btn" id="btnEnd" title="전체 데이터 보기">끝으로 ⇥</button>
+    <div class="seg" role="group" aria-label="재생 속도">
+      <button data-speed="1" aria-pressed="true">1×</button>
+      <button data-speed="5" aria-pressed="false">5×</button>
+      <button data-speed="20" aria-pressed="false">20×</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="kpis">
+    <div class="kpi temp">
+      <div class="label"><i style="background:var(--temp)"></i>온도</div>
+      <div class="num mono" id="kTemp">--<small>℃</small></div>
+      <div class="foot" id="kTempFoot">HIGH 80 ℃ · LOW −10 ℃</div>
+    </div>
+    <div class="kpi pres">
+      <div class="label"><i style="background:var(--pres)"></i>압력</div>
+      <div class="num mono" id="kPres">--<small>bar</small></div>
+      <div class="foot" id="kPresFoot">HIGH 8 bar · LOW 0.5 bar</div>
+    </div>
+    <div class="kpi" id="kAlarmCard">
+      <div class="label">알람 상태</div>
+      <div><span class="pill good" id="kAlarm"><span class="dot"></span>정상</span></div>
+      <div class="foot" id="kAlarmFoot">활성 알람 없음</div>
+    </div>
+    <div class="kpi">
+      <div class="label">수집 시각</div>
+      <div class="num mono" id="kClock" style="font-size:26px">--:--:--</div>
+      <div class="foot" id="kClockFoot">seq - · 지연 - ms</div>
+    </div>
+  </section>
+
+  <section class="chart" id="chartTemp">
+    <header><h2>온도</h2><span class="hint">℃ · HIGH 임계값 80 ℃ 점선 · 알람 구간 음영</span></header>
+    <svg viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="온도 추이 차트"></svg>
+  </section>
+  <section class="chart" id="chartPres">
+    <header><h2>압력</h2><span class="hint">bar · 임계값(0.5 / 8 bar)은 표시 범위 밖</span></header>
+    <svg viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="압력 추이 차트"></svg>
+  </section>
+
+  <section class="bottom">
+    <div class="panel">
+      <header><h2>알람 이벤트</h2><span class="count" id="alarmCount">0건</span></header>
+      <div class="body">
+        <table>
+          <thead><tr><th>시각</th><th>태그</th><th>종류</th><th>상태</th><th class="n">값</th></tr></thead>
+          <tbody id="alarmBody"></tbody>
+        </table>
+        <div class="empty" id="alarmEmpty">아직 발생한 알람이 없습니다.</div>
+      </div>
+    </div>
+    <div class="panel">
+      <header><h2>샘플 데이터</h2><span class="count" id="tableCount">0 / 100</span></header>
+      <div class="body">
+        <table>
+          <thead><tr><th class="n">seq</th><th>수집 시각 (UTC)</th><th class="n">온도 ℃</th><th class="n">압력 bar</th><th>품질</th><th class="n">지연 ms</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="footer">데이터는 plc-gateway 시뮬레이터 드라이버로 생성한 예시 값이며 실제 설비 측정값이 아닙니다.</footer>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+/**
+ * ---------------------------------------------------------------------
+ *  리플레이 로직
+ *  - 데이터 로딩: window.__PLC_SAMPLES__ 가 있으면 사용, 없으면 samples/sample-100.json fetch
+ *  - 1초(÷속도)마다 cursor 를 1 증가시켜 KPI/차트/표/알람을 갱신
+ *  - 알람은 게이트웨이 AlarmEngine 과 동일한 히스테리시스 규칙으로 재계산
+ *    (생성 시 기록된 alarms 배열과 동일한 결과가 나오도록 함)
+ * --------------------------------------------------------------------- */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var data = null;      // { meta, tags, samples, alarms }
+  var cursor = 0;       // 현재까지 재생된 샘플 수 (1..N)
+  var playing = true;
+  var speed = 1;
+  var timer = null;
+  var active = {};      // 활성 알람 key → alarm
+  var events = [];      // 재생 중 발생한 알람 이벤트 (최신이 앞)
+
+  // ---------- 데이터 로딩 ----------
+  function load() {
+    if (window.__PLC_SAMPLES__) return Promise.resolve(window.__PLC_SAMPLES__);
+    return fetch('samples/sample-100.json').then(function (r) {
+      if (!r.ok) throw new Error('샘플 파일을 불러오지 못했습니다 (' + r.status + ')');
+      return r.json();
+    });
+  }
+
+  load().then(function (d) {
+    data = d;
+    var n = d.samples.length;
+    $('subtitle').textContent = '시뮬레이터 생성 데이터 · 1초 간격 ' + n + '건 · ' +
+      fmtTime(d.samples[0].ts) + ' ~ ' + fmtTime(d.samples[n - 1].ts) + ' (UTC)';
+    var ta = tagOf('temperature').alarm, pa = tagOf('pressure').alarm;
+    if (ta) $('kTempFoot').textContent = 'HIGH ' + ta.high + ' ℃ · LOW ' + ta.low + ' ℃ · 히스테리시스 ' + ta.hysteresis;
+    if (pa) $('kPresFoot').textContent = 'HIGH ' + pa.high + ' bar · LOW ' + pa.low + ' bar · 히스테리시스 ' + pa.hysteresis;
+    setupCharts();
+    seek(1);
+    schedule();
+  }).catch(function (err) {
+    $('subtitle').textContent = String(err.message || err);
+  });
+
+  function tagOf(name) { return data.tags.filter(function (t) { return t.name === name; })[0] || {}; }
+  function fmtTime(iso) { return iso.slice(11, 19); }
+  function fmt(v, d) { return v === null || v === undefined ? '--' : Number(v).toFixed(d); }
+
+  // ---------- 재생 제어 ----------
+  function schedule() {
+    clearInterval(timer);
+    if (!playing) return;
+    timer = setInterval(function () {
+      if (cursor >= data.samples.length) { setPlaying(false); return; }
+      seek(cursor + 1);
+    }, 1000 / speed);
+  }
+  function setPlaying(p) {
+    playing = p;
+    var b = $('btnPlay');
+    b.textContent = p ? '❚❚ 일시정지' : '▶ 재생';
+    b.setAttribute('aria-pressed', String(p));
+    schedule();
+  }
+  $('btnPlay').addEventListener('click', function () {
+    if (!playing && cursor >= data.samples.length) seek(1);
+    setPlaying(!playing);
+  });
+  $('btnRestart').addEventListener('click', function () { seek(1); setPlaying(true); });
+  $('btnEnd').addEventListener('click', function () { seek(data.samples.length); setPlaying(false); });
+  Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (b) {
+    b.addEventListener('click', function () {
+      speed = Number(b.dataset.speed);
+      Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      schedule();
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.code === 'Space' && e.target === document.body) { e.preventDefault(); $('btnPlay').click(); }
+  });
+
+  /**
+   * cursor 를 to 로 이동시키며 그 사이 샘플의 알람을 순서대로 평가.
+   * 뒤로 이동(처음부터)하면 알람 상태를 초기화한 뒤 처음부터 다시 평가.
+   */
+  function seek(to) {
+    if (to < cursor) { cursor = 0; active = {}; events = []; }
+    while (cursor < to) { cursor += 1; evaluateAlarm(data.samples[cursor - 1]); }
+    render();
+  }
+
+  // ---------- 알람 (AlarmEngine 과 동일 규칙) ----------
+  function evaluateAlarm(s) {
+    if (s.quality !== 'GOOD') return;
+    data.tags.forEach(function (t) {
+      var v = s.values[t.name]; if (v === null || !t.alarm) return;
+      var a = t.alarm;
+      if (a.high !== null && a.high !== undefined) transition(t.name, 'HIGH', v, a.high, s.ts, v > a.high, v <= a.high - a.hysteresis);
+      if (a.low !== null && a.low !== undefined) transition(t.name, 'LOW', v, a.low, s.ts, v < a.low, v >= a.low + a.hysteresis);
+    });
+  }
+  function transition(tag, level, value, threshold, ts, raise, clear) {
+    var key = tag + ':' + level, ex = active[key];
+    if (!ex && raise) {
+      active[key] = { tag: tag, level: level, state: 'ACTIVE', value: value, threshold: threshold, raisedAt: ts };
+      events.unshift(active[key]);
+    } else if (ex && clear) {
+      delete active[key];
+      events.unshift({ tag: tag, level: level, state: 'CLEARED', value: value, threshold: threshold, raisedAt: ex.raisedAt, clearedAt: ts });
+    }
+  }
+
+  // ---------- 렌더링 ----------
+  function render() {
+    var n = data.samples.length, s = data.samples[cursor - 1];
+    $('progressText').textContent = cursor + ' / ' + n;
+    $('progressBar').style.width = (cursor / n * 100) + '%';
+    $('tableCount').textContent = cursor + ' / ' + n;
+
+    // KPI
+    $('kTemp').innerHTML = fmt(s.values.temperature, 1) + '<small>℃</small>';
+    $('kPres').innerHTML = fmt(s.values.pressure, 2) + '<small>bar</small>';
+    $('kClock').textContent = fmtTime(s.ts);
+    $('kClockFoot').textContent = 'seq ' + s.seq + ' · 지연 ' + s.latencyMs + ' ms · ' + s.quality;
+
+    var keys = Object.keys(active);
+    var card = $('kAlarmCard'), pill = $('kAlarm');
+    if (keys.length) {
+      card.classList.add('alarm-active');
+      pill.className = 'pill crit'; pill.innerHTML = '<span class="dot"></span>알람 ' + keys.length + '건';
+      $('kAlarmFoot').textContent = keys.map(function (k) {
+        var a = active[k]; return tagOf(a.tag).label + ' ' + a.level + ' (' + a.value + ' > ' + a.threshold + ')';
+      }).join(' · ');
+    } else {
+      card.classList.remove('alarm-active');
+      pill.className = 'pill good'; pill.innerHTML = '<span class="dot"></span>정상';
+      $('kAlarmFoot').textContent = events.length ? '활성 알람 없음 · 누적 이벤트 ' + events.length + '건' : '활성 알람 없음';
+    }
+
+    // 알람 표
+    $('alarmCount').textContent = events.length + '건';
+    $('alarmEmpty').hidden = events.length > 0;
+    $('alarmBody').innerHTML = events.map(function (a) {
+      var t = tagOf(a.tag);
+      return '<tr class="ev-' + a.state + '"><td class="mono">' + fmtTime(a.state === 'CLEARED' ? a.clearedAt : a.raisedAt) + '</td>' +
+        '<td>' + t.label + '</td><td class="lvl ' + a.level + '">' + a.level + '</td>' +
+        '<td>' + (a.state === 'ACTIVE' ? '발생' : '해제') + '</td>' +
+        '<td class="n mono">' + a.value + ' ' + t.unit + '</td></tr>';
+    }).join('');
+
+    // 데이터 표: 최신이 위. 현재 행 강조
+    var rows = [];
+    for (var i = cursor - 1; i >= 0; i--) {
+      var r = data.samples[i];
+      rows.push('<tr class="' + (i === cursor - 1 ? 'current' : '') + (r.quality !== 'GOOD' ? ' bad' : '') + '">' +
+        '<td class="n mono">' + r.seq + '</td><td class="mono">' + r.ts.slice(11, 23) + '</td>' +
+        '<td class="n mono">' + fmt(r.values.temperature, 2) + '</td><td class="n mono">' + fmt(r.values.pressure, 3) + '</td>' +
+        '<td>' + r.quality + '</td><td class="n mono">' + r.latencyMs + '</td></tr>');
+    }
+    $('tableBody').innerHTML = rows.join('');
+
+    drawChart(charts.temp);
+    drawChart(charts.pres);
+  }
+
+  // ---------- 차트 ----------
+  var charts = {};
+  var W = 1000, H = 220, PL = 56, PR = 20, PT = 14, PB = 28;
+
+  function setupCharts() {
+    var temps = data.samples.map(function (s) { return s.values.temperature; }).filter(function (v) { return v !== null; });
+    var press = data.samples.map(function (s) { return s.values.pressure; }).filter(function (v) { return v !== null; });
+    var ta = tagOf('temperature').alarm;
+    charts.temp = {
+      svg: document.querySelector('#chartTemp svg'), key: 'temperature', color: 'var(--temp)', soft: 'var(--temp-soft)',
+      d: 1, unit: '℃', threshold: ta && ta.high !== null ? ta.high : null,
+      domain: niceDomain(Math.min.apply(null, temps), Math.max.apply(null, temps.concat(ta && ta.high !== null ? [ta.high] : [])), 5)
+    };
+    charts.pres = {
+      svg: document.querySelector('#chartPres svg'), key: 'pressure', color: 'var(--pres)', soft: 'var(--pres-soft)',
+      d: 2, unit: 'bar', threshold: null,
+      domain: niceDomain(Math.min.apply(null, press), Math.max.apply(null, press), 0.1)
+    };
+    [charts.temp, charts.pres].forEach(attachHover);
+  }
+
+  /** 데이터 범위를 step 단위로 여유 있게 확장 */
+  function niceDomain(min, max, step) {
+    var lo = Math.floor(min / step) * step - step, hi = Math.ceil(max / step) * step + step;
+    return [lo, hi];
+  }
+  function xOf(i, n) { return PL + (i / Math.max(1, n - 1)) * (W - PL - PR); }
+  function yOf(v, dom) { return PT + (1 - (v - dom[0]) / (dom[1] - dom[0])) * (H - PT - PB); }
+
+  function drawChart(c) {
+    var n = data.samples.length, dom = c.domain, shown = data.samples.slice(0, cursor);
+    var g = '';
+
+    // 알람 구간 음영 (해당 태그의 ACTIVE→CLEARED 구간)
+    var bands = alarmBands(c.key);
+    bands.forEach(function (b) {
+      g += '<rect class="alarm-band" x="' + xOf(b[0], n) + '" y="' + PT + '" width="' + Math.max(1, xOf(b[1], n) - xOf(b[0], n)) + '" height="' + (H - PT - PB) + '"/>';
+    });
+
+    // 그리드 + Y축 라벨 (5단계)
+    g += '<g class="grid axis">';
+    for (var k = 0; k <= 4; k++) {
+      var v = dom[0] + (dom[1] - dom[0]) * k / 4, y = yOf(v, dom);
+      g += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y + '" y2="' + y + '"/>';
+      g += '<text x="' + (PL - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + v.toFixed(c.d) + '</text>';
+    }
+    g += '</g>';
+
+    // X축 라벨 (시각, 5개)
+    g += '<g class="axis">';
+    for (var j = 0; j <= 4; j++) {
+      var idx = Math.round((n - 1) * j / 4);
+      g += '<text x="' + xOf(idx, n) + '" y="' + (H - 8) + '" text-anchor="' + (j === 0 ? 'start' : j === 4 ? 'end' : 'middle') + '">' + fmtTime(data.samples[idx].ts) + '</text>';
+    }
+    g += '</g>';
+
+    // 임계값 선
+    if (c.threshold !== null && c.threshold >= dom[0] && c.threshold <= dom[1]) {
+      var ty = yOf(c.threshold, dom);
+      g += '<g class="thr"><line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + ty + '" y2="' + ty + '"/>' +
+        '<text x="' + (W - PR) + '" y="' + (ty - 5) + '" text-anchor="end">HIGH ' + c.threshold + ' ' + c.unit + '</text></g>';
+    }
+
+    // 면 + 선 (BAD 구간은 끊어서 그림)
+    var path = '', area = '', open = false, lastX = null, baseY = yOf(dom[0], dom), startX = null;
+    shown.forEach(function (s, i) {
+      var v = s.values[c.key];
+      if (v === null) { if (open) { area += ' L' + lastX + ' ' + baseY + ' Z'; } open = false; return; }
+      var x = xOf(i, n), y = yOf(v, dom);
+      if (!open) { path += ' M' + x + ' ' + y; area += ' M' + x + ' ' + baseY + ' L' + x + ' ' + y; open = true; startX = x; }
+      else { path += ' L' + x + ' ' + y; area += ' L' + x + ' ' + y; }
+      lastX = x;
+    });
+    if (open) area += ' L' + lastX + ' ' + baseY + ' Z';
+    g += '<path class="area" d="' + area + '" fill="' + c.soft + '"/>';
+    g += '<path class="line" d="' + path + '" stroke="' + c.color + '"/>';
+
+    // 끝점 강조
+    var last = shown[shown.length - 1];
+    if (last && last.values[c.key] !== null) {
+      g += '<circle class="end" cx="' + xOf(cursor - 1, n) + '" cy="' + yOf(last.values[c.key], dom) + '" r="4.5" fill="' + c.color + '"/>';
+    }
+
+    g += '<g class="cross" data-cross></g>';
+    c.svg.innerHTML = g;
+  }
+
+  /** 지정 태그의 알람 활성 구간 [시작 index, 끝 index] 목록 (재생된 범위 기준) */
+  function alarmBands(tag) {
+    var out = [], startIdx = null;
+    for (var i = 0; i < cursor; i++) {
+      var s = data.samples[i], v = s.values[tag], a = tagOf(tag).alarm;
+      if (!a || v === null) continue;
+      var over = (a.high !== null && v > a.high) || (a.low !== null && v < a.low);
+      var back = (a.high !== null && v <= a.high - a.hysteresis) && (a.low === null || v >= a.low + a.hysteresis);
+      if (startIdx === null && over) startIdx = i;
+      else if (startIdx !== null && back) { out.push([startIdx, i]); startIdx = null; }
+    }
+    if (startIdx !== null) out.push([startIdx, cursor - 1]);
+    return out;
+  }
+
+  // ---------- 호버: 크로스헤어 + 툴팁 ----------
+  function attachHover(c) {
+    var tip = $('tip');
+    c.svg.addEventListener('mousemove', function (e) {
+      var rect = c.svg.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width * W;
+      var n = data.samples.length;
+      var i = Math.round((px - PL) / (W - PL - PR) * (n - 1));
+      i = Math.max(0, Math.min(cursor - 1, i));
+      var s = data.samples[i], v = s.values[c.key];
+      var cross = c.svg.querySelector('[data-cross]');
+      if (v === null) { cross.innerHTML = ''; tip.hidden = true; return; }
+      var x = xOf(i, n), y = yOf(v, c.domain);
+      cross.innerHTML = '<line x1="' + x + '" x2="' + x + '" y1="' + PT + '" y2="' + (H - PB) + '"/>' +
+        '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + c.color + '"/>';
+      tip.hidden = false;
+      tip.textContent = fmtTime(s.ts) + ' · seq ' + s.seq + ' · ' + v.toFixed(c.d + 1) + ' ' + c.unit;
+      tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY - 30) + 'px';
+    });
+    c.svg.addEventListener('mouseleave', function () {
+      c.svg.querySelector('[data-cross]').innerHTML = ''; tip.hidden = true;
+    });
+  }
+})();
+</script>

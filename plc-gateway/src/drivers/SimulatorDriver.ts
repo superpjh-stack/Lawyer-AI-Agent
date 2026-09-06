@@ -26,6 +26,11 @@ export interface SimulatorOptions {
   faultRate: number;
   /** 시뮬레이션 지연 (ms). 실제 PLC 응답 시간을 흉내냄 */
   latencyMs?: number;
+  /**
+   * 기동 후 이 초(秒)에 도달하면 온도 스파이크(20초간 +60℃)를 강제로 발생시킵니다.
+   * 알람 데모/샘플 데이터 생성용. 미설정 시 랜덤 발생만 적용.
+   */
+  forceSpikeAtSec?: number;
 }
 
 export class SimulatorDriver implements PlcDriver {
@@ -40,6 +45,9 @@ export class SimulatorDriver implements PlcDriver {
 
   /** 온도 스파이크 잔여 시간(초). 0 이면 스파이크 없음 */
   private spikeRemaining = 0;
+
+  /** 읽기 호출 횟수 (forceSpikeAtSec 판정용) */
+  private readCount = 0;
 
   constructor(private readonly opts: SimulatorOptions) {}
 
@@ -69,6 +77,7 @@ export class SimulatorDriver implements PlcDriver {
     }
 
     const elapsedSec = (Date.now() - this.startedAt) / 1000;
+    this.readCount += 1;
 
     // ---- 온도: 주기 5분 사인파(±3℃) + 노이즈(±0.2℃) ----
     let temperature =
@@ -76,6 +85,10 @@ export class SimulatorDriver implements PlcDriver {
 
     // 약 1/600 확률(평균 10분에 1회)로 20초짜리 온도 스파이크 시작 → 알람 데모용
     if (this.spikeRemaining === 0 && Math.random() < 1 / 600) {
+      this.spikeRemaining = 20;
+    }
+    // 강제 스파이크: 지정한 읽기 횟수(≒초)에 도달하면 시작
+    if (this.opts.forceSpikeAtSec !== undefined && this.readCount === this.opts.forceSpikeAtSec) {
       this.spikeRemaining = 20;
     }
     if (this.spikeRemaining > 0) {
